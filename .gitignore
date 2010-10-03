@@ -1,0 +1,7 @@
+#.gitignore
+
+
+#Compiled Files
+*.exe
+*.o
+*.so
