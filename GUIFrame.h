@@ -44,6 +44,7 @@ class GUIFrame : public wxFrame
 		wxListBox* m_SysListBox;
 		wxStaticText* m_staticParamslabel;
 		wxStaticText* m_staticLinksLabel;
+		wxListBox* m_SysHyperlinkslist;
 		wxToolBar* m_toolBar1;
 		wxStatusBar* statusBar;
 		

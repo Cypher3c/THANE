@@ -77,7 +77,12 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	m_staticLinksLabel = new wxStaticText( this, wxID_ANY, wxT("Hyperjump Links"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticLinksLabel->Wrap( -1 );
-	bSizer4->Add( m_staticLinksLabel, 0, wxALL, 5 );
+	bSizer4->Add( m_staticLinksLabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	m_SysHyperlinkslist = new wxListBox( this, wxID_ANY, wxPoint( -1,-1 ), wxDefaultSize, 0, NULL, 0 ); 
+	m_SysHyperlinkslist->SetMinSize( wxSize( -1,300 ) );
+	
+	bSizer4->Add( m_SysHyperlinkslist, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	fgSizer1->Add( bSizer4, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxBOTTOM|wxRIGHT|wxLEFT, 30 );
 	

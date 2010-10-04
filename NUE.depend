@@ -1770,7 +1770,7 @@
 1286072132 c:\users\chris\documents\nue_wx\nue\nueapp.h
 	<wx/app.h>
 
-1286073303 c:\users\chris\documents\nue_wx\nue\guiframe.h
+1286153515 c:\users\chris\documents\nue_wx\nue\guiframe.h
 	<wx/string.h>
 	<wx/bitmap.h>
 	<wx/image.h>
@@ -1813,7 +1813,7 @@
 	"NUEApp.h"
 	"NUEMain.h"
 
-1286073303 source:c:\users\chris\documents\nue_wx\nue\guiframe.cpp
+1286153515 source:c:\users\chris\documents\nue_wx\nue\guiframe.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIFrame.h"
