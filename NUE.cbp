@@ -226,7 +226,9 @@
 		<Unit filename="sound_openal.h" />
 		<Unit filename="sound_priv.h" />
 		<Unit filename="sound_sdlmix.h" />
-		<Unit filename="space.cpp" />
+		<Unit filename="space.cpp">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="space.h" />
 		<Unit filename="spfx.h" />
 		<Unit filename="tech.h" />

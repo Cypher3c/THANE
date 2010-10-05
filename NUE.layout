@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="GUIFrame.cpp" open="1" top="0" tabpos="3">
+	<File name="GUIFrame.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="NUEApp.cpp" open="1" top="0" tabpos="1">
+	<File name="NUEApp.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="360" topLine="0" />
 	</File>
-	<File name="NUEMain.cpp" open="1" top="0" tabpos="2">
+	<File name="NUEMain.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="34" topLine="0" />
 	</File>
-	<File name="nxml.h" open="1" top="0" tabpos="6">
+	<File name="ai.h" open="0" top="0" tabpos="0">
+		<Cursor position="113" topLine="0" />
+	</File>
+	<File name="equipment.h" open="0" top="0" tabpos="0">
+		<Cursor position="134" topLine="0" />
+	</File>
+	<File name="faction.h" open="0" top="0" tabpos="0">
+		<Cursor position="169" topLine="0" />
+	</File>
+	<File name="ndata.h" open="0" top="0" tabpos="0">
+		<Cursor position="249" topLine="9" />
+	</File>
+	<File name="nxml.h" open="0" top="0" tabpos="6">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="objects.h" open="1" top="0" tabpos="7">
+	<File name="objects.h" open="0" top="0" tabpos="7">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="space.cpp" open="1" top="1" tabpos="5">
-		<Cursor position="2257" topLine="41" />
+	<File name="opengl.h" open="0" top="0" tabpos="0">
+		<Cursor position="125" topLine="0" />
+	</File>
+	<File name="opengl_vbo.h" open="0" top="0" tabpos="0">
+		<Cursor position="802" topLine="22" />
+	</File>
+	<File name="outfit.h" open="0" top="0" tabpos="0">
+		<Cursor position="12309" topLine="341" />
+	</File>
+	<File name="ship.h" open="0" top="0" tabpos="0">
+		<Cursor position="2435" topLine="66" />
 	</File>
 	<File name="space.h" open="0" top="0" tabpos="5">
-		<Cursor position="7890" topLine="221" />
+		<Cursor position="2912" topLine="72" />
 	</File>
-	<File name="wx_pch.h" open="1" top="0" tabpos="4">
+	<File name="toolkit.h" open="0" top="0" tabpos="0">
+		<Cursor position="130" topLine="0" />
+	</File>
+	<File name="wx_pch.h" open="1" top="0" tabpos="1">
 		<Cursor position="416" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
