@@ -1,0 +1,42 @@
+lfunc.o: lfunc.c ../../src/config.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stddef.h lua.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stdarg.h luaconf.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/limits.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/_mingw.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/assert.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/math.h lfunc.h \
+ lobject.h llimits.h lgc.h lmem.h lstate.h ltm.h lzio.h
+
+../../src/config.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stddef.h:
+
+lua.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stdarg.h:
+
+luaconf.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/limits.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/_mingw.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/assert.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/math.h:
+
+lfunc.h:
+
+lobject.h:
+
+llimits.h:
+
+lgc.h:
+
+lmem.h:
+
+lstate.h:
+
+ltm.h:
+
+lzio.h:

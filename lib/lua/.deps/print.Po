@@ -1,0 +1,54 @@
+print.o: print.c ../../src/config.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/ctype.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/_mingw.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stddef.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdio.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stdarg.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/sys/types.h \
+ ldebug.h lstate.h lua.h luaconf.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/limits.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/assert.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/math.h \
+ lobject.h llimits.h ltm.h lzio.h lmem.h lopcodes.h lundump.h
+
+../../src/config.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/ctype.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/_mingw.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stddef.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdio.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stdarg.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/sys/types.h:
+
+ldebug.h:
+
+lstate.h:
+
+lua.h:
+
+luaconf.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/limits.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/assert.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/math.h:
+
+lobject.h:
+
+llimits.h:
+
+ltm.h:
+
+lzio.h:
+
+lmem.h:
+
+lopcodes.h:
+
+lundump.h:

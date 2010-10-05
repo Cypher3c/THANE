@@ -1,0 +1,59 @@
+# A simple makefile generator by KiSoft, 2010. mailto: kisoft@rambler.ru
+# version: 0.3.12.5
+
+# Project Variables start
+CPP=mingw32-g++.exe
+CC=mingw32-gcc.exe
+LD=mingw32-g++.exe
+LIB=ar.exe
+WINDRES=windres.exe
+# Project Variables end
+
+# Target: Debug
+
+OBJS_DEBUG=wx_pch.h.gch\Debug_wx_pch_h_gch obj\Debug\NUEMain.o obj\Debug\resource.res obj\Debug\NUEApp.o obj\Debug\GUIFrame.o
+
+Debug: bin/Debug/NUE.exe
+
+bin/Debug/NUE.exe: $(OBJS_DEBUG)
+	@echo Building executable bin\Debug\NUE.exe
+	@mingw32-g++.exe -LC:\wxWidgets-2.8.11\lib\gcc_lib  -o bin\Debug\NUE.exe $(OBJS_DEBUG)  -mthreads  -lwxmsw28ud_media -lwxmsw28ud_core -lwxbase28ud -lwxpngd -lwxjpegd -lwxtiffd -lwxzlibd -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -luuid -lcomctl32 -lwsock32 -lodbc32  -mwindows
+
+wx_pch.h.gch\Debug_wx_pch_h_gch: C:/Users/Chris/Documents/NUE_wx/NUE/wx_pch.h
+	@echo Compiling: C:\Users\Chris\Documents\NUE_wx\NUE\wx_pch.h
+	@mingw32-g++.exe -pipe -mthreads -D__GNUWIN32__ -D__WXMSW__ -DwxUSE_UNICODE -Wno-attributes -Winvalid-pch -include wx_pch.h -DWX_PRECOMP -Wall  -g -D__WXDEBUG__    -IC:\wxWidgets-2.8.11\include -IC:\wxWidgets-2.8.11\contrib\include -IC:\wxWidgets-2.8.11\lib\gcc_lib\mswud -IC:\MinGW\include\libxml2  -c C:\Users\Chris\Documents\NUE_wx\NUE\wx_pch.h -o wx_pch.h.gch\Debug_wx_pch_h_gch
+
+obj\Debug\NUEMain.o: C:/Users/Chris/Documents/NUE_wx/NUE/NUEMain.cpp
+	@echo Compiling: C:\Users\Chris\Documents\NUE_wx\NUE\NUEMain.cpp
+	@mingw32-g++.exe -pipe -mthreads -D__GNUWIN32__ -D__WXMSW__ -DwxUSE_UNICODE -Wno-attributes -Winvalid-pch -include wx_pch.h -DWX_PRECOMP -Wall  -g -D__WXDEBUG__    -IC:\wxWidgets-2.8.11\include -IC:\wxWidgets-2.8.11\contrib\include -IC:\wxWidgets-2.8.11\lib\gcc_lib\mswud -IC:\MinGW\include\libxml2  -c C:\Users\Chris\Documents\NUE_wx\NUE\NUEMain.cpp -o obj\Debug\NUEMain.o
+
+obj\Debug\resource.res: C:/Users/Chris/DOCUME~1/NUE_wx/NUE/resource.rc
+	@echo Compiling: C:\Users\Chris\DOCUME~1\NUE_wx\NUE\resource.rc
+	@windres.exe -i C:\Users\Chris\DOCUME~1\NUE_wx\NUE\resource.rc -J rc -o obj\Debug\resource.res -O coff -IC:\wxWidgets-2.8.11\include -IC:\wxWidgets-2.8.11\lib\gcc_lib\mswud 
+
+obj\Debug\NUEApp.o: C:/Users/Chris/Documents/NUE_wx/NUE/NUEApp.cpp
+	@echo Compiling: C:\Users\Chris\Documents\NUE_wx\NUE\NUEApp.cpp
+	@mingw32-g++.exe -pipe -mthreads -D__GNUWIN32__ -D__WXMSW__ -DwxUSE_UNICODE -Wno-attributes -Winvalid-pch -include wx_pch.h -DWX_PRECOMP -Wall  -g -D__WXDEBUG__    -IC:\wxWidgets-2.8.11\include -IC:\wxWidgets-2.8.11\contrib\include -IC:\wxWidgets-2.8.11\lib\gcc_lib\mswud -IC:\MinGW\include\libxml2  -c C:\Users\Chris\Documents\NUE_wx\NUE\NUEApp.cpp -o obj\Debug\NUEApp.o
+
+obj\Debug\GUIFrame.o: C:/Users/Chris/Documents/NUE_wx/NUE/GUIFrame.cpp
+	@echo Compiling: C:\Users\Chris\Documents\NUE_wx\NUE\GUIFrame.cpp
+	@mingw32-g++.exe -pipe -mthreads -D__GNUWIN32__ -D__WXMSW__ -DwxUSE_UNICODE -Wno-attributes -Winvalid-pch -include wx_pch.h -DWX_PRECOMP -Wall  -g -D__WXDEBUG__    -IC:\wxWidgets-2.8.11\include -IC:\wxWidgets-2.8.11\contrib\include -IC:\wxWidgets-2.8.11\lib\gcc_lib\mswud -IC:\MinGW\include\libxml2  -c C:\Users\Chris\Documents\NUE_wx\NUE\GUIFrame.cpp -o obj\Debug\GUIFrame.o
+
+C:\Users\Chris\Documents\NUE_wx\NUE\NUEMain.cpp: wx_pch.h NUEMain.h
+
+C:\Users\Chris\Documents\NUE_wx\NUE\NUEMain.h: NUEApp.h GUIFrame.h
+
+C:\Users\Chris\Documents\NUE_wx\NUE\resource.rc: wx/msw/wx.rc
+
+C:\Users\Chris\Documents\NUE_wx\NUE\NUEApp.cpp: wx_pch.h NUEApp.h NUEMain.h
+
+C:\Users\Chris\Documents\NUE_wx\NUE\GUIFrame.cpp: wx/wxprec.h GUIFrame.h
+
+.PHONY: clean_Debug
+
+clean_Debug: 
+	@echo Delete $(OBJS_DEBUG) bin\Debug\NUE.exe
+	-@del /f $(OBJS_DEBUG) bin\Debug\NUE.exe
+
+
+

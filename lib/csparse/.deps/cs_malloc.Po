@@ -1,0 +1,27 @@
+cs_malloc.o: cs_malloc.c cs.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdlib.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/_mingw.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stddef.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/limits.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/math.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdio.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stdarg.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/sys/types.h
+
+cs.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdlib.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/_mingw.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stddef.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/limits.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/math.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdio.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stdarg.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/sys/types.h:

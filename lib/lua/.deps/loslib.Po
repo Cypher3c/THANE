@@ -1,0 +1,49 @@
+loslib.o: loslib.c ../../src/config.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/errno.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/_mingw.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/locale.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stddef.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdlib.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/string.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/time.h lua.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stdarg.h luaconf.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/limits.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/assert.h \
+ lauxlib.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdio.h \
+ c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/sys/types.h \
+ lualib.h
+
+../../src/config.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/errno.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/_mingw.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/locale.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stddef.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdlib.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/string.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/time.h:
+
+lua.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/include/stdarg.h:
+
+luaconf.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/limits.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/assert.h:
+
+lauxlib.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/stdio.h:
+
+c:\mingw\bin\../lib/gcc/mingw32/4.5.0/../../../../include/sys/types.h:
+
+lualib.h:
