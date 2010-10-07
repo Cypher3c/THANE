@@ -53,6 +53,7 @@ NUEFrame::NUEFrame(wxFrame *frame)
     statusBar->SetStatusText(_("Hello Code::Blocks user!"), 0);
     statusBar->SetStatusText(wxbuildinfo(short_f), 1);
 #endif
+
 }
 
 NUEFrame::~NUEFrame()

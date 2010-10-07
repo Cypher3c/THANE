@@ -362,7 +362,8 @@ char** space_getFactionPlanet( int *nplanets, int *factions, int nfactions )
 
    ntmp = 0;
    mtmp = CHUNK_SIZE;
-   tmp = malloc(sizeof(char*) * mtmp);
+   //tmp = malloc(sizeof(char*) * mtmp);
+   //tmp = new char*[mtmp];
 
    for (i=0; i<systems_nstack; i++)
       for (j=0; j<systems_stack[i].nplanets; j++) {
@@ -400,8 +401,8 @@ char* space_getRndPlanet (void)
 
    ntmp = 0;
    mtmp = CHUNK_SIZE;
-   tmp = malloc(sizeof(char*) * mtmp);
-
+   //tmp = malloc(sizeof(char*) * mtmp);
+   tmp = new char*[mtmp];
    for (i=0; i<systems_nstack; i++)
       for (j=0; j<systems_stack[i].nplanets; j++) {
          if(systems_stack[i].planets[j]->real == ASSET_REAL) {
@@ -415,7 +416,8 @@ char* space_getRndPlanet (void)
       }
 
    res = tmp[RNG(0,ntmp-1)];
-   free(tmp);
+   //free(tmp);
+   delete [] tmp;
 
    return res;
 }

@@ -1755,7 +1755,7 @@
 
 1186443652 c:\wxwidgets-2.8.11\include\wx\msw\filedlg.h
 
-1286072132 source:c:\users\chris\documents\nue_wx\nue\nuemain.cpp
+1286428269 source:c:\users\chris\documents\nue_wx\nue\nuemain.cpp
 	"wx_pch.h"
 	"NUEMain.h"
 
@@ -1770,7 +1770,7 @@
 1286072132 c:\users\chris\documents\nue_wx\nue\nueapp.h
 	<wx/app.h>
 
-1286153515 c:\users\chris\documents\nue_wx\nue\guiframe.h
+1286428200 c:\users\chris\documents\nue_wx\nue\guiframe.h
 	<wx/string.h>
 	<wx/bitmap.h>
 	<wx/image.h>
@@ -1813,16 +1813,13 @@
 	"NUEApp.h"
 	"NUEMain.h"
 
-1286153515 source:c:\users\chris\documents\nue_wx\nue\guiframe.cpp
+1286427871 source:c:\users\chris\documents\nue_wx\nue\guiframe.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIFrame.h"
 
-1286252564 source:c:\users\chris\documents\nue_wx\nue\system.cpp
-	"nxml.h"
-	"ndata.h"
-	"space.h"
-	<string>
+1286427079 source:c:\users\chris\documents\nue_wx\nue\system.cpp
+	"System.h"
 
 1286159170 c:\users\chris\documents\nue_wx\nue\nxml.h
 	"libxml/parser.h"
@@ -2599,4 +2596,10 @@
 	"colour.h"
 
 1285987880 c:\users\chris\documents\nue_wx\nue\map_overlay.h
+
+1286426998 c:\users\chris\documents\nue_wx\nue\system.h
+	<string>
+	<vector>
+	"nxml.h"
+	"space.h"
 

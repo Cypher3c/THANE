@@ -52,6 +52,7 @@ class GUIFrame : public wxFrame
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
+		virtual void googoo( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:

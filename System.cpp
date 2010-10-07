@@ -1,27 +1,20 @@
-/***************************************************************
- * Name:      System.cpp
- * Purpose:   Code for Parsing Systems
- * Author:    Cypher ()
- * Created:   2010-10-03
- * Copyright: Cypher ()
- * License:
- **************************************************************/
+/** System.cpp
 
-#include "nxml.h"
-#include "ndata.h"
-#include "space.h"
+Obtain systems, planets, oh my!
+
+*/
+
+#include "System.h"
 #include <string>
 
-int Parse_Ssys(char* ssys_file){
+std::string Load_Systems(){
 
-//Adapted from Naev's space.c
+//Identify location of file in question (TEMPORARY)
+std::string ssys_file = "C:\\ssys.xml";
 
-    uint32_t bufsize;
-    char *buf;
-    xmlNodePtr node;
-    xmlDocPtr doc;
-     /* Load the file. */
+//Create new Xml object
+XmlO SysX(ssys_file);
 
-return 1;
+return "BOO";
 
 }

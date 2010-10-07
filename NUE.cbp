@@ -92,6 +92,10 @@
 			<Add library="libcomctl32.a" />
 			<Add library="libwsock32.a" />
 			<Add library="libodbc32.a" />
+			<Add library="C:\MinGW\lib\libxml2.a" />
+			<Add library="C:\MinGW\lib\libz.a" />
+			<Add library="C:\MinGW\lib\libiconv.a" />
+			<Add library="C:\MinGW\lib\libwsock32.a" />
 		</Linker>
 		<Unit filename="GUIFrame.cpp" />
 		<Unit filename="GUIFrame.h" />
@@ -99,9 +103,9 @@
 		<Unit filename="NUEApp.h" />
 		<Unit filename="NUEMain.cpp" />
 		<Unit filename="NUEMain.h" />
+		<Unit filename="System.cpp" />
 		<Unit filename="System.h" />
 		<Unit filename="WxWizFrame.fbp" />
-		<Unit filename="ai.h" />
 		<Unit filename="ai_extra.h" />
 		<Unit filename="array.h" />
 		<Unit filename="background.h" />
@@ -205,7 +209,6 @@
 		<Unit filename="pack.h" />
 		<Unit filename="pause.h" />
 		<Unit filename="perlin.h" />
-		<Unit filename="physics.h" />
 		<Unit filename="pilot.h" />
 		<Unit filename="pilot_cargo.h" />
 		<Unit filename="pilot_heat.h" />
@@ -221,13 +224,13 @@
 		</Unit>
 		<Unit filename="rng.h" />
 		<Unit filename="save.h" />
-		<Unit filename="ship.h" />
 		<Unit filename="sound.h" />
 		<Unit filename="sound_openal.h" />
 		<Unit filename="sound_priv.h" />
 		<Unit filename="sound_sdlmix.h" />
 		<Unit filename="space.cpp">
-			<Option compilerVar="CC" />
+			<Option compile="0" />
+			<Option link="0" />
 		</Unit>
 		<Unit filename="space.h" />
 		<Unit filename="spfx.h" />
