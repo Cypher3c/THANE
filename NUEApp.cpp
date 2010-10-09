@@ -25,6 +25,8 @@ bool NUEApp::OnInit()
     NUEFrame* frame = new NUEFrame(0L);
     frame->SetIcon(wxICON(aaaa)); // To Set App Icon
     frame->Show();
-    
+
+
+
     return true;
 }

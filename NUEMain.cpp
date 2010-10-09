@@ -75,3 +75,4 @@ void NUEFrame::OnAbout(wxCommandEvent &event)
     wxString msg = wxbuildinfo(long_f);
     wxMessageBox(msg, _("Welcome to..."));
 }
+

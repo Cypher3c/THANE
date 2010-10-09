@@ -3,8 +3,9 @@
 
 #include <string>
 #include <vector>
+#include <wx/wx.h>
 #include "nxml.h"
-#include "space.h"
+//#include "space.h"
 //#include "libxml/parser.h"
 //#include "libxml/xmlwriter.h"
 
@@ -40,7 +41,6 @@ public:
 
     std::string name;
 
-private:
 
 
 
@@ -50,11 +50,11 @@ class XmlO{
 public:
     //Constructors
     XmlO(){};
-
+/*
     XmlO(std::string filename){
         file = xmlParseFile(filename.c_str());
 
-    }
+    } */
     //Destructor
     ~XmlO(){
         delete file;
@@ -65,9 +65,11 @@ public:
         file = xmlParseFile(fname.c_str());
     }
     //Load Systems
-    void load(){
+    std::vector<SSystem> load(wxString filenam){
         //Only handle nodes, foolish XML library
-//        xml_onlyNodes(node);   //Doesn't work, complains about continue statement
+//       xml_onlyNodes(node);   //Doesn't work, complains about continue statement
+        std::string tempfile = std::string(filenam.mb_str()); //Change passed wxString to Std::String
+        file = xmlParseFile(tempfile.c_str()); //Get XmlDocPtr
         node = file->xmlChildrenNode; //Set NodePtr to main node
         //TODO: Error handling here: Is this the proper type of xml file?
         node = node->xmlChildrenNode; //Set NodePtr to first system node
@@ -75,20 +77,22 @@ public:
 
         //Add systems to vector in turn (right now just adds 3 systems)
         for(int i = 1; i < 4; i++){
-            //Create new system from XML DEF
+            //Create new system from XML Def
             SSystem tmp(node);
             //Add it to the Sys vector
             Sys.push_back(tmp);
             //Move NodePtr to next node
             xml_nextNode(node);
         }
+        return Sys;
     }
+
+
 
     xmlDocPtr file;     //Pointer to xml file
     xmlNodePtr node;  //Pointer to node of interest
     std::vector<SSystem> Sys; //Vector of Systems --MUAHAHAHAHA!, we are vectorized. All Systems under my command! -- Sorry
 
 };
-
 
 #endif // SYSTEM_H_INCLUDED

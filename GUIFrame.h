@@ -50,6 +50,7 @@ class GUIFrame : public wxFrame
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
+		virtual void OpenFile( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 		virtual void googoo( wxCommandEvent& event ) { event.Skip(); }

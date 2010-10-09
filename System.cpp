@@ -6,15 +6,18 @@ Obtain systems, planets, oh my!
 
 #include "System.h"
 #include <string>
+#include <wx/wx.h>
+#include "GUIFrame.h"
 
-std::string Load_Systems(){
+std::vector<SSystem> Load_Systems(wxString chosen_file){
 
-//Identify location of file in question (TEMPORARY)
-std::string ssys_file = "C:\\ssys.xml";
+    //Get passed file location, turn into standard string
+    std::string ssys_file = std::string(chosen_file.mb_str());
 
-//Create new Xml object
-XmlO SysX(ssys_file);
+    //Create new Xml object
+   // XmlO SysX(ssys_file);
+    //Set m_SysListBox contents to names from ssys.xml
+  //  return SysX.Sys;
 
-return "BOO";
 
 }
