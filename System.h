@@ -4,10 +4,8 @@
 #include <string>
 #include <vector>
 #include <wx/wx.h>
-//#include "nxml.h"
-//#include "space.h"
-//#include "libxml/parser.h"
-//#include "libxml/xmlwriter.h"
+#include "tinystr.h"
+#include "tinyxml.h"
 
 
 
@@ -27,10 +25,6 @@ class SSystem{
 public:
     //Constructors
     SSystem();
-    //Make SSystem from XML Definition. Pass ptr to node
-    SSystem(xmlNodePtr Nptr){
-        name = xml_nodeProp(Nptr, "Name");
-    }
     //Destructor
     ~SSystem(){
         //Clear Planets vect[or
@@ -48,48 +42,45 @@ public:
 
 class XmlO{
 public:
-    //Constructors
-    XmlO(){};
+
+
 /*
     XmlO(std::string filename){
-        file = xmlParseFile(filename.c_str());
-
-    } */
-    //Destructor
-    ~XmlO(){
-        delete file;
-    }
+        file = xmlParseFile(filename.c_str()); */
     /**Methods */
-    //(Re)Set file
-    void Set(std::string fname){
-        file = xmlParseFile(fname.c_str());
-    }
     //Load Systems
     void load(std::string filenam){
         //Only handle nodes, foolish XML library
 //       xml_onlyNodes(node);   //Doesn't work, complains about continue statement
-        file = xmlParseFile(filenam.c_str()); //Get XmlDocPtr
-        node = file->xmlChildrenNode; //Set NodePtr to main node
+        file = TiXmlDocument(filenam.c_str()); //Load Document into object
+        //Define handles
+    //    fdoc = TiXmlHandle(&file); //Handle to document
+    //    TiXmlHandle doc(&file); //Handle to root
+    //    pElem = file.FirstChildElement("Systems"); //main element
+    //    node = file->xmlChildrenNode; //Set NodePtr to main node
         //TODO: Error handling here: Is this the proper type of xml file?
-        node = node->xmlChildrenNode; //Set NodePtr to first system node
+      //  node = node->xmlChildrenNode; //Set NodePtr to first system node
         //TODO: More Error handling, is there a node here?
 
         //Add systems to vector in turn (right now just adds 3 systems)
         //Add first system
-        for(int i = 1; i < 4; i++){
+    //    for(int i = 1; i < 4; i++){
             //Create new system from XML Def
-            SSystem tmp(node);
+         //   SSystem tmp(node);
             //Add it to the Sys vector
-            Sys.push_back(tmp);
+        //    Sys.push_back(tmp);
             //Move NodePtr to next node
-            xml_nextNode(node);
-        }
+        //    xml_nextNode(node);
+      //  }
     }
 
 
 
-    xmlDocPtr file;     //Pointer to xml file
-    xmlNodePtr node;  //Pointer to node of interest
+    TiXmlDocument file;     //XML Doc (TinyXML)
+    TiXmlElement* root;  //Pointer to root element
+  //  TiXmlElement* pElem; //Element pointer
+    const std::string root_name;
+   // TiXmlHandle f_root; //Root Handle
     std::vector<SSystem> Sys; //Vector of Systems --MUAHAHAHAHA!, we are vectorized. All Systems under my command! -- Sorry
 
 };

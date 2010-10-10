@@ -1763,7 +1763,7 @@
 	<wx/wxprec.h>
 	<wx/wx.h>
 
-1286659577 c:\users\chris\documents\nue_wx\nue\nuemain.h
+1286679255 c:\users\chris\documents\nue_wx\nue\nuemain.h
 	"System.h"
 	"NUEApp.h"
 	"GUIFrame.h"
@@ -2602,10 +2602,50 @@
 
 1285987880 c:\users\chris\documents\nue_wx\nue\map_overlay.h
 
-1286676950 c:\users\chris\documents\nue_wx\nue\system.h
+1286737964 c:\users\chris\documents\nue_wx\nue\system.h
 	<string>
 	<vector>
 	<wx/wx.h>
-	"libxml/parser.h"
-	"libxml/xmlwriter.h"
+	"tinystr.h"
+	"tinyxml.h"
+
+1286677107 c:\users\chris\documents\nue_wx\nue\tinystr.h
+	<assert.h>
+	<string.h>
+
+1286677107 c:\users\chris\documents\nue_wx\nue\tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1286677107 source:c:\users\chris\documents\nue_wx\nue\tinystr.cpp
+	"tinystr.h"
+
+1286677107 source:c:\users\chris\documents\nue_wx\nue\tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"tinyxml.h"
+
+1286677108 source:c:\users\chris\documents\nue_wx\nue\tinyxmlerror.cpp
+	"tinyxml.h"
+
+1286677108 source:c:\users\chris\documents\nue_wx\nue\tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"tinyxml.h"
+	<windows.h>
+
+1286677108 source:c:\users\chris\documents\nue_wx\nue\xmltest.cpp
+	<iostream>
+	<sstream>
+	<stdio.h>
+	<crtdbg.h>
+	"tinyxml.h"
 

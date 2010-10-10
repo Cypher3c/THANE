@@ -41,7 +41,7 @@ class NUEFrame: public GUIFrame
                 //Convert path from wxString to std::String
                 std::string pathp = std::string(OpenDialog->GetPath().mb_str());
                 //Set m_SysListBox contents to names from ssys.xml
-                SysX.load("c:\ssys.xml"); //Crashing here
+                SysX.load("c:\\ssys.xml"); //Crashing here
                 //Start adding names to m_SysListbox
                // unsigned int vecsize = SysX.Sys.size(); //Aha, vector size is a problem
                 for(int i = 0; i <= 3; i++){
