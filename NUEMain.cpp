@@ -47,7 +47,7 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 
 
 NUEFrame::NUEFrame(wxFrame *frame)
-    : GUIFrame(frame)
+: GUIFrame(frame)
 {
 #if wxUSE_STATUSBAR
     statusBar->SetStatusText(_("Hello Code::Blocks user!"), 0);

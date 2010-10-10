@@ -5,7 +5,7 @@
 		<Cursor position="2424" topLine="57" />
 	</File>
 	<File name="GUIFrame.h" open="1" top="0" tabpos="5">
-		<Cursor position="2050" topLine="32" />
+		<Cursor position="1047" topLine="32" />
 	</File>
 	<File name="NUEApp.cpp" open="1" top="0" tabpos="6">
 		<Cursor position="618" topLine="0" />
@@ -14,19 +14,22 @@
 		<Cursor position="286" topLine="0" />
 	</File>
 	<File name="NUEMain.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="986" topLine="0" />
+		<Cursor position="986" topLine="31" />
 	</File>
-	<File name="NUEMain.h" open="1" top="0" tabpos="3">
-		<Cursor position="1571" topLine="27" />
+	<File name="NUEMain.h" open="1" top="1" tabpos="3">
+		<Cursor position="1952" topLine="33" />
 	</File>
-	<File name="System.h" open="1" top="1" tabpos="1">
-		<Cursor position="1860" topLine="54" />
+	<File name="System.h" open="1" top="0" tabpos="1">
+		<Cursor position="1987" topLine="58" />
+	</File>
+	<File name="nxml.h" open="1" top="0" tabpos="8">
+		<Cursor position="596" topLine="34" />
 	</File>
 	<File name="objects.h" open="0" top="0" tabpos="7">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="tinyxml.h" open="1" top="0" tabpos="8">
-		<Cursor position="34216" topLine="934" />
+	<File name="outfit.h" open="0" top="0" tabpos="0">
+		<Cursor position="12309" topLine="341" />
 	</File>
 	<File name="wx_pch.h" open="0" top="0" tabpos="1">
 		<Cursor position="416" topLine="0" />
