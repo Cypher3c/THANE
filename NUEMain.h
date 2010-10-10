@@ -11,7 +11,6 @@
 #define NUEMAIN_H
 
 
-
 #include "NUEApp.h"
 #include "GUIFrame.h"
 #include "System.h"
@@ -37,15 +36,21 @@ class NUEFrame: public GUIFrame
             // Creates a "open file" dialog with 4 file types
             if (OpenDialog->ShowModal() == wxID_OK) // if the user click "Open" instead of "Cancel"
             {
-                //Return vector of loaded systems
-
+                //Change Statusbar to display path of opened file
+                SetStatusText(OpenDialog->GetPath(),0);
+                //Convert path from wxString to std::String
+                std::string pathp = std::string(OpenDialog->GetPath().mb_str());
                 //Set m_SysListBox contents to names from ssys.xml
-                SysX.load(OpenDialog->GetPath());
+                SysX.load("c:\ssys.xml"); //Crashing here
                 //Start adding names to m_SysListbox
-                for(int j = 0; j <= SysX.Sys.size(); j++){
+               // unsigned int vecsize = SysX.Sys.size(); //Aha, vector size is a problem
+                for(int i = 0; i <= 3; i++){
                     //Convert name from string to wxString
-                    const char *tempstr = SysX.Sys.at(j).name.c_str();
-                    m_SysListBox->AppendString(wxString(tempstr, wxConvUTF8));
+                    //  const char *tempstr =
+                    //Convert Sys name to string
+                  //  const char* SysStr = SysX.Sys.at(2).name.c_str();
+                  //  wxString Sysnam = wxString("Hello", wxConvUTF8);
+                  //  m_SysListBox->AppendString(Sysnam);
                 }
                 // MainEditBox->LoadFile(CurrentDocPath); //Opens that file
                 //SetTitle(wxString("Edit - ") <<OpenDialog->GetFilename()); // Set the Title to reflect the file open

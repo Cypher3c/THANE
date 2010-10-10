@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <wx/wx.h>
-#include "nxml.h"
+//#include "nxml.h"
 //#include "space.h"
 //#include "libxml/parser.h"
 //#include "libxml/xmlwriter.h"
@@ -33,7 +33,7 @@ public:
     }
     //Destructor
     ~SSystem(){
-        //Clear Planets vector
+        //Clear Planets vect[or
         Planets.clear();
     }
 
@@ -65,17 +65,17 @@ public:
         file = xmlParseFile(fname.c_str());
     }
     //Load Systems
-    std::vector<SSystem> load(wxString filenam){
+    void load(std::string filenam){
         //Only handle nodes, foolish XML library
 //       xml_onlyNodes(node);   //Doesn't work, complains about continue statement
-        std::string tempfile = std::string(filenam.mb_str()); //Change passed wxString to Std::String
-        file = xmlParseFile(tempfile.c_str()); //Get XmlDocPtr
+        file = xmlParseFile(filenam.c_str()); //Get XmlDocPtr
         node = file->xmlChildrenNode; //Set NodePtr to main node
         //TODO: Error handling here: Is this the proper type of xml file?
         node = node->xmlChildrenNode; //Set NodePtr to first system node
         //TODO: More Error handling, is there a node here?
 
         //Add systems to vector in turn (right now just adds 3 systems)
+        //Add first system
         for(int i = 1; i < 4; i++){
             //Create new system from XML Def
             SSystem tmp(node);
@@ -84,7 +84,6 @@ public:
             //Move NodePtr to next node
             xml_nextNode(node);
         }
-        return Sys;
     }
 
 
