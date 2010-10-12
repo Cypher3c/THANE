@@ -1763,7 +1763,7 @@
 	<wx/wxprec.h>
 	<wx/wx.h>
 
-1286742686 c:\users\chris\documents\nue_wx\nue\nuemain.h
+1286756884 c:\users\chris\documents\nue_wx\nue\nuemain.h
 	"System.h"
 	"NUEApp.h"
 	"GUIFrame.h"
@@ -2603,11 +2603,11 @@
 
 1285987880 c:\users\chris\documents\nue_wx\nue\map_overlay.h
 
-1286742610 c:\users\chris\documents\nue_wx\nue\system.h
+1286766972 c:\users\chris\documents\nue_wx\nue\system.h
 	<string>
 	<vector>
 	<wx/wx.h>
-	"nxml.h"
 	"libxml/parser.h"
 	"libxml/xmlwriter.h"
+	<libxml/tree.h>
 

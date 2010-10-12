@@ -52,6 +52,7 @@ class NUEFrame: public GUIFrame
                     //Get name of system as string
                     //Convert name from string to wxString
                     m_SysListBox->AppendString(tempsys.name);
+                    m_SysListBox->AppendString(tempsys.radius);
                 }
                 // MainEditBox->LoadFile(CurrentDocPath); //Opens that file
                 //SetTitle(wxString("Edit - ") <<OpenDialog->GetFilename()); // Set the Title to reflect the file open

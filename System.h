@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 #include <wx/wx.h>
-#include "nxml.h"
+//#include "nxml.h"
 //#include "space.h"
 #include "libxml/parser.h"
 #include "libxml/xmlwriter.h"
-
+#include <libxml/tree.h>
 
 
 class APlanet{
@@ -28,8 +28,18 @@ public:
     //Constructors
     SSystem(){};
     //Make SSystem from XML Definition. Pass ptr to node
-    SSystem(xmlNodePtr Nptr){
+    SSystem(xmlNodePtr Nptr, xmlDocPtr Dptr){
         name = wxString((char *)xmlGetProp(Nptr, (xmlChar*)"name"), wxConvUTF8);
+        //Move to next level down, the <general> element
+        Nptr = Nptr->xmlChildrenNode;
+        //Move one more level down to the <radius> element
+        Nptr = Nptr->xmlChildrenNode;
+        //Get Radius value
+        if (!xmlStrcmp(Nptr->name, (const xmlChar *)"radius")) {
+            char* contents = (char*)xmlNodeGetContent(Nptr);
+            std::string test1 = std::string(contents);
+            radius = wxString(contents, wxConvUTF8);
+        }
     }
     //Destructor
     ~SSystem(){
@@ -38,9 +48,14 @@ public:
     }
 
     std::vector<APlanet> Planets;
-
+    //System Parameters
     wxString name;
-
+    wxString radius;
+    wxString stars;
+    wxString asteriods;
+    wxString interference;
+    wxString pos_x;
+    wxString pos_y;
 
 
 
@@ -78,7 +93,7 @@ public:
         while(node != NULL) {
             if ((!xmlStrcmp(node->name, (const xmlChar *)"ssys"))){
                 //Create new system from XML Def
-                SSystem tmp(node);
+                SSystem tmp(node, file);
                 //Add it to the Sys vector
                 Sys.push_back(tmp);
                 //Move NodePtr to next node
