@@ -39,24 +39,24 @@ class NUEFrame: public GUIFrame
             {
                 //Change Statusbar to display path of opened file
                 SetStatusText(OpenDialog->GetPath(),0);
-                //Convert path from wxString to std::String
-                std::string pathp = std::string(OpenDialog->GetPath().mb_str());
+
                 //Set m_SysListBox contents to names from ssys.xml
-                SysX.load(pathp);
-                //Start adding names to m_SysListbox
-               // unsigned int vecsize = SysX.Sys.size(); //Aha, vector size is a problem
-                //Pointer to system
+                SysX.load(OpenDialog->GetPath());
+                SysX.Generate_objs();
                 SSystem tempsys;
+                //Start adding names to m_SysListbox
+                //Pointer to system
                 for(int i = 1; i < SysX.Sys.size(); i++){
                     tempsys = SysX.Sys.at(i);
                     //Get name of system as string
                     //Convert name from string to wxString
                     m_SysListBox->AppendString(tempsys.name);
-                    m_SysListBox->AppendString(tempsys.radius);
+                //    m_SysListBox->AppendString(tempsys.radius);
                 }
                 // MainEditBox->LoadFile(CurrentDocPath); //Opens that file
-                //SetTitle(wxString("Edit - ") <<OpenDialog->GetFilename()); // Set the Title to reflect the file open
             }
+                //SetTitle(wxString("Edit - ") <<OpenDialog->GetFilename()); // Set the Title to reflect the file open
+
 
         // Clean up after ourselves
         OpenDialog->Destroy();

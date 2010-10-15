@@ -92,10 +92,7 @@
 			<Add library="libcomctl32.a" />
 			<Add library="libwsock32.a" />
 			<Add library="libodbc32.a" />
-			<Add library="C:\MinGW\lib\libxml2.a" />
-			<Add library="C:\MinGW\lib\libz.a" />
-			<Add library="C:\MinGW\lib\libiconv.a" />
-			<Add library="C:\MinGW\lib\libwsock32.a" />
+			<Add library="C:\MinGW\lib\libmxml.a" />
 		</Linker>
 		<Unit filename="GUIFrame.cpp" />
 		<Unit filename="GUIFrame.h" />

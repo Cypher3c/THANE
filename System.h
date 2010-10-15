@@ -6,9 +6,8 @@
 #include <wx/wx.h>
 //#include "nxml.h"
 //#include "space.h"
-#include "libxml/parser.h"
-#include "libxml/xmlwriter.h"
-#include <libxml/tree.h>
+#include <mxml.h>
+#include <wx/msgdlg.h>
 
 
 class APlanet{
@@ -27,19 +26,11 @@ class SSystem{
 public:
     //Constructors
     SSystem(){};
-    //Make SSystem from XML Definition. Pass ptr to node
-    SSystem(xmlNodePtr Nptr, xmlDocPtr Dptr){
-        name = wxString((char *)xmlGetProp(Nptr, (xmlChar*)"name"), wxConvUTF8);
-        //Move to next level down, the <general> element
-        Nptr = Nptr->xmlChildrenNode;
-        //Move one more level down to the <radius> element
-        Nptr = Nptr->xmlChildrenNode;
-        //Get Radius value
-        if (!xmlStrcmp(Nptr->name, (const xmlChar *)"radius")) {
-            char* contents = (char*)xmlNodeGetContent(Nptr);
-            std::string test1 = std::string(contents);
-            radius = wxString(contents, wxConvUTF8);
-        }
+    //Make SSystem from XmlO params
+    SSystem(int p_ID, const char* p_name){
+        //Set ID
+        ID = p_ID;
+        name = wxString::FromAscii(p_name);
     }
     //Destructor
     ~SSystem(){
@@ -47,6 +38,7 @@ public:
         Planets.clear();
     }
 
+    int ID; //ID for SSystem that corresponds to vector positions in XmlO
     std::vector<APlanet> Planets;
     //System Parameters
     wxString name;
@@ -65,49 +57,73 @@ class XmlO{
 public:
     //Constructors
     XmlO(){};
-/*
-    XmlO(std::string filename){
-        file = xmlParseFile(filename.c_str());
 
-    } */
     //Destructor
     ~XmlO(){
-        delete file;
     }
     /**Methods */
     //(Re)Set file
     void Set(std::string fname){
-        file = xmlParseFile(fname.c_str());
+        //TODO
     }
-    //Load Systems
-    void load(std::string filenam){
-        //Only handle nodes, foolish XML library
-//       xml_onlyNodes(node);   //Doesn't work, complains about continue statement
-        file = xmlParseFile(filenam.c_str()); //Get XmlDocPtr
-        node = file->xmlChildrenNode; //Set NodePtr to main node
-        //TODO: Error handling here: Is this the proper type of xml file?
-        node = node->xmlChildrenNode; //Set NodePtr to first system node
-        //TODO: More Error handling, is there a node here?
 
-        //Add systems to vector in turn (right now just adds 3 systems)
-        while(node != NULL) {
-            if ((!xmlStrcmp(node->name, (const xmlChar *)"ssys"))){
-                //Create new system from XML Def
-                SSystem tmp(node, file);
-                //Add it to the Sys vector
-                Sys.push_back(tmp);
-                //Move NodePtr to next node
-            }
-            node = node->next;
+    //Load XML file into XmlO
+    void load(wxString filenam){
+        //First, convert wxString to std::string for safety (char* is transient), then to const char*
+        std::string tmp_filenam = std::string(filenam.mb_str());
+        const char* tmp_filenam2 = tmp_filenam.c_str();
+        //Get pointer to file
+        fp = fopen(tmp_filenam2,"r");
+        //Load tree
+        tree = mxmlLoadFile(NULL, fp, MXML_TEXT_CALLBACK);
+
+        //Close file (be nice!)
+        fclose(fp);
+
+        //Load <Systems> node
+        Systems_elem = mxmlWalkNext(tree, tree, MXML_DESCEND_FIRST);
+
+        //Start loading <ssys> elements
+        mxml_node_t *node; //temporary node to save
+        const char* name_tmp; //Temporary string for names of ssys
+        //Load first ssys
+        node = mxmlFindElement(Systems_elem, tree, "ssys", NULL, NULL, MXML_DESCEND);
+        //Start loading the rest of the ssys elements (but fail if first element is NULL)
+        while (node != NULL){
+            //Load node into vector of pointers
+            ssys_elem.push_back(node);
+            //Get name attribute
+            name_tmp = mxmlElementGetAttr(node, "name");
+            ssys_name.push_back(name_tmp);
+            //load next ssys
+            node = mxmlFindElement(node, tree, "ssys", NULL, NULL, MXML_DESCEND);
         }
+
+    }
+
+    void Generate_objs(){
+
+
+        int ssys_num = ssys_elem.size();
+
+        const char* tmp_name;
+        for (int i = 0; i<ssys_num; i++){
+            tmp_name = ssys_name[i];
+            SSystem tmp_sys(i, tmp_name);
+            Sys.push_back(tmp_sys);
+        }
+
+
     }
 
 
 
-    xmlDocPtr file;     //Pointer to xml file
-    xmlNodePtr node;  //Pointer to node of interest
     std::vector<SSystem> Sys; //Vector of Systems --MUAHAHAHAHA!, we are vectorized. All Systems under my command! -- Sorry
-
+    FILE *fp; //pointer to file of interest
+    mxml_node_t *tree; //Pointer to main node
+    mxml_node_t *Systems_elem; //Pointer to Systems Element
+    std::vector<mxml_node_t*> ssys_elem; //Vector of pointers (!) to syss elements
+    std::vector<const char*> ssys_name; //Vector of pointers to name elements for ssys
 };
 
 #endif // SYSTEM_H_INCLUDED
