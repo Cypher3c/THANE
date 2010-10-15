@@ -46,13 +46,11 @@ class NUEFrame: public GUIFrame
                 //Start adding names to m_SysListbox
                 //Pointer to system
                 wxString temp_rad;
-                for(int i = 1; i < SysX.Sys.size(); i++){
+                for(int i = 0; i < SysX.Sys.size(); i++){
                     tempsys = SysX.Sys.at(i);
                     //Get name of system as string
                     //Convert name from string to wxString
                     m_SysListBox->AppendString(tempsys.name);
-                    temp_rad << tempsys.radius;
-                    m_SysListBox->AppendString(temp_rad);
                 }
                 // MainEditBox->LoadFile(CurrentDocPath); //Opens that file
             }
@@ -62,6 +60,25 @@ class NUEFrame: public GUIFrame
         // Clean up after ourselves
         OpenDialog->Destroy();
 
+
+        }
+        //Handle clicking on a system
+        virtual void sys_click( wxCommandEvent& event ) {
+            //Get the index of the selected item
+            int ind;
+            ind = m_SysListBox->GetSelection();
+
+            wxString tmp_sys_nam;
+            wxString tmp_rad;
+
+            tmp_sys_nam = SysX.Sys.at(ind).name;
+            tmp_rad << SysX.Sys.at(ind).radius;
+
+            //Set the system name listbox
+            m_textPNAME->ChangeValue(tmp_sys_nam);
+
+            //Set the radius listbox
+            m_textRadius->ChangeValue(tmp_rad);
 
         }
 };

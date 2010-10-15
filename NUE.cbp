@@ -102,7 +102,6 @@
 		<Unit filename="NUEMain.h" />
 		<Unit filename="System.h" />
 		<Unit filename="WxWizFrame.fbp" />
-		<Unit filename="nlua_bkg.h" />
 		<Unit filename="nlua_camera.h" />
 		<Unit filename="nlua_cli.h" />
 		<Unit filename="nlua_col.h" />

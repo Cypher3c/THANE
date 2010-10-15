@@ -44,7 +44,10 @@ class GUIFrame : public wxFrame
 		wxStaticText* m_staticTextSysboxlabel;
 		wxListBox* m_SysListBox;
 		wxStaticText* m_staticParamslabel;
+		wxStaticText* m_staticText4;
 		wxTextCtrl* m_textPNAME;
+		wxStaticText* m_staticText5;
+		wxTextCtrl* m_textRadius;
 		wxStaticText* m_staticLinksLabel;
 		wxListBox* m_SysHyperlinkslist;
 		wxToolBar* m_toolBar1;
@@ -55,12 +58,12 @@ class GUIFrame : public wxFrame
 		virtual void OpenFile( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
-		virtual void googoo( wxCommandEvent& event ) { event.Skip(); }
+		virtual void sys_click( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("NUE v0.0.1a"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 800,600 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("NUE v0.0.1a"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 915,600 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		~GUIFrame();
 	
 };

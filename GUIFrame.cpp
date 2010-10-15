@@ -60,7 +60,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_staticTextSysboxlabel->Wrap( -1 );
 	bSizer2->Add( m_staticTextSysboxlabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
-	m_SysListBox = new wxListBox( this, wxID_ANY, wxPoint( -1,-1 ), wxDefaultSize, 0, NULL, 0 ); 
+	m_SysListBox = new wxListBox( this, wxID_ANY, wxPoint( -1,-1 ), wxDefaultSize, 0, NULL, wxLB_ALWAYS_SB|wxLB_HSCROLL|wxLB_SINGLE ); 
 	m_SysListBox->SetMinSize( wxSize( -1,300 ) );
 	
 	bSizer2->Add( m_SysListBox, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
@@ -72,10 +72,41 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	m_staticParamslabel = new wxStaticText( this, wxID_ANY, wxT("System Parameters"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticParamslabel->Wrap( -1 );
-	bSizer3->Add( m_staticParamslabel, 0, wxALL, 5 );
+	bSizer3->Add( m_staticParamslabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
+	wxBoxSizer* bSizer41;
+	bSizer41 = new wxBoxSizer( wxVERTICAL );
+	
+	wxGridSizer* gSizer1;
+	gSizer1 = new wxGridSizer( 2, 2, 0, 0 );
+	
+	m_staticText4 = new wxStaticText( this, wxID_ANY, wxT("Name:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText4->Wrap( -1 );
+	gSizer1->Add( m_staticText4, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_textPNAME = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer3->Add( m_textPNAME, 0, wxALL, 5 );
+	gSizer1->Add( m_textPNAME, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	bSizer41->Add( gSizer1, 0, 0, 5 );
+	
+	wxGridSizer* gSizer2;
+	gSizer2 = new wxGridSizer( 2, 2, 0, 0 );
+	
+	m_staticText5 = new wxStaticText( this, wxID_ANY, wxT("Radius:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText5->Wrap( -1 );
+	gSizer2->Add( m_staticText5, 0, wxALIGN_RIGHT|wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	m_textRadius = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	gSizer2->Add( m_textRadius, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	bSizer41->Add( gSizer2, 0, 0, 5 );
+	
+	bSizer3->Add( bSizer41, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer6;
+	bSizer6 = new wxBoxSizer( wxVERTICAL );
+	
+	bSizer3->Add( bSizer6, 1, wxEXPAND, 5 );
 	
 	fgSizer1->Add( bSizer3, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxRIGHT|wxLEFT, 30 );
 	
@@ -105,7 +136,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	this->Connect( menuFileOpen->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OpenFile ) );
 	this->Connect( menuFileQuit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnQuit ) );
 	this->Connect( menuHelpAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnAbout ) );
-	m_SysListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( GUIFrame::googoo ), NULL, this );
+	m_SysListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( GUIFrame::sys_click ), NULL, this );
 }
 
 GUIFrame::~GUIFrame()
@@ -115,6 +146,6 @@ GUIFrame::~GUIFrame()
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OpenFile ) );
 	this->Disconnect( idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnQuit ) );
 	this->Disconnect( idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnAbout ) );
-	m_SysListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( GUIFrame::googoo ), NULL, this );
+	m_SysListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( GUIFrame::sys_click ), NULL, this );
 	
 }
