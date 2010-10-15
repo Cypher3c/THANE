@@ -1763,7 +1763,7 @@
 	<wx/wxprec.h>
 	<wx/wx.h>
 
-1287102331 c:\users\chris\documents\nue_wx\nue\nuemain.h
+1287113475 c:\users\chris\documents\nue_wx\nue\nuemain.h
 	"System.h"
 	"NUEApp.h"
 	"GUIFrame.h"
@@ -1773,7 +1773,7 @@
 1286072132 c:\users\chris\documents\nue_wx\nue\nueapp.h
 	<wx/app.h>
 
-1286597887 c:\users\chris\documents\nue_wx\nue\guiframe.h
+1287111702 c:\users\chris\documents\nue_wx\nue\guiframe.h
 	<wx/string.h>
 	<wx/bitmap.h>
 	<wx/image.h>
@@ -1786,6 +1786,7 @@
 	<wx/stattext.h>
 	<wx/listbox.h>
 	<wx/sizer.h>
+	<wx/textctrl.h>
 	<wx/toolbar.h>
 	<wx/statusbr.h>
 	<wx/frame.h>
@@ -1816,7 +1817,7 @@
 	"NUEApp.h"
 	"NUEMain.h"
 
-1286597887 source:c:\users\chris\documents\nue_wx\nue\guiframe.cpp
+1287111702 source:c:\users\chris\documents\nue_wx\nue\guiframe.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIFrame.h"
@@ -2603,7 +2604,7 @@
 
 1285987880 c:\users\chris\documents\nue_wx\nue\map_overlay.h
 
-1287102317 c:\users\chris\documents\nue_wx\nue\system.h
+1287113148 c:\users\chris\documents\nue_wx\nue\system.h
 	<string>
 	<vector>
 	<wx/wx.h>

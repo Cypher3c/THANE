@@ -27,10 +27,13 @@ public:
     //Constructors
     SSystem(){};
     //Make SSystem from XmlO params
-    SSystem(int p_ID, const char* p_name){
+    SSystem(int p_ID, mxml_node_t *sysnode_t, const char* p_name, float p_rad){
         //Set ID
         ID = p_ID;
+        sys_node = sysnode_t;
         name = wxString::FromAscii(p_name);
+        radius  = p_rad;
+
     }
     //Destructor
     ~SSystem(){
@@ -42,12 +45,13 @@ public:
     std::vector<APlanet> Planets;
     //System Parameters
     wxString name;
-    wxString radius;
+    float radius;
     wxString stars;
     wxString asteriods;
     wxString interference;
     wxString pos_x;
     wxString pos_y;
+    mxml_node_t *sys_node;
 
 
 
@@ -84,38 +88,42 @@ public:
         Systems_elem = mxmlWalkNext(tree, tree, MXML_DESCEND_FIRST);
 
         //Start loading <ssys> elements
-        mxml_node_t *node; //temporary node to save
-        const char* name_tmp; //Temporary string for names of ssys
+
+        //Temporary Elements
+        mxml_node_t *node; //Node to save
+        mxml_node_t *subnode_gen; //Subnode for general nodes
+        mxml_node_t *subnode; //Subnode
+        const char* name_tmp; //String for names of ssys
+        const char* tmp_str; //String for anything :P
+        float rad; //Radius Float
+
         //Load first ssys
         node = mxmlFindElement(Systems_elem, tree, "ssys", NULL, NULL, MXML_DESCEND);
         //Start loading the rest of the ssys elements (but fail if first element is NULL)
+        int i = 1;
+        SSystem tmp_sys; //Temporary system object to add to Sys vector
         while (node != NULL){
-            //Load node into vector of pointers
-            ssys_elem.push_back(node);
-            //Get name attribute
+            //Load name attrib
             name_tmp = mxmlElementGetAttr(node, "name");
-            ssys_name.push_back(name_tmp);
+
+            //Descend to General element
+            subnode_gen = mxmlFindElement(node, tree, "general", NULL, NULL, MXML_DESCEND);
+            subnode = mxmlFindElement(subnode_gen, tree, "radius", NULL, NULL, MXML_DESCEND);
+            if(subnode != NULL){
+                tmp_str = (subnode->child->value.text.string);
+                rad = atof(tmp_str);
+            }
+            //Generate tmp system
+            SSystem tmp_sys(i, node, name_tmp, rad);
+            //Load system with its node into vector of SSystems
+            Sys.push_back(tmp_sys);
             //load next ssys
             node = mxmlFindElement(node, tree, "ssys", NULL, NULL, MXML_DESCEND);
+            //Increment ID counter
+            i++;
         }
 
     }
-
-    void Generate_objs(){
-
-
-        int ssys_num = ssys_elem.size();
-
-        const char* tmp_name;
-        for (int i = 0; i<ssys_num; i++){
-            tmp_name = ssys_name[i];
-            SSystem tmp_sys(i, tmp_name);
-            Sys.push_back(tmp_sys);
-        }
-
-
-    }
-
 
 
     std::vector<SSystem> Sys; //Vector of Systems --MUAHAHAHAHA!, we are vectorized. All Systems under my command! -- Sorry

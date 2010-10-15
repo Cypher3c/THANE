@@ -20,6 +20,7 @@
 #include <wx/stattext.h>
 #include <wx/listbox.h>
 #include <wx/sizer.h>
+#include <wx/textctrl.h>
 #include <wx/toolbar.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
@@ -43,6 +44,7 @@ class GUIFrame : public wxFrame
 		wxStaticText* m_staticTextSysboxlabel;
 		wxListBox* m_SysListBox;
 		wxStaticText* m_staticParamslabel;
+		wxTextCtrl* m_textPNAME;
 		wxStaticText* m_staticLinksLabel;
 		wxListBox* m_SysHyperlinkslist;
 		wxToolBar* m_toolBar1;

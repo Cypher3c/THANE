@@ -42,16 +42,17 @@ class NUEFrame: public GUIFrame
 
                 //Set m_SysListBox contents to names from ssys.xml
                 SysX.load(OpenDialog->GetPath());
-                SysX.Generate_objs();
                 SSystem tempsys;
                 //Start adding names to m_SysListbox
                 //Pointer to system
+                wxString temp_rad;
                 for(int i = 1; i < SysX.Sys.size(); i++){
                     tempsys = SysX.Sys.at(i);
                     //Get name of system as string
                     //Convert name from string to wxString
                     m_SysListBox->AppendString(tempsys.name);
-                //    m_SysListBox->AppendString(tempsys.radius);
+                    temp_rad << tempsys.radius;
+                    m_SysListBox->AppendString(temp_rad);
                 }
                 // MainEditBox->LoadFile(CurrentDocPath); //Opens that file
             }
