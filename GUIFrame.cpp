@@ -74,6 +74,9 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_staticParamslabel->Wrap( -1 );
 	bSizer3->Add( m_staticParamslabel, 0, wxALL, 5 );
 	
+	m_textPNAME = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer3->Add( m_textPNAME, 0, wxALL, 5 );
+	
 	fgSizer1->Add( bSizer3, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxRIGHT|wxLEFT, 30 );
 	
 	wxBoxSizer* bSizer4;
