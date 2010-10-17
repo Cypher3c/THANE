@@ -2611,3 +2611,65 @@
 	<mxml.h>
 	<wx/msgdlg.h>
 
+1286072132 source:c:\users\chris\documents\nue_wx2\nue\wx_pch.h
+	<wx/wxprec.h>
+	<wx/wx.h>
+
+1287342836 source:c:\users\chris\documents\nue_wx2\nue\nuemain.cpp
+	"wx_pch.h"
+	"NUEMain.h"
+
+1286072132 c:\users\chris\documents\nue_wx2\nue\wx_pch.h
+	<wx/wxprec.h>
+	<wx/wx.h>
+
+1287342913 c:\users\chris\documents\nue_wx2\nue\nuemain.h
+	"System.h"
+	"NUEApp.h"
+	"GUIFrame.h"
+	"System.h"
+	<wx/wx.h>
+
+1287343011 c:\users\chris\documents\nue_wx2\nue\system.h
+	<string>
+	<vector>
+	<wx/wx.h>
+	<mxml.h>
+	<wx/msgdlg.h>
+
+1286072132 c:\users\chris\documents\nue_wx2\nue\nueapp.h
+	<wx/app.h>
+
+1287341965 c:\users\chris\documents\nue_wx2\nue\guiframe.h
+	<wx/string.h>
+	<wx/bitmap.h>
+	<wx/image.h>
+	<wx/icon.h>
+	<wx/menu.h>
+	<wx/gdicmn.h>
+	<wx/font.h>
+	<wx/colour.h>
+	<wx/settings.h>
+	<wx/button.h>
+	<wx/sizer.h>
+	<wx/frame.h>
+	<wx/stattext.h>
+	<wx/listbox.h>
+	<wx/textctrl.h>
+	<wx/statbmp.h>
+	<wx/toolbar.h>
+	<wx/statusbr.h>
+
+1189868552 source:c:\users\chris\documents\nue_wx2\nue\resource.rc
+	"wx/msw/wx.rc"
+
+1286597506 source:c:\users\chris\documents\nue_wx2\nue\nueapp.cpp
+	"wx_pch.h"
+	"NUEApp.h"
+	"NUEMain.h"
+
+1287341965 source:c:\users\chris\documents\nue_wx2\nue\guiframe.cpp
+	"wx/wxprec.h"
+	<wx/wx.h>
+	"GUIFrame.h"
+

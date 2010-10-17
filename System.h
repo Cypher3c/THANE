@@ -22,36 +22,34 @@ private:
 };
 
 
-class SSystem{
+class Asset{
 public:
     //Constructors
-    SSystem(){};
-    //Make SSystem from XmlO params
-    SSystem(int p_ID, mxml_node_t *sysnode_t, const char* p_name, float p_rad){
+    Asset(){};
+    //Make Asset from XmlO params
+    Asset(int p_ID, mxml_node_t *sysnode_t, const char* p_name, float p_x, float p_y){
         //Set ID
         ID = p_ID;
         sys_node = sysnode_t;
         name = wxString::FromAscii(p_name);
-        radius  = p_rad;
-        //stars =
+        x_pos  = p_x;
+        y_pos = p_y;
 
     }
     //Destructor
-    ~SSystem(){
-        //Clear Planets vect[or
-        Planets.clear();
-    }
+    ~Asset(){}
 
-    int ID; //ID for SSystem that corresponds to vector positions in XmlO
-    std::vector<APlanet> Planets;
-    //System Parameters
+    int ID; //ID for Asset that corresponds to vector positions in XmlO
+    //Asset Parameters
     wxString name;
     float radius;
-    wxString stars;
-    wxString asteriods;
+
+    //GFX Files
+    wxString gfx_space;
+    wxString gfx_ext;
     wxString interference;
-    wxString pos_x;
-    wxString pos_y;
+    float x_pos;
+    float y_pos;
     mxml_node_t *sys_node;
 
 
@@ -86,40 +84,52 @@ public:
         fclose(fp);
 
         //Load <Systems> node
-        Systems_elem = mxmlWalkNext(tree, tree, MXML_DESCEND_FIRST);
+        Asset_elem = mxmlWalkNext(tree, tree, MXML_DESCEND_FIRST);
 
-        //Start loading <ssys> elements
+        //Start loading <asset> elements
 
         //Temporary Elements
         mxml_node_t *node; //Node to save
-        mxml_node_t *subnode_gen; //Subnode for general nodes
+        mxml_node_t *subnode_pos; //Subnode for pos nodes
         mxml_node_t *subnode; //Subnode
-        const char* name_tmp; //String for names of ssys
+        const char* name_tmp; //String for names of asset
         const char* tmp_str; //String for anything :P
-        float rad; //Radius Float
+        float x_pos; //X_pos Float
+        float y_pos; //Y_pos Float
 
-        //Load first ssys
-        node = mxmlFindElement(Systems_elem, tree, "ssys", NULL, NULL, MXML_DESCEND);
+        //Load first asset
+        node = mxmlFindElement(Asset_elem, tree, "asset", NULL, NULL, MXML_DESCEND);
         //Start loading the rest of the ssys elements (but fail if first element is NULL)
         int i = 1;
-        SSystem tmp_sys; //Temporary system object to add to Sys vector
         while (node != NULL){
             //Load name attrib
             name_tmp = mxmlElementGetAttr(node, "name");
 
-            //Descend to General element
-            subnode_gen = mxmlFindElement(node, tree, "general", NULL, NULL, MXML_DESCEND);
-            subnode = mxmlFindElement(subnode_gen, tree, "radius", NULL, NULL, MXML_DESCEND);
+            //Mark Branching nodes
+            //TODO
+
+            //Descend to pos element
+            subnode_pos = mxmlFindElement(node, tree, "pos", NULL, NULL, MXML_DESCEND);
+
+            //Get Pos parameters x and y
+            subnode = mxmlFindElement(subnode_pos, tree, "x", NULL, NULL, MXML_DESCEND);
             if(subnode != NULL){
                 tmp_str = (subnode->child->value.text.string);
-                rad = atof(tmp_str);
+                x_pos = atof(tmp_str);
             }
-            //Generate tmp system
-            SSystem tmp_sys(i, node, name_tmp, rad);
-            //Load system with its node into vector of SSystems
-            Sys.push_back(tmp_sys);
-            //load next ssys
-            node = mxmlFindElement(node, tree, "ssys", NULL, NULL, MXML_DESCEND);
+            subnode = mxmlFindElement(subnode_pos, tree, "y", NULL, NULL, MXML_DESCEND);
+            if(subnode != NULL){
+                tmp_str = (subnode->child->value.text.string);
+                y_pos = atof(tmp_str);
+            }
+
+            //Generate tmp Asset
+            Asset asset_sys(i, node, name_tmp, x_pos, y_pos);
+            //Load system with its node into vector of Assets
+            Sys.push_back(asset_sys);
+
+            //Load next Asset
+            node = mxmlFindElement(node, tree, "asset", NULL, NULL, MXML_DESCEND);
             //Increment ID counter
             i++;
         }
@@ -127,10 +137,10 @@ public:
     }
 
 
-    std::vector<SSystem> Sys; //Vector of Systems --MUAHAHAHAHA!, we are vectorized. All Systems under my command! -- Sorry
+    std::vector<Asset> Sys; //Vector of Systems --MUAHAHAHAHA!, we are vectorized. All Systems under my command! -- Sorry
     FILE *fp; //pointer to file of interest
     mxml_node_t *tree; //Pointer to main node
-    mxml_node_t *Systems_elem; //Pointer to Systems Element
+    mxml_node_t *Asset_elem; //Pointer to Systems Element
     std::vector<mxml_node_t*> ssys_elem; //Vector of pointers (!) to syss elements
     std::vector<const char*> ssys_name; //Vector of pointers to name elements for ssys
 };

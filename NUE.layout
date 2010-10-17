@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="GUIFrame.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="2424" topLine="57" />
+	<File name="GUIFrame.cpp" open="0" top="0" tabpos="6">
+		<Cursor position="9976" topLine="219" />
 	</File>
-	<File name="GUIFrame.h" open="1" top="0" tabpos="3">
-		<Cursor position="1329" topLine="14" />
+	<File name="GUIFrame.h" open="1" top="0" tabpos="6">
+		<Cursor position="1178" topLine="34" />
 	</File>
-	<File name="NUEApp.cpp" open="0" top="0" tabpos="7">
-		<Cursor position="618" topLine="0" />
+	<File name="NUEApp.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="499" topLine="0" />
 	</File>
-	<File name="NUEApp.h" open="0" top="0" tabpos="8">
-		<Cursor position="286" topLine="0" />
+	<File name="NUEApp.h" open="1" top="0" tabpos="5">
+		<Cursor position="451" topLine="0" />
 	</File>
-	<File name="NUEMain.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="1466" topLine="35" />
+	<File name="NUEMain.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="1527" topLine="64" />
 	</File>
 	<File name="NUEMain.h" open="1" top="0" tabpos="2">
-		<Cursor position="2444" topLine="16" />
+		<Cursor position="2440" topLine="59" />
 	</File>
 	<File name="System.h" open="1" top="1" tabpos="1">
-		<Cursor position="721" topLine="28" />
+		<Cursor position="2572" topLine="98" />
 	</File>
 	<File name="nxml.h" open="0" top="0" tabpos="8">
 		<Cursor position="878" topLine="24" />

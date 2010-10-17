@@ -17,13 +17,15 @@
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
+#include <wx/button.h>
+#include <wx/sizer.h>
+#include <wx/frame.h>
 #include <wx/stattext.h>
 #include <wx/listbox.h>
-#include <wx/sizer.h>
 #include <wx/textctrl.h>
+#include <wx/statbmp.h>
 #include <wx/toolbar.h>
 #include <wx/statusbr.h>
-#include <wx/frame.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -38,32 +40,72 @@ class GUIFrame : public wxFrame
 	private:
 	
 	protected:
+		wxMenuBar* m_menubar2;
+		wxMenu* m_file;
+		wxMenu* m_Settings;
+		
+		wxButton* m_buttonAsset;
+		wxButton* m_buttonShip;
+		
+		
+		wxButton* m_buttonTech;
+		wxButton* m_buttonOutfit;
+		
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
+		virtual void SetNaevDir_ev( wxCommandEvent& event ) { event.Skip(); }
+		virtual void launch_asset_ed( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("NUE v0.0.1a"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 242,200 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		~GUIFrame();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class AssetEd
+///////////////////////////////////////////////////////////////////////////////
+class AssetEd : public wxFrame 
+{
+	private:
+	
+	protected:
 		wxMenuBar* mbar;
 		wxMenu* fileMenu;
 		wxMenu* helpMenu;
-		wxStaticText* m_staticTextSysboxlabel;
-		wxListBox* m_SysListBox;
+		wxStaticText* m_staticText_TitleAssets;
+		wxListBox* m_AssetListBox;
+		wxButton* m_buttonAddAsset;
+		wxButton* m_buttonDeleteAsset;
 		wxStaticText* m_staticParamslabel;
 		wxStaticText* m_staticText4;
 		wxTextCtrl* m_textPNAME;
+		wxStaticText* m_staticText6111;
 		wxStaticText* m_staticText5;
-		wxTextCtrl* m_textRadius;
-		wxStaticText* m_staticText6;
-		wxTextCtrl* m_textStars;
-		wxStaticText* m_staticText61;
-		wxTextCtrl* m_textInterference;
-		wxStaticText* m_staticText611;
-		wxStaticText* m_staticText612;
 		wxTextCtrl* m_textPosX;
-		wxStaticText* m_staticText6121;
+		wxStaticText* m_staticText6;
 		wxTextCtrl* m_textPosY;
-		wxStaticText* m_staticLinksLabel;
-		wxListBox* m_SysHyperlinkslist;
+		wxStaticText* m_staticText611;
+		wxStaticText* m_staticText61;
+		wxTextCtrl* m_text_GFXSpace;
+		wxStaticText* m_staticText612;
+		wxTextCtrl* m_text_GFXExt;
+		wxStaticText* m_staticText6112;
+		wxStaticText* m_staticText613;
+		wxTextCtrl* m_text_GFXSpace1;
+		wxStaticText* m_staticText6121;
+		wxTextCtrl* m_text_GFXExt1;
+		wxStaticText* m_staticPrevLabel;
+		wxStaticBitmap* m_bitmap_AssetPreview;
+		wxButton* m_button7;
+		wxButton* m_button8;
 		wxToolBar* m_toolBar1;
 		wxStatusBar* statusBar;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OpenFile( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
@@ -72,8 +114,8 @@ class GUIFrame : public wxFrame
 	
 	public:
 		
-		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("NUE v0.0.1a"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 915,600 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
-		~GUIFrame();
+		AssetEd( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 915,600 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		~AssetEd();
 	
 };
 

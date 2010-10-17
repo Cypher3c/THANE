@@ -18,8 +18,7 @@
 #include "NUEMain.h"
 
 //helper functions
-enum wxbuildinfoformat {
-    short_f, long_f };
+enum wxbuildinfoformat {short_f, long_f };
 
 wxString wxbuildinfo(wxbuildinfoformat format)
 {
@@ -50,8 +49,8 @@ NUEFrame::NUEFrame(wxFrame *frame)
 : GUIFrame(frame)
 {
 #if wxUSE_STATUSBAR
-    statusBar->SetStatusText(_("Hello Code::Blocks user!"), 0);
-    statusBar->SetStatusText(wxbuildinfo(short_f), 1);
+//    statusBar->SetStatusText(_("Hello Code::Blocks user!"), 0);
+ //   statusBar->SetStatusText(wxbuildinfo(short_f), 1);
 #endif
 
 }
@@ -60,19 +59,41 @@ NUEFrame::~NUEFrame()
 {
 }
 
-void NUEFrame::OnClose(wxCloseEvent &event)
+void NUEAsset::OnClose(wxCloseEvent &event)
 {
     Destroy();
 }
 
-void NUEFrame::OnQuit(wxCommandEvent &event)
+void NUEAsset::OnQuit(wxCommandEvent &event)
 {
     Destroy();
 }
 
-void NUEFrame::OnAbout(wxCommandEvent &event)
+void NUEAsset::OnAbout(wxCommandEvent &event)
 {
     wxString msg = wxbuildinfo(long_f);
     wxMessageBox(msg, _("Welcome to..."));
 }
 
+void NUEAsset::sys_click( wxCommandEvent& event ) {
+    //Get the index of the selected item
+    int ind;
+    ind = m_AssetListBox->GetSelection();
+
+    wxString tmp_asset_nam;
+    wxString tmp_x;
+    wxString tmp_y;
+
+    tmp_asset_nam = SysX.Sys.at(ind).name;
+    tmp_x << SysX.Sys.at(ind).x_pos;
+    tmp_y << SysX.Sys.at(ind).y_pos;
+
+    //Set the asset name textbox
+    m_textPNAME->ChangeValue(tmp_asset_nam);
+
+    //Set the X_pos textbok
+    m_textPosX->ChangeValue(tmp_x);
+
+    //Set the Y_pos textbox
+    m_textPosY->ChangeValue(tmp_y);
+}

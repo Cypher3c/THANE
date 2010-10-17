@@ -16,11 +16,12 @@
 #include "System.h"
 #include <wx/wx.h>
 
-class NUEFrame: public GUIFrame
+
+class NUEAsset : public AssetEd
 {
     public:
-        NUEFrame(wxFrame *frame);
-        ~NUEFrame();
+        NUEAsset(wxFrame *frame): AssetEd(frame){}
+        ~NUEAsset(){};
 
         //Xml object
         XmlO SysX;
@@ -42,15 +43,14 @@ class NUEFrame: public GUIFrame
 
                 //Set m_SysListBox contents to names from ssys.xml
                 SysX.load(OpenDialog->GetPath());
-                SSystem tempsys;
+                Asset assetsys;
                 //Start adding names to m_SysListbox
                 //Pointer to system
-                wxString temp_rad;
                 for(int i = 0; i < SysX.Sys.size(); i++){
-                    tempsys = SysX.Sys.at(i);
+                    assetsys = SysX.Sys.at(i);
                     //Get name of system as string
                     //Convert name from string to wxString
-                    m_SysListBox->AppendString(tempsys.name);
+                    m_AssetListBox->AppendString(assetsys.name);
                 }
                 // MainEditBox->LoadFile(CurrentDocPath); //Opens that file
             }
@@ -63,22 +63,28 @@ class NUEFrame: public GUIFrame
 
         }
         //Handle clicking on a system
-        virtual void sys_click( wxCommandEvent& event ) {
-            //Get the index of the selected item
-            int ind;
-            ind = m_SysListBox->GetSelection();
+        virtual void sys_click( wxCommandEvent& event );
+};
 
-            wxString tmp_sys_nam;
-            wxString tmp_rad;
 
-            tmp_sys_nam = SysX.Sys.at(ind).name;
-            tmp_rad << SysX.Sys.at(ind).radius;
+class NUEFrame: public GUIFrame
+{
+    public:
+        NUEFrame(wxFrame *frame);
+        ~NUEFrame();
 
-            //Set the system name listbox
-            m_textPNAME->ChangeValue(tmp_sys_nam);
+    private:
+    //    virtual void OnClose(wxCloseEvent& event);
+    //    virtual void OnQuit(wxCommandEvent& event);
+    //    virtual void OnAbout(wxCommandEvent& event);
 
-            //Set the radius listbox
-            m_textRadius->ChangeValue(tmp_rad);
+        //Launch Asset Editor
+        virtual void launch_asset_ed( wxCommandEvent& event ) {
+            NUEAsset* asset_ed_frame = new NUEAsset(0L);
+            asset_ed_frame->SetIcon(wxICON(aaaa)); // To Set App Icon
+
+          //Show Asset Editor Frame
+            asset_ed_frame->Show();
 
         }
 };

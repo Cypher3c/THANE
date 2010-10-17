@@ -78,7 +78,7 @@
 			<Add directory="C:\wxWidgets-2.8.11\include" />
 		</ResourceCompiler>
 		<Linker>
-			<Add option="-mthreads" />
+			<Add option="-mthreads --enable-auto-import" />
 			<Add library="libkernel32.a" />
 			<Add library="libuser32.a" />
 			<Add library="libgdi32.a" />
