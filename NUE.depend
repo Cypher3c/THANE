@@ -2630,7 +2630,7 @@
 	"System.h"
 	<wx/wx.h>
 
-1287343011 c:\users\chris\documents\nue_wx2\nue\system.h
+1287351302 c:\users\chris\documents\nue_wx2\nue\system.h
 	<string>
 	<vector>
 	<wx/wx.h>
@@ -2668,7 +2668,7 @@
 	"NUEApp.h"
 	"NUEMain.h"
 
-1287341965 source:c:\users\chris\documents\nue_wx2\nue\guiframe.cpp
+1287342965 source:c:\users\chris\documents\nue_wx2\nue\guiframe.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIFrame.h"

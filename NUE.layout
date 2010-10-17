@@ -13,14 +13,14 @@
 	<File name="NUEApp.h" open="1" top="0" tabpos="5">
 		<Cursor position="451" topLine="0" />
 	</File>
-	<File name="NUEMain.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="1527" topLine="64" />
+	<File name="NUEMain.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="1815" topLine="69" />
 	</File>
 	<File name="NUEMain.h" open="1" top="0" tabpos="2">
-		<Cursor position="2440" topLine="59" />
+		<Cursor position="588" topLine="3" />
 	</File>
-	<File name="System.h" open="1" top="1" tabpos="1">
-		<Cursor position="2572" topLine="98" />
+	<File name="System.h" open="1" top="0" tabpos="1">
+		<Cursor position="1090" topLine="42" />
 	</File>
 	<File name="nxml.h" open="0" top="0" tabpos="8">
 		<Cursor position="878" topLine="24" />

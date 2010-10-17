@@ -96,4 +96,9 @@ void NUEAsset::sys_click( wxCommandEvent& event ) {
 
     //Set the Y_pos textbox
     m_textPosY->ChangeValue(tmp_y);
+
+    //Set the GFX_space textbox
+    m_text_GFXSpace->ChangeValue(SysX.Sys.at(ind).gfx_space);
+    //Set the GFX_space textbox
+    m_text_GFXExt->ChangeValue(SysX.Sys.at(ind).gfx_ext);
 }
