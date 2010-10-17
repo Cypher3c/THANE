@@ -48,6 +48,15 @@ class GUIFrame : public wxFrame
 		wxTextCtrl* m_textPNAME;
 		wxStaticText* m_staticText5;
 		wxTextCtrl* m_textRadius;
+		wxStaticText* m_staticText6;
+		wxTextCtrl* m_textStars;
+		wxStaticText* m_staticText61;
+		wxTextCtrl* m_textInterference;
+		wxStaticText* m_staticText611;
+		wxStaticText* m_staticText612;
+		wxTextCtrl* m_textPosX;
+		wxStaticText* m_staticText6121;
+		wxTextCtrl* m_textPosY;
 		wxStaticText* m_staticLinksLabel;
 		wxListBox* m_SysHyperlinkslist;
 		wxToolBar* m_toolBar1;

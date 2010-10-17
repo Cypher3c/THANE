@@ -16,11 +16,11 @@
 	<File name="NUEMain.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="1466" topLine="35" />
 	</File>
-	<File name="NUEMain.h" open="1" top="1" tabpos="2">
-		<Cursor position="2444" topLine="53" />
+	<File name="NUEMain.h" open="1" top="0" tabpos="2">
+		<Cursor position="2444" topLine="16" />
 	</File>
-	<File name="System.h" open="1" top="0" tabpos="1">
-		<Cursor position="3337" topLine="30" />
+	<File name="System.h" open="1" top="1" tabpos="1">
+		<Cursor position="721" topLine="28" />
 	</File>
 	<File name="nxml.h" open="0" top="0" tabpos="8">
 		<Cursor position="878" topLine="24" />

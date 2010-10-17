@@ -33,6 +33,7 @@ public:
         sys_node = sysnode_t;
         name = wxString::FromAscii(p_name);
         radius  = p_rad;
+        //stars =
 
     }
     //Destructor

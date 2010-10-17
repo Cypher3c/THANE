@@ -58,6 +58,8 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	m_staticTextSysboxlabel = new wxStaticText( this, wxID_ANY, wxT("Systems"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticTextSysboxlabel->Wrap( -1 );
+	m_staticTextSysboxlabel->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
+	
 	bSizer2->Add( m_staticTextSysboxlabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	m_SysListBox = new wxListBox( this, wxID_ANY, wxPoint( -1,-1 ), wxDefaultSize, 0, NULL, wxLB_ALWAYS_SB|wxLB_HSCROLL|wxLB_SINGLE ); 
@@ -72,6 +74,8 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	m_staticParamslabel = new wxStaticText( this, wxID_ANY, wxT("System Parameters"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticParamslabel->Wrap( -1 );
+	m_staticParamslabel->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
+	
 	bSizer3->Add( m_staticParamslabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	wxBoxSizer* bSizer41;
@@ -101,6 +105,70 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	bSizer41->Add( gSizer2, 0, 0, 5 );
 	
+	wxGridSizer* gSizer3;
+	gSizer3 = new wxGridSizer( 2, 2, 0, 0 );
+	
+	m_staticText6 = new wxStaticText( this, wxID_ANY, wxT("Stars:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText6->Wrap( -1 );
+	gSizer3->Add( m_staticText6, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
+	
+	m_textStars = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	gSizer3->Add( m_textStars, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	bSizer41->Add( gSizer3, 0, 0, 5 );
+	
+	wxGridSizer* gSizer31;
+	gSizer31 = new wxGridSizer( 2, 2, 0, 0 );
+	
+	m_staticText61 = new wxStaticText( this, wxID_ANY, wxT("Interference:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText61->Wrap( -1 );
+	gSizer31->Add( m_staticText61, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
+	
+	m_textInterference = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	gSizer31->Add( m_textInterference, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	bSizer41->Add( gSizer31, 0, 0, 5 );
+	
+	wxGridSizer* gSizer311;
+	gSizer311 = new wxGridSizer( 2, 1, 0, 0 );
+	
+	m_staticText611 = new wxStaticText( this, wxID_ANY, wxT("Position"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText611->Wrap( -1 );
+	m_staticText611->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
+	
+	gSizer311->Add( m_staticText611, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	bSizer41->Add( gSizer311, 1, wxEXPAND, 5 );
+	
+	wxGridSizer* gSizer312;
+	gSizer312 = new wxGridSizer( 1, 2, 0, 0 );
+	
+	wxGridSizer* gSizer14;
+	gSizer14 = new wxGridSizer( 2, 2, 0, 0 );
+	
+	m_staticText612 = new wxStaticText( this, wxID_ANY, wxT("X:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText612->Wrap( -1 );
+	gSizer14->Add( m_staticText612, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
+	
+	m_textPosX = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	gSizer14->Add( m_textPosX, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	gSizer312->Add( gSizer14, 0, wxALIGN_CENTER_VERTICAL, 5 );
+	
+	wxGridSizer* gSizer141;
+	gSizer141 = new wxGridSizer( 2, 2, 0, 0 );
+	
+	m_staticText6121 = new wxStaticText( this, wxID_ANY, wxT("Y:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText6121->Wrap( -1 );
+	gSizer141->Add( m_staticText6121, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
+	
+	m_textPosY = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	gSizer141->Add( m_textPosY, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	gSizer312->Add( gSizer141, 0, 0, 5 );
+	
+	bSizer41->Add( gSizer312, 0, 0, 5 );
+	
 	bSizer3->Add( bSizer41, 1, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer6;
@@ -115,6 +183,8 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	m_staticLinksLabel = new wxStaticText( this, wxID_ANY, wxT("Hyperjump Links"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticLinksLabel->Wrap( -1 );
+	m_staticLinksLabel->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
+	
 	bSizer4->Add( m_staticLinksLabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	m_SysHyperlinkslist = new wxListBox( this, wxID_ANY, wxPoint( -1,-1 ), wxDefaultSize, 0, NULL, 0 ); 
