@@ -76,6 +76,9 @@ void NUEAsset::OnAbout(wxCommandEvent &event)
 }
 
 void NUEAsset::sys_click( wxCommandEvent& event ) {
+
+    //Set Faction Check box to off
+    m_checkFac->SetValue(false);
     //Get the index of the selected item
     int ind;
     ind = m_AssetListBox->GetSelection();
@@ -83,6 +86,7 @@ void NUEAsset::sys_click( wxCommandEvent& event ) {
     wxString tmp_asset_nam;
     wxString tmp_x;
     wxString tmp_y;
+    wxString tmp_tmp;
 
     tmp_asset_nam = SysX.Sys.at(ind).name;
     tmp_x << SysX.Sys.at(ind).x_pos;
@@ -96,4 +100,26 @@ void NUEAsset::sys_click( wxCommandEvent& event ) {
 
     //Set the Y_pos textbox
     m_textPosY->ChangeValue(tmp_y);
+
+    //Set the GFX_space textbox
+    m_text_GFXSpace->ChangeValue(SysX.Sys.at(ind).gfx_space);
+    //Set the GFX_space textbox
+    m_text_GFXExt->ChangeValue(SysX.Sys.at(ind).gfx_ext);
+
+    //Set the faction textbox and checkbox
+    if(SysX.Sys.at(ind).pres_faction != wxT("n")){
+        m_text_Faction->ChangeValue(SysX.Sys.at(ind).pres_faction);
+        m_checkFac->SetValue(true);
+    }
+    else{
+      //  m_text_Faction->
+    }
+
+    //Set the value textbox
+    tmp_tmp << SysX.Sys.at(ind).pres_value;
+    m_text_PresVal->ChangeValue(tmp_tmp);
+    //Set the range textbox
+    tmp_tmp << SysX.Sys.at(ind).pres_range;
+    m_text_PresVal->ChangeValue(tmp_tmp);
+
 }

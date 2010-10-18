@@ -2615,7 +2615,7 @@
 	<wx/wxprec.h>
 	<wx/wx.h>
 
-1287342836 source:c:\users\chris\documents\nue_wx2\nue\nuemain.cpp
+1287364501 source:c:\users\chris\documents\nue_wx2\nue\nuemain.cpp
 	"wx_pch.h"
 	"NUEMain.h"
 
@@ -2630,7 +2630,7 @@
 	"System.h"
 	<wx/wx.h>
 
-1287343011 c:\users\chris\documents\nue_wx2\nue\system.h
+1287362654 c:\users\chris\documents\nue_wx2\nue\system.h
 	<string>
 	<vector>
 	<wx/wx.h>
@@ -2640,7 +2640,7 @@
 1286072132 c:\users\chris\documents\nue_wx2\nue\nueapp.h
 	<wx/app.h>
 
-1287341965 c:\users\chris\documents\nue_wx2\nue\guiframe.h
+1287366729 c:\users\chris\documents\nue_wx2\nue\guiframe.h
 	<wx/string.h>
 	<wx/bitmap.h>
 	<wx/image.h>
@@ -2656,6 +2656,7 @@
 	<wx/stattext.h>
 	<wx/listbox.h>
 	<wx/textctrl.h>
+	<wx/checkbox.h>
 	<wx/statbmp.h>
 	<wx/toolbar.h>
 	<wx/statusbr.h>
@@ -2668,7 +2669,7 @@
 	"NUEApp.h"
 	"NUEMain.h"
 
-1287341965 source:c:\users\chris\documents\nue_wx2\nue\guiframe.cpp
+1287360799 source:c:\users\chris\documents\nue_wx2\nue\guiframe.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIFrame.h"

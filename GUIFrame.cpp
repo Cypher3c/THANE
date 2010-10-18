@@ -239,8 +239,6 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	gSizer31->Add( m_staticText61, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	m_text_GFXSpace = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_text_GFXSpace->Enable( false );
-	
 	gSizer31->Add( m_text_GFXSpace, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	GFXBox->Add( gSizer31, 0, 0, 5 );
@@ -253,8 +251,6 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	gSizer312->Add( m_staticText612, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
 	m_text_GFXExt = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_text_GFXExt->Enable( false );
-	
 	gSizer312->Add( m_text_GFXExt, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	GFXBox->Add( gSizer312, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
@@ -267,41 +263,52 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	wxGridSizer* gSizer3112;
 	gSizer3112 = new wxGridSizer( 2, 1, 0, 0 );
 	
-	m_staticText6112 = new wxStaticText( this, wxID_ANY, wxT("GFX"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText6112->Wrap( -1 );
-	m_staticText6112->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
+	m_staticTextPresence = new wxStaticText( this, wxID_ANY, wxT("Presence"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticTextPresence->Wrap( -1 );
+	m_staticTextPresence->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
 	
-	gSizer3112->Add( m_staticText6112, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	gSizer3112->Add( m_staticTextPresence, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	FactionBox->Add( gSizer3112, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	wxGridSizer* gSizer313;
-	gSizer313 = new wxGridSizer( 1, 2, 0, 0 );
+	gSizer313 = new wxGridSizer( 1, 3, 0, 0 );
 	
-	m_staticText613 = new wxStaticText( this, wxID_ANY, wxT("Space:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText613->Wrap( -1 );
-	gSizer313->Add( m_staticText613, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
+	m_staticTextFaction = new wxStaticText( this, wxID_ANY, wxT("Faction:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticTextFaction->Wrap( -1 );
+	gSizer313->Add( m_staticTextFaction, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
-	m_text_GFXSpace1 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_text_GFXSpace1->Enable( false );
+	m_text_Faction = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	gSizer313->Add( m_text_Faction, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	gSizer313->Add( m_text_GFXSpace1, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	m_checkFac = new wxCheckBox( this, wxID_ANY, wxT("Any?"), wxDefaultPosition, wxDefaultSize, 0 );
+	gSizer313->Add( m_checkFac, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	FactionBox->Add( gSizer313, 0, 0, 5 );
 	
 	wxGridSizer* gSizer3121;
 	gSizer3121 = new wxGridSizer( 1, 2, 0, 0 );
 	
-	m_staticText6121 = new wxStaticText( this, wxID_ANY, wxT("Exterior:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText6121->Wrap( -1 );
-	gSizer3121->Add( m_staticText6121, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
+	m_staticTextValue = new wxStaticText( this, wxID_ANY, wxT("Value:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticTextValue->Wrap( -1 );
+	gSizer3121->Add( m_staticTextValue, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
-	m_text_GFXExt1 = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	m_text_GFXExt1->Enable( false );
+	m_text_PresVal = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	gSizer3121->Add( m_text_PresVal, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	gSizer3121->Add( m_text_GFXExt1, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	FactionBox->Add( gSizer3121, 0, 0, 5 );
 	
-	FactionBox->Add( gSizer3121, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
+	wxGridSizer* gSizer31211;
+	gSizer31211 = new wxGridSizer( 1, 2, 0, 0 );
+	
+	m_staticTextRange = new wxStaticText( this, wxID_ANY, wxT("Range:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticTextRange->Wrap( -1 );
+	gSizer31211->Add( m_staticTextRange, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
+	
+	m_text_PresRange = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	gSizer31211->Add( m_text_PresRange, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	FactionBox->Add( gSizer31211, 0, 0, 5 );
 	
 	bSizer41->Add( FactionBox, 1, wxEXPAND, 5 );
 	
@@ -318,7 +325,7 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	bSizer4->Add( m_staticPrevLabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
-	m_bitmap_AssetPreview = new wxStaticBitmap( this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize( 300,300 ), 0 );
+	m_bitmap_AssetPreview = new wxStaticBitmap( this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize( 200,200 ), 0 );
 	bSizer4->Add( m_bitmap_AssetPreview, 0, wxALL, 5 );
 	
 	wxGridSizer* gSizer19;
@@ -336,7 +343,10 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	bSizer4->Add( gSizer19, 1, wxEXPAND, 5 );
 	
-	fgSizer1->Add( bSizer4, 1, wxEXPAND|wxALIGN_CENTER_HORIZONTAL|wxBOTTOM|wxRIGHT|wxLEFT, 30 );
+	
+	bSizer4->Add( m_customControl1, 0, wxALL, 5 );
+	
+	fgSizer1->Add( bSizer4, 0, wxALIGN_CENTER_HORIZONTAL|wxBOTTOM|wxRIGHT|wxLEFT, 30 );
 	
 	this->SetSizer( fgSizer1 );
 	this->Layout();

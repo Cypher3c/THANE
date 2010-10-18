@@ -23,6 +23,7 @@
 #include <wx/stattext.h>
 #include <wx/listbox.h>
 #include <wx/textctrl.h>
+#include <wx/checkbox.h>
 #include <wx/statbmp.h>
 #include <wx/toolbar.h>
 #include <wx/statusbr.h>
@@ -93,15 +94,19 @@ class AssetEd : public wxFrame
 		wxTextCtrl* m_text_GFXSpace;
 		wxStaticText* m_staticText612;
 		wxTextCtrl* m_text_GFXExt;
-		wxStaticText* m_staticText6112;
-		wxStaticText* m_staticText613;
-		wxTextCtrl* m_text_GFXSpace1;
-		wxStaticText* m_staticText6121;
-		wxTextCtrl* m_text_GFXExt1;
+		wxStaticText* m_staticTextPresence;
+		wxStaticText* m_staticTextFaction;
+		wxTextCtrl* m_text_Faction;
+		wxCheckBox* m_checkFac;
+		wxStaticText* m_staticTextValue;
+		wxTextCtrl* m_text_PresVal;
+		wxStaticText* m_staticTextRange;
+		wxTextCtrl* m_text_PresRange;
 		wxStaticText* m_staticPrevLabel;
 		wxStaticBitmap* m_bitmap_AssetPreview;
 		wxButton* m_button7;
 		wxButton* m_button8;
+		
 		wxToolBar* m_toolBar1;
 		wxStatusBar* statusBar;
 		
@@ -114,7 +119,7 @@ class AssetEd : public wxFrame
 	
 	public:
 		
-		AssetEd( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 915,600 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		AssetEd( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,700 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		~AssetEd();
 	
 };
