@@ -1,6 +1,6 @@
 NUE v0.0.1a Readme
 
-A lot of interesting stuff will go here.
+Currently, only viewing of the assets.xml file is supported.
 
-For now, you will have to be contented with the above text.
+In addition, there is little to no error checking at the moment.
 
