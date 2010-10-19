@@ -64,6 +64,8 @@ class NUEAsset : public AssetEd
         }
         //Handle clicking on a system
         virtual void sys_click( wxCommandEvent& event );
+
+        void clear_params();
 };
 
 

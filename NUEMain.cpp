@@ -15,6 +15,7 @@
 #pragma hdrstop
 #endif //__BORLANDC__
 
+#include <wx/bitmap.h>
 #include "NUEMain.h"
 
 //helper functions
@@ -75,10 +76,37 @@ void NUEAsset::OnAbout(wxCommandEvent &event)
     wxMessageBox(msg, _("Welcome to..."));
 }
 
+void NUEAsset::clear_params(){
+
+    //Clear textboxes and checkboxes
+    m_textPNAME->ChangeValue(wxT(""));
+    m_textPosX->ChangeValue(wxT(""));
+    m_textPosY->ChangeValue(wxT(""));
+    m_text_GFXSpace->ChangeValue(wxT(""));
+    m_text_GFXExt->ChangeValue(wxT(""));
+    m_text_Faction->ChangeValue(wxT(""));
+    m_checkFac->SetValue(false);
+    m_text_PresVal->ChangeValue(wxT(""));
+    m_text_PresRange->ChangeValue(wxT(""));
+    m_text_Class->ChangeValue(wxT(""));
+    m_text_Population->ChangeValue(wxT(""));
+    m_checkBoxLand->SetValue(false);
+    m_checkBoxRefuel->SetValue(false);
+    m_checkBoxBar->SetValue(false);
+    m_checkBoxMissions->SetValue(false);
+    m_checkBoxCommodity->SetValue(false);
+    m_checkBoxOutfits->SetValue(false);
+    m_checkBoxShipyard->SetValue(false);
+    m_textLandingDescription->ChangeValue(wxT(""));
+    m_textBarDescription->ChangeValue(wxT(""));
+
+}
+
+
 void NUEAsset::sys_click( wxCommandEvent& event ) {
 
-    //Set Faction Check box to off
-    m_checkFac->SetValue(false);
+    clear_params();
+
     //Get the index of the selected item
     int ind;
     ind = m_AssetListBox->GetSelection();
@@ -87,6 +115,7 @@ void NUEAsset::sys_click( wxCommandEvent& event ) {
     wxString tmp_x;
     wxString tmp_y;
     wxString tmp_tmp;
+    wxString tmp_tmp2;
 
     tmp_asset_nam = SysX.Sys.at(ind).name;
     tmp_x << SysX.Sys.at(ind).x_pos;
@@ -119,7 +148,44 @@ void NUEAsset::sys_click( wxCommandEvent& event ) {
     tmp_tmp << SysX.Sys.at(ind).pres_value;
     m_text_PresVal->ChangeValue(tmp_tmp);
     //Set the range textbox
-    tmp_tmp << SysX.Sys.at(ind).pres_range;
-    m_text_PresVal->ChangeValue(tmp_tmp);
+    tmp_tmp2 << SysX.Sys.at(ind).pres_range;
+    m_text_PresRange->ChangeValue(tmp_tmp2);
 
+    //Set the Class and Population Boxes
+
+    tmp_tmp = SysX.Sys.at(ind).planet_class;
+    m_text_Class->ChangeValue(tmp_tmp);
+
+    tmp_tmp = wxT(""); //Clear it
+
+    tmp_tmp << SysX.Sys.at(ind).population;
+
+    m_text_Population->ChangeValue(tmp_tmp);
+
+    //Set Services Checkboxes
+    m_checkBoxLand->SetValue(SysX.Sys.at(ind).land);
+    m_checkBoxRefuel->SetValue(SysX.Sys.at(ind).refuel);
+    m_checkBoxBar->SetValue(SysX.Sys.at(ind).bar);
+    m_checkBoxMissions->SetValue(SysX.Sys.at(ind).missions);
+    m_checkBoxCommodity->SetValue(SysX.Sys.at(ind).commodity);
+    m_checkBoxOutfits->SetValue(SysX.Sys.at(ind).outfits);
+    m_checkBoxShipyard->SetValue(SysX.Sys.at(ind).shipyard);
+
+    //Set the description textboxes
+    m_textLandingDescription->ChangeValue(SysX.Sys.at(ind).description);
+    m_textBarDescription->ChangeValue(SysX.Sys.at(ind).bar_description);
+
+    //Set the bitmap
+    //get path
+    wxString tmp_path = wxT("c:\\NaevDev\\naev\\gfx\\planet\\space\\");
+    const wxString tmp_path3 = tmp_path + SysX.Sys.at(ind).gfx_space;
+    //wxBitmapHandler tmp_bit_hand;
+    wxBitmap tmp_bit;
+    tmp_bit.LoadFile(tmp_path3, wxBITMAP_TYPE_BMP);
+
+   // tmp_bit_hand.LoadFile(&tmp_bit, tmp_path3);
+
+    //TODO
+  //  m_bpAssetPrev->SetBitmapLabel(tmp_bit);
 }
+

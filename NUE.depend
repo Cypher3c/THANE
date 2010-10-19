@@ -2615,22 +2615,23 @@
 	<wx/wxprec.h>
 	<wx/wx.h>
 
-1287364501 source:c:\users\chris\documents\nue_wx2\nue\nuemain.cpp
+1287464725 source:c:\users\chris\documents\nue_wx2\nue\nuemain.cpp
 	"wx_pch.h"
+	<wx/bitmap.h>
 	"NUEMain.h"
 
 1286072132 c:\users\chris\documents\nue_wx2\nue\wx_pch.h
 	<wx/wxprec.h>
 	<wx/wx.h>
 
-1287342913 c:\users\chris\documents\nue_wx2\nue\nuemain.h
+1287464219 c:\users\chris\documents\nue_wx2\nue\nuemain.h
 	"System.h"
 	"NUEApp.h"
 	"GUIFrame.h"
 	"System.h"
 	<wx/wx.h>
 
-1287362654 c:\users\chris\documents\nue_wx2\nue\system.h
+1287465051 c:\users\chris\documents\nue_wx2\nue\system.h
 	<string>
 	<vector>
 	<wx/wx.h>
@@ -2640,7 +2641,7 @@
 1286072132 c:\users\chris\documents\nue_wx2\nue\nueapp.h
 	<wx/app.h>
 
-1287366729 c:\users\chris\documents\nue_wx2\nue\guiframe.h
+1287462743 c:\users\chris\documents\nue_wx2\nue\guiframe.h
 	<wx/string.h>
 	<wx/bitmap.h>
 	<wx/image.h>
@@ -2657,7 +2658,7 @@
 	<wx/listbox.h>
 	<wx/textctrl.h>
 	<wx/checkbox.h>
-	<wx/statbmp.h>
+	<wx/bmpbuttn.h>
 	<wx/toolbar.h>
 	<wx/statusbr.h>
 
@@ -2669,8 +2670,25 @@
 	"NUEApp.h"
 	"NUEMain.h"
 
-1287360799 source:c:\users\chris\documents\nue_wx2\nue\guiframe.cpp
+1287462743 source:c:\users\chris\documents\nue_wx2\nue\guiframe.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIFrame.h"
+
+1211212296 c:\wxwidgets-2.8.11\include\wx\animate.h
+	"wx/defs.h"
+	"wx/animdecod.h"
+	"wx/control.h"
+	"wx/timer.h"
+	"wx/bitmap.h"
+	"wx/gtk/animate.h"
+	"wx/generic/animate.h"
+
+1194650180 c:\wxwidgets-2.8.11\include\wx\animdecod.h
+	"wx/defs.h"
+	"wx/colour.h"
+	"wx/gdicmn.h"
+
+1234555246 c:\wxwidgets-2.8.11\include\wx\generic\animate.h
+	"wx/bitmap.h"
 

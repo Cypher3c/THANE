@@ -27,9 +27,16 @@ public:
     //Constructors
     Asset(){};
     //Make Asset from XmlO params
-    Asset(int p_ID, mxml_node_t *sysnode_t, const char* p_name, float p_x,
-          float p_y, const char* gfx_space_tmp, const char* gfx_ext_tmp,
-          const char* p_fac, float p_presval, int p_presrange){
+
+    //ID, node, Asset Name, X position,
+    //Y position, Space graphic, exterior graphic,
+    //faction name, value, range,
+    //planet/station class, population, land,
+    //refuel, bar, missions, commodity
+    //outfits, shipyard, description, bar description
+    Asset(int p_ID, mxml_node_t *sysnode_t, const char* p_name, float p_x, float p_y, const char* gfx_space_tmp, const char* gfx_ext_tmp,
+          const char* p_fac, float p_presval, int p_presrange, const char* p_plan_class, int p_pop, bool p_land, bool p_refuel, bool p_bar, bool p_missions, bool p_commodity,
+          bool p_outfits, bool p_shipyard, const char* p_descrip, const char* p_bar_descrip){
         //Set ID
         ID = p_ID;
         sys_node = sysnode_t;
@@ -45,9 +52,19 @@ public:
         else{
             pres_faction = wxT("n");
         }
-    //    pres_value << p_presval;
-     //   pres_range << p_presrange;
-
+        pres_value = p_presval;
+        pres_range = p_presrange;
+        planet_class = wxString::FromAscii(p_plan_class);
+        population = p_pop;
+        land = p_land;
+        refuel = p_refuel;
+        bar = p_bar;
+        missions = p_missions;
+        commodity = p_commodity;
+        outfits = p_outfits;
+        shipyard = p_shipyard;
+        description = wxString::FromAscii(p_descrip);
+        bar_description = wxString::FromAscii(p_bar_descrip);
 
     }
     //Destructor
@@ -67,6 +84,17 @@ public:
     wxString pres_faction;
     float pres_value;
     int pres_range;
+    wxString planet_class;
+    int population;
+    bool land;
+    bool refuel;
+    bool bar;
+    bool missions;
+    bool commodity;
+    bool outfits;
+    bool shipyard;
+    wxString description;
+    wxString bar_description;
 
 
 
@@ -85,6 +113,71 @@ public:
     void Set(std::string fname){
         //TODO
     }
+
+    //XML Reading Functions
+
+    const char* GetString(mxml_node_t *nd, const char* tag){
+        const char * tmp_str;
+        mxml_node_t *temp_sub_node;
+        temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
+        if(temp_sub_node != NULL){
+            return temp_sub_node->child->value.text.string;
+        }
+        else{
+            return NULL;
+        }
+        delete tmp_str;
+        delete temp_sub_node;
+    }
+
+    int GetInt(mxml_node_t *nd, const char* tag){
+        const char * tmp_str;
+        mxml_node_t *temp_sub_node;
+        temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
+        if(temp_sub_node != NULL){
+            tmp_str = (temp_sub_node->child->value.text.string);
+            return atoi(tmp_str);
+        }
+        else{
+            return NULL;
+        }
+        delete tmp_str;
+        delete temp_sub_node;
+
+    }
+    float GetFloat(mxml_node_t *nd, const char* tag){
+        const char * tmp_str;
+        mxml_node_t *temp_sub_node;
+        temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
+        if(temp_sub_node != NULL){
+            tmp_str = (temp_sub_node->child->value.text.string);
+            return atof(tmp_str);
+        }
+        else{
+            return NULL;
+        }
+        delete tmp_str;
+        delete temp_sub_node;
+
+    }
+
+        bool TagIsPresent(mxml_node_t *nd, const char* tag){
+        const char * tmp_str;
+        mxml_node_t *temp_sub_node;
+        temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
+        if(temp_sub_node != NULL){
+            return true;
+        }
+        else{
+            return false;
+        }
+        delete tmp_str;
+        delete temp_sub_node;
+    }
+
+
+    //XML Writing Functions
+    //TODO
 
     //Load XML file into XmlO
     void load(wxString filenam){
@@ -110,6 +203,7 @@ public:
         mxml_node_t *subnode_GFX; //Subnode for GFX nodes
         mxml_node_t *subnode_pres; //Subnode for presence nodes
         mxml_node_t *subnode_gen; //Subnode for general nodes
+        mxml_node_t *subnode_serv; //Subnode for services nodes
         mxml_node_t *subnode; //Subnode
         const char* name_tmp; //String for names of asset
         const char* tmp_str; //String for anything :P
@@ -120,6 +214,17 @@ public:
         const char* pres_fac;
         float pres_val;
         int pres_range;
+        const char* plan_class;
+        int population;
+        bool land;
+        bool refuel;
+        bool bar;
+        bool missions;
+        bool commodity;
+        bool outfits;
+        bool shipyard;
+        const char* descrip;
+        const char* bar_descrip;
 
         //Load first asset
         node = mxmlFindElement(Asset_elem, tree, "asset", NULL, NULL, MXML_DESCEND);
@@ -131,59 +236,60 @@ public:
 
             //Mark Branching nodes
             //Pos Element
-            subnode_pos = mxmlFindElement(node, tree, "pos", NULL, NULL, MXML_DESCEND);
+            subnode_pos = mxmlFindElement(node, Asset_elem, "pos", NULL, NULL, MXML_DESCEND);
             //GFX Element
-            subnode_GFX = mxmlFindElement(node, tree, "GFX", NULL, NULL, MXML_DESCEND);
+            subnode_GFX = mxmlFindElement(node, Asset_elem, "GFX", NULL, NULL, MXML_DESCEND);
             //Presence Element
-            subnode_pres = mxmlFindElement(node, tree, "presence", NULL, NULL, MXML_DESCEND);
+            subnode_pres = mxmlFindElement(node, Asset_elem, "presence", NULL, NULL, MXML_DESCEND);
             //General Element
-            subnode_gen = mxmlFindElement(node, tree, "general", NULL, NULL, MXML_DESCEND);
-
+            subnode_gen = mxmlFindElement(node, Asset_elem, "general", NULL, NULL, MXML_DESCEND);
+            //Services Sub-element
+            subnode_serv = mxmlFindElement(subnode_gen, Asset_elem, "services", NULL, NULL, MXML_DESCEND);
 
             //Get Pos parameters x and y
-            subnode = mxmlFindElement(subnode_pos, subnode_pos, "x", NULL, NULL, MXML_DESCEND);
-            if(subnode != NULL){
-                tmp_str = (subnode->child->value.text.string);
-                x_pos = atof(tmp_str);
-            }
-            subnode = mxmlFindElement(subnode_pos, subnode_pos, "y", NULL, NULL, MXML_DESCEND);
-            if(subnode != NULL){
-                tmp_str = (subnode->child->value.text.string);
-                y_pos = atof(tmp_str);
-            }
+            x_pos = GetFloat(subnode_pos, "x");
 
-            //Get GFX Parameters space and exterior
-            subnode = mxmlFindElement(subnode_GFX, subnode_GFX, "space", NULL, NULL, MXML_DESCEND);
-            if(subnode != NULL){
-                gfx_space = (subnode->child->value.text.string);
-            }
-            subnode = mxmlFindElement(subnode_GFX, subnode_GFX, "exterior", NULL, NULL, MXML_DESCEND);
-            if(subnode != NULL){
-                gfx_ext = (subnode->child->value.text.string);
-            }
+            y_pos = GetFloat(subnode_pos, "y");
+
+            //Get GFX filenames
+            gfx_space = GetString(subnode_GFX, "space");
+
+            gfx_ext = GetString(subnode_GFX, "exterior");
 
             //Get Presence Parameters (faction, value, and range)
-            subnode = mxmlFindElement(subnode_pres, subnode_pres, "faction", NULL, NULL, MXML_DESCEND);
-            if(subnode != NULL){
-                pres_fac = subnode->child->value.text.string;
-            }
-            else{
-                pres_fac = "n";
-            }
-            subnode = mxmlFindElement(subnode_pres, subnode_pres, "value", NULL, NULL, MXML_DESCEND);
-            if(subnode != NULL){
-                pres_val = atof(subnode->child->value.text.string);
-            }
-            subnode = mxmlFindElement(subnode_pres, subnode_pres, "range", NULL, NULL, MXML_DESCEND);
-            if(subnode != NULL){
-                pres_val = atoi(subnode->child->value.text.string);
-            }
 
+            pres_fac = GetString(subnode_pres, "faction");
 
+            pres_val = GetFloat(subnode_pres, "value");
+
+            pres_range = GetInt(subnode_pres, "range");
 
             //Get elements from general node (class, population, servicesTODO, description, bar)
+            plan_class = GetString(subnode_gen, "class");
+
+            population = GetInt(subnode_gen, "population");
+
+            //Get available services as true/false values
+            land = TagIsPresent(subnode_serv, "land");
+            refuel = TagIsPresent(subnode_serv, "refuel");
+            bar = TagIsPresent(subnode_serv, "bar");
+            missions = TagIsPresent(subnode_serv, "missions");
+            commodity = TagIsPresent(subnode_serv, "commodity");
+            outfits = TagIsPresent(subnode_serv, "outfits");
+            shipyard = TagIsPresent(subnode_serv, "shipyard");
+
+            //Get Descriptions
+       //     descrip = GetString(subnode_gen, "description");
+            descrip = "TODO";
+            bar_descrip = "TODO";
+
+       //     bar_descrip = GetString(subnode_gen, "bar");
+
+
             //Generate tmp Asset
-            Asset asset_sys(i, node, name_tmp, x_pos, y_pos, gfx_space, gfx_ext, pres_fac, pres_val, pres_range);
+            Asset asset_sys(i, node, name_tmp, x_pos, y_pos, gfx_space, gfx_ext, pres_fac,
+                            pres_val, pres_range, plan_class, population, land, refuel,
+                            bar, missions, commodity, outfits, shipyard, descrip, bar_descrip);
             //Load system with its node into vector of Assets
             Sys.push_back(asset_sys);
 
