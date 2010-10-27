@@ -24,7 +24,6 @@
 #include <wx/listbox.h>
 #include <wx/textctrl.h>
 #include <wx/checkbox.h>
-#include <wx/bmpbuttn.h>
 #include <wx/toolbar.h>
 #include <wx/statusbr.h>
 
@@ -36,43 +35,40 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// Class GUIFrame
 ///////////////////////////////////////////////////////////////////////////////
-class GUIFrame : public wxFrame
+class GUIFrame : public wxFrame 
 {
 	private:
-
+	
 	protected:
 		wxMenuBar* m_menubar2;
 		wxMenu* m_file;
 		wxMenu* m_Settings;
-
 		wxButton* m_buttonAsset;
+		wxButton* m_buttonCom;
 		wxButton* m_buttonShip;
-
-
 		wxButton* m_buttonTech;
 		wxButton* m_buttonOutfit;
-
-
+		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void SetNaevDir_ev( wxCommandEvent& event ) { event.Skip(); }
 		virtual void launch_asset_ed( wxCommandEvent& event ) { event.Skip(); }
-
-
+		
+	
 	public:
-
-		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("THANE v0.0.1a"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 242,200 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		
+		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("THANE v0.0.2a"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 242,200 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		~GUIFrame();
-
+	
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class AssetEd
 ///////////////////////////////////////////////////////////////////////////////
-class AssetEd : public wxFrame
+class AssetEd : public wxFrame 
 {
 	private:
-
+	
 	protected:
 		wxMenuBar* mbar;
 		wxMenu* fileMenu;
@@ -119,25 +115,25 @@ class AssetEd : public wxFrame
 		wxTextCtrl* m_textLandingDescription;
 		wxStaticText* m_staticTextLandDescription1;
 		wxTextCtrl* m_textBarDescription;
-		wxStaticText* m_staticPrevLabel;
-		wxBitmapButton* m_bpAssetPrev;
-		wxButton* m_button7;
-		wxButton* m_button8;
+		wxStaticText* m_staticCommoditiesLabel;
+		wxListBox* m_ComListBox;
+		wxButton* m_buttonAddCom;
+		wxButton* m_buttonDeleteCom;
 		wxToolBar* m_toolBar1;
 		wxStatusBar* statusBar;
-
+		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OpenFile( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 		virtual void sys_click( wxCommandEvent& event ) { event.Skip(); }
-
-
+		
+	
 	public:
-
+		
 		AssetEd( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,743 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		~AssetEd();
-
+	
 };
 
 #endif //__GUIFrame__

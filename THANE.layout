@@ -4,6 +4,15 @@
 	<File name="GUIFrame.h" open="0" top="0" tabpos="0">
 		<Cursor position="1752" topLine="36" />
 	</File>
+	<File name="System.h" open="1" top="1" tabpos="2">
+		<Cursor position="11307" topLine="351" />
+	</File>
+	<File name="THANEApp.h" open="1" top="0" tabpos="1">
+		<Cursor position="353" topLine="0" />
+	</File>
+	<File name="THANEMain.h" open="1" top="0" tabpos="3">
+		<Cursor position="1380" topLine="49" />
+	</File>
 	<File name="WxWizFrame.fbp" open="0" top="0" tabpos="0">
 		<Cursor position="1277" topLine="15" />
 	</File>

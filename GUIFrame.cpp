@@ -41,26 +41,25 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	this->SetMenuBar( m_menubar2 );
 	
 	wxFlexGridSizer* fgSizer4;
-	fgSizer4 = new wxFlexGridSizer( 4, 4, 0, 0 );
+	fgSizer4 = new wxFlexGridSizer( 4, 2, 0, 0 );
 	fgSizer4->SetFlexibleDirection( wxBOTH );
 	fgSizer4->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	
-	fgSizer4->Add( 20, 0, 1, wxEXPAND, 5 );
-	
 	m_buttonAsset = new wxButton( this, wxID_ANY, wxT("Asset Editor"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_buttonAsset->SetToolTip( wxT("Asset Editor") );
+	
 	fgSizer4->Add( m_buttonAsset, 0, wxALL, 5 );
+	
+	m_buttonCom = new wxButton( this, wxID_ANY, wxT("Comm. Editor"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_buttonCom->Enable( false );
+	m_buttonCom->SetToolTip( wxT("Commodity Editor") );
+	
+	fgSizer4->Add( m_buttonCom, 0, wxALL, 5 );
 	
 	m_buttonShip = new wxButton( this, wxID_ANY, wxT("Ship Editor"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_buttonShip->Enable( false );
 	
 	fgSizer4->Add( m_buttonShip, 0, wxALL, 5 );
-	
-	
-	fgSizer4->Add( 20, 0, 1, wxEXPAND, 5 );
-	
-	
-	fgSizer4->Add( 20, 0, 1, wxEXPAND, 5 );
 	
 	m_buttonTech = new wxButton( this, wxID_ANY, wxT("Tech Editor"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_buttonTech->Enable( false );
@@ -71,9 +70,6 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_buttonOutfit->Enable( false );
 	
 	fgSizer4->Add( m_buttonOutfit, 0, wxALL, 5 );
-	
-	
-	fgSizer4->Add( 20, 0, 1, wxEXPAND, 5 );
 	
 	this->SetSizer( fgSizer4 );
 	this->Layout();
@@ -445,35 +441,38 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxVERTICAL );
 	
-	m_staticPrevLabel = new wxStaticText( this, wxID_ANY, wxT("Preview"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticPrevLabel->Wrap( -1 );
-	m_staticPrevLabel->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
+	m_staticCommoditiesLabel = new wxStaticText( this, wxID_ANY, wxT("Commodities"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticCommoditiesLabel->Wrap( -1 );
+	m_staticCommoditiesLabel->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), 70, 90, 92, false, wxEmptyString ) );
 	
-	bSizer4->Add( m_staticPrevLabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	bSizer4->Add( m_staticCommoditiesLabel, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
-	m_bpAssetPrev = new wxBitmapButton( this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize( 250,250 ), wxBU_AUTODRAW );
-	m_bpAssetPrev->SetMinSize( wxSize( 250,250 ) );
+	wxBoxSizer* bSizer21;
+	bSizer21 = new wxBoxSizer( wxVERTICAL );
 	
-	m_bpAssetPrev->SetMinSize( wxSize( 250,250 ) );
+	m_ComListBox = new wxListBox( this, wxID_ANY, wxPoint( -1,-1 ), wxDefaultSize, 0, NULL, wxLB_ALWAYS_SB|wxLB_HSCROLL|wxLB_SINGLE ); 
+	m_ComListBox->SetMinSize( wxSize( 200,200 ) );
 	
-	bSizer4->Add( m_bpAssetPrev, 0, wxALL, 5 );
+	bSizer21->Add( m_ComListBox, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
-	wxGridSizer* gSizer19;
-	gSizer19 = new wxGridSizer( 3, 2, 0, 0 );
+	wxGridSizer* gSizer181;
+	gSizer181 = new wxGridSizer( 2, 2, 0, 0 );
 	
-	m_button7 = new wxButton( this, wxID_ANY, wxT("Space"), wxDefaultPosition, wxSize( 60,-1 ), 0 );
-	m_button7->Enable( false );
+	m_buttonAddCom = new wxButton( this, wxID_ANY, wxT("Add Commodity"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_buttonAddCom->Enable( false );
 	
-	gSizer19->Add( m_button7, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
+	gSizer181->Add( m_buttonAddCom, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
-	m_button8 = new wxButton( this, wxID_ANY, wxT("Ext"), wxDefaultPosition, wxSize( 60,-1 ), 0 );
-	m_button8->Enable( false );
+	m_buttonDeleteCom = new wxButton( this, wxID_ANY, wxT("Delete Commodity"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_buttonDeleteCom->Enable( false );
 	
-	gSizer19->Add( m_button8, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	gSizer181->Add( m_buttonDeleteCom, 0, wxALL, 5 );
 	
-	bSizer4->Add( gSizer19, 1, wxEXPAND, 5 );
+	bSizer21->Add( gSizer181, 1, wxEXPAND, 5 );
 	
-	fgSizer1->Add( bSizer4, 0, wxALIGN_CENTER_HORIZONTAL|wxBOTTOM|wxRIGHT|wxLEFT, 30 );
+	bSizer4->Add( bSizer21, 1, wxEXPAND, 5 );
+	
+	fgSizer1->Add( bSizer4, 0, wxBOTTOM|wxRIGHT|wxLEFT|wxALIGN_CENTER_HORIZONTAL, 30 );
 	
 	this->SetSizer( fgSizer1 );
 	this->Layout();
@@ -489,6 +488,7 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	this->Connect( menuFileQuit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnQuit ) );
 	this->Connect( menuHelpAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
 	m_AssetListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
+	m_ComListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
 }
 
 AssetEd::~AssetEd()
@@ -498,5 +498,6 @@ AssetEd::~AssetEd()
 	this->Disconnect( idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnQuit ) );
 	this->Disconnect( idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
 	m_AssetListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
+	m_ComListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
 	
 }

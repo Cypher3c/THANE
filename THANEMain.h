@@ -6,14 +6,12 @@
  * Copyright: Cypher ()
  * License:
  **************************************************************/
-#include "System.h"
 #ifndef THANEMAIN_H
 #define THANEMAIN_H
-
-
+#include "System.h"
 #include "THANEApp.h"
 #include "GUIFrame.h"
-#include "System.h"
+
 #include <wx/wx.h>
 
 
@@ -42,7 +40,7 @@ class THANEAsset : public AssetEd
                 SetStatusText(OpenDialog->GetPath(),0);
 
                 //Set m_SysListBox contents to names from ssys.xml
-                SysX.load(OpenDialog->GetPath());
+                SysX.load(OpenDialog->GetPath(), 1);
                 Asset assetsys;
                 //Start adding names to m_SysListbox
                 //Pointer to system
@@ -76,9 +74,6 @@ class THANEFrame: public GUIFrame
         ~THANEFrame();
 
     private:
-    //    virtual void OnClose(wxCloseEvent& event);
-    //    virtual void OnQuit(wxCommandEvent& event);
-    //    virtual void OnAbout(wxCommandEvent& event);
 
         //Launch Asset Editor
         virtual void launch_asset_ed( wxCommandEvent& event ) {
