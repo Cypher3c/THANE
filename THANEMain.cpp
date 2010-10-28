@@ -186,6 +186,15 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
    // tmp_bit_hand.LoadFile(&tmp_bit, tmp_path3);
 */
     //TODO
-  //  m_bpAssetPrev->SetBitmapLabel(tmp_bit);
+  //  m_bpAssetPrev->SetBitmapLabel(tmp_bit}
 }
+
+  void THANEFrame::SetNaevDir_ev( wxCommandEvent& event ) {
+    //TODO
+    wxFileDialog* OpenDialog = new wxFileDialog(this, _("Select the Naev Executable"), wxEmptyString, wxEmptyString,_("Naev Executable|naev*"),wxFD_OPEN, wxDefaultPosition);
+    if (OpenDialog->ShowModal() == wxID_OK){
+
+    }
+
+  }
 

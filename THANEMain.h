@@ -74,6 +74,7 @@ class THANEFrame: public GUIFrame
         ~THANEFrame();
 
     private:
+        virtual void SetNaevDir_ev( wxCommandEvent& event );
 
         //Launch Asset Editor
         virtual void launch_asset_ed( wxCommandEvent& event ) {

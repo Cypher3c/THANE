@@ -136,4 +136,36 @@ class AssetEd : public wxFrame
 	
 };
 
+///////////////////////////////////////////////////////////////////////////////
+/// Class CommEditor
+///////////////////////////////////////////////////////////////////////////////
+class CommEditor : public wxFrame 
+{
+	private:
+	
+	protected:
+	
+	public:
+		
+		CommEditor( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 500,300 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		~CommEditor();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class MyFrame4
+///////////////////////////////////////////////////////////////////////////////
+class MyFrame4 : public wxFrame 
+{
+	private:
+	
+	protected:
+	
+	public:
+		
+		MyFrame4( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 500,300 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		~MyFrame4();
+	
+};
+
 #endif //__GUIFrame__

@@ -501,3 +501,27 @@ AssetEd::~AssetEd()
 	m_ComListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
 	
 }
+
+CommEditor::CommEditor( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	
+	this->Centre( wxBOTH );
+}
+
+CommEditor::~CommEditor()
+{
+}
+
+MyFrame4::MyFrame4( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	
+	this->Centre( wxBOTH );
+}
+
+MyFrame4::~MyFrame4()
+{
+}
