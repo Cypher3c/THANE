@@ -12,6 +12,8 @@
 
 class Commodity{
 public:
+    //Constructors
+    Commodity(){};
     Commodity(const char* p_name, const char* p_descrip, float p_price){
         name = wxString::FromAscii(p_name);
         description = wxString::FromAscii(p_descrip);
@@ -171,7 +173,6 @@ public:
 
     }
     float GetFloat(mxml_node_t *nd, const char* tag){
-        const char * tmp_str;
         mxml_node_t *temp_sub_node;
         temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
         if(temp_sub_node != NULL){
@@ -238,6 +239,46 @@ public:
         }
 
     }
+
+     int ParseCommodities(mxml_node_t *p_tree){
+
+            //Load <Systems> node
+            Comm_elem = mxmlWalkNext(p_tree, p_tree, MXML_DESCEND_FIRST);
+
+            //Start loading <asset> elements
+
+            //Temporary Elements
+            mxml_node_t *node; //Node to save
+            const char* name; //String for names of commodity
+            const char* description; //String for description
+            float price;
+
+            //Load first commodity
+            node = mxmlFindElement(Comm_elem, tree, "Commodities", NULL, NULL, MXML_DESCEND);
+            node = mxmlFindElement(node, tree, "commodity", NULL, NULL, MXML_DESCEND);
+            //Start loading the rest of the ssys elements (but fail if first element is NULL)
+            int i = 1;
+                while (node){
+                    //Load name attrib
+                    name = mxmlElementGetAttr(node, "name");
+
+                    //Get description, if any
+                    description = GetStringOpaque(node, "description");
+
+                    //Get Price, if any
+                    price = GetFloat(node, "price");
+
+                //Generate tmp Asset
+                Commodity comms_tmp(name, description, price);
+                //Load system with its node into vector of Assets
+                MainCommodities.push_back(comms_tmp);
+                //Load next Asset
+                node = mxmlFindElement(node, tree, "commodity", NULL, NULL, MXML_DESCEND);
+                //Increment ID counter
+               i++;
+           }
+           return 1; //Success
+        }
     int ParseAssets(mxml_node_t *p_tree){
 
             //Load <Systems> node
@@ -252,7 +293,7 @@ public:
             mxml_node_t *subnode_pres; //Subnode for presence nodes
             mxml_node_t *subnode_gen; //Subnode for general nodes
             mxml_node_t *subnode_serv; //Subnode for services nodes
-            mxml_node_t *subnode; //Subnode
+        //    mxml_node_t *subnode; //Subnode
             const char* name_tmp; //String for names of asset
             const char* tmp_str; //String for anything :P
             float x_pos; //X_pos Float
@@ -273,6 +314,7 @@ public:
             bool shipyard;
             const char* descrip;
             const char* bar_descrip;
+            std::vector<const char*> temp_commodities;
 
             //Load first asset
             node = mxmlFindElement(Asset_elem, tree, "asset", NULL, NULL, MXML_DESCEND);
@@ -331,6 +373,8 @@ public:
                 descrip = GetStringOpaque(subnode_gen, "description");
                 bar_descrip = GetStringOpaque(subnode_gen, "bar");
 
+                //Get commodities (Temp, will be checked against list in future versions)
+                ParseCommodities(subnode_gen);
 
                 //Generate tmp Asset
                 Asset asset_sys(i, node, name_tmp, x_pos, y_pos, gfx_space, gfx_ext, pres_fac,
@@ -346,46 +390,28 @@ public:
            }
            return 1; //Success
         }
+    //Update a parameter in the xml tree from the correct form. obj a node pointer to the asset/commodity to be updated
+    //param is the name of the parameter, and obj_type is the type of object: 1 = asset, 2 = commodity
+    //data is the (text) value to change the param to
+    int UpdateParam(mxml_node_t *obj,  int obj_type, const char* param, wxString data){
+        switch(obj_type)
+        {
+            case 1 :
+            //Special case for changing name param (the only attribute so far)
 
-        int ParseCommodities(mxml_node_t *p_tree){
+            break;
 
-            //Load <Systems> node
-            Comm_elem = mxmlWalkNext(p_tree, p_tree, MXML_DESCEND_FIRST);
-
-            //Start loading <asset> elements
-
-            //Temporary Elements
-            mxml_node_t *node; //Node to save
-            const char* name; //String for names of commodity
-            const char* description; //String for description
-            float price;
-
-            //Load first commodity
-            node = mxmlFindElement(Comm_elem, tree, "asset", NULL, NULL, MXML_DESCEND);
-            //Start loading the rest of the ssys elements (but fail if first element is NULL)
-            int i = 1;
-                while (node){
-                    //Load name attrib
-                    name = mxmlElementGetAttr(node, "name");
-
-                    //Get description, if any
-                    description = GetStringOpaque(node, "description");
-
-                    //Get Price, if any
-                    price = GetFloat(node, "price");
-
-                //Generate tmp Asset
-                Commodity comms_tmp(name, description, price);
-                //Load system with its node into vector of Assets
-                MainCommodities.push_back(comms_tmp);
-                //Load next Asset
-                node = mxmlFindElement(node, tree, "commodity", NULL, NULL, MXML_DESCEND);
-                //Increment ID counter
-               i++;
-           }
-           return 1; //Success
+            default :
+            return 0; //Error
         }
 
+    }
+    //Same as above, but for updating object name. Only need the node pointer and the data to write
+    int UpdateName(mxml_node_t *obj, wxString data){
+        mxmlElementSetAttr(obj, "name", data.mb_str());
+
+        return 1; //Hopefully success, error handling to be written later
+    }
 
 
     std::vector<Asset> Sys; //Vector of Systems --MUAHAHAHAHA!, we are vectorized. All Systems under my command! -- Sorry

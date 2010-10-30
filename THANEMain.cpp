@@ -102,6 +102,56 @@ void THANEAsset::clear_params(){
 
 }
 
+void THANEAsset::loadMainComms( wxCommandEvent& event ){
+    wxFileDialog* OpenDialog2 = new wxFileDialog(this, _("Choose commodity file to open"), wxEmptyString, wxEmptyString,_("XML Files (*.xml)|*.xml"),wxFD_OPEN, wxDefaultPosition);
+
+    // Creates a "open file" dialog with 4 file types
+    if (OpenDialog2->ShowModal() == wxID_OK) // if the user click "Open" instead of "Cancel"
+    {
+        //Set m_ComListBox contents to names from commodity.xml
+        SysX.load(OpenDialog2->GetPath(), 2);
+        Commodity comm_temp;
+        //Start adding names to m_ComListBox
+        for(unsigned int i = 0; i < SysX.MainCommodities.size(); i++){
+           comm_temp = SysX.MainCommodities.at(i);
+            //Get name of system as string
+            //Convert name from string to wxString
+            m_ComListBox->AppendString(comm_temp.name);
+        }
+    }
+
+}
+
+
+void THANEAsset::OpenFile( wxCommandEvent& event ){
+            wxFileDialog* OpenDialog = new wxFileDialog(
+            this, _("Choose a file to open"), wxEmptyString, wxEmptyString,_("XML Files (*.xml)|*.xml"),wxFD_OPEN, wxDefaultPosition);
+
+            // Creates a "open file" dialog with 4 file types
+            if (OpenDialog->ShowModal() == wxID_OK) // if the user click "Open" instead of "Cancel"
+            {
+                //Change Statusbar to display path of opened file
+                SetStatusText(OpenDialog->GetPath(),0);
+
+                //Set m_SysListBox contents to names from ssys.xml
+                SysX.load(OpenDialog->GetPath(), 1);
+                Asset assetsys;
+                //Start adding names to m_SysListbox
+                //Pointer to system
+                for(unsigned int i = 0; i < SysX.Sys.size(); i++){
+                   assetsys = SysX.Sys.at(i);
+                    //Get name of system as string
+                    //Convert name from string to wxString
+                    m_AssetListBox->AppendString(assetsys.name);
+                }
+            }
+                SetTitle(wxString("Edit - ", wxConvUTF8) <<OpenDialog->GetFilename()); // Set the Title to reflect the file open
+
+
+        // Clean up after ourselves
+        OpenDialog->Destroy();
+  }
+
 
 void THANEAsset::sys_click( wxCommandEvent& event ) {
 
@@ -189,12 +239,39 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
   //  m_bpAssetPrev->SetBitmapLabel(tmp_bit}
 }
 
+//And now, the name and parameter changing functions
+void THANEAsset::Name_Changed( wxCommandEvent& event ){
+    //Check if user modfied name box
+    if(m_textPNAME->IsModified()){
+        //Wait for focus to leave box
+        //TODO
+
+        //Get index of selection in asset list box
+        int ind;
+        ind = m_AssetListBox->GetSelection();
+
+        //set name in object
+        SysX.Sys.at(ind).name = m_textPNAME->GetValue();
+
+        //set name in listbox by first inserting new name before last one, then deleting existing name off list
+        //Insert new item
+        m_AssetListBox->Insert(SysX.Sys.at(ind).name, ind+1);
+
+        //Select new item
+        m_AssetListBox->SetSelection(ind+1);
+        //Delete old item
+        m_AssetListBox->Delete(ind);
+        //TODO
+    }
+
+}
+
   void THANEFrame::SetNaevDir_ev( wxCommandEvent& event ) {
     //TODO
     wxFileDialog* OpenDialog = new wxFileDialog(this, _("Select the Naev Executable"), wxEmptyString, wxEmptyString,_("Naev Executable|naev*"),wxFD_OPEN, wxDefaultPosition);
     if (OpenDialog->ShowModal() == wxID_OK){
-
     }
 
   }
+
 

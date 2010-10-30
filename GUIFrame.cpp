@@ -109,6 +109,13 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	mbar->Append( fileMenu, wxT("&File") ); 
 	
+	Prefsmenu = new wxMenu();
+	wxMenuItem* m_LoadComm;
+	m_LoadComm = new wxMenuItem( Prefsmenu, wxID_ANY, wxString( wxT("&Load Commodity.xml") ) , wxEmptyString, wxITEM_NORMAL );
+	Prefsmenu->Append( m_LoadComm );
+	
+	mbar->Append( Prefsmenu, wxT("&Preferences") ); 
+	
 	helpMenu = new wxMenu();
 	wxMenuItem* menuHelpAbout;
 	menuHelpAbout = new wxMenuItem( helpMenu, idMenuAbout, wxString( wxT("&About") ) + wxT('\t') + wxT("F1"), wxT("Show info about this application"), wxITEM_NORMAL );
@@ -451,6 +458,7 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	bSizer21 = new wxBoxSizer( wxVERTICAL );
 	
 	m_ComListBox = new wxListBox( this, wxID_ANY, wxPoint( -1,-1 ), wxDefaultSize, 0, NULL, wxLB_ALWAYS_SB|wxLB_HSCROLL|wxLB_SINGLE ); 
+	m_ComListBox->Enable( false );
 	m_ComListBox->SetMinSize( wxSize( 200,200 ) );
 	
 	bSizer21->Add( m_ComListBox, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
@@ -486,9 +494,14 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	// Connect Events
 	this->Connect( menuFileOpen->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OpenFile ) );
 	this->Connect( menuFileQuit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnQuit ) );
+	this->Connect( m_LoadComm->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::loadMainComms ) );
 	this->Connect( menuHelpAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
 	m_AssetListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
-	m_ComListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
+	m_textPNAME->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Name_Changed ), NULL, this );
+	m_textPosX->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::X_Changed ), NULL, this );
+	m_textPosY->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Y_Changed ), NULL, this );
+	m_text_Class->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( AssetEd::m_text_ClassOnTextEnter ), NULL, this );
+	m_ComListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::comm_click ), NULL, this );
 }
 
 AssetEd::~AssetEd()
@@ -496,9 +509,14 @@ AssetEd::~AssetEd()
 	// Disconnect Events
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OpenFile ) );
 	this->Disconnect( idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnQuit ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::loadMainComms ) );
 	this->Disconnect( idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
 	m_AssetListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
-	m_ComListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
+	m_textPNAME->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Name_Changed ), NULL, this );
+	m_textPosX->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::X_Changed ), NULL, this );
+	m_textPosY->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Y_Changed ), NULL, this );
+	m_text_Class->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( AssetEd::m_text_ClassOnTextEnter ), NULL, this );
+	m_ComListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::comm_click ), NULL, this );
 	
 }
 

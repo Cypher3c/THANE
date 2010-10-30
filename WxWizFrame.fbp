@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <wxFormBuilder_Project>
     <FileVersion major="1" minor="10" />
-    <object class="Project" expanded="0">
+    <object class="Project" expanded="1">
         <property name="class_decoration"></property>
         <property name="code_generation">C++</property>
         <property name="disconnect_events">1</property>
@@ -468,7 +468,7 @@
                 </object>
             </object>
         </object>
-        <object class="Frame" expanded="0">
+        <object class="Frame" expanded="1">
             <property name="bg"></property>
             <property name="center">wxBOTH</property>
             <property name="context_help"></property>
@@ -526,7 +526,7 @@
             <event name="OnSetFocus"></event>
             <event name="OnSize"></event>
             <event name="OnUpdateUI"></event>
-            <object class="wxMenuBar" expanded="0">
+            <object class="wxMenuBar" expanded="1">
                 <property name="bg"></property>
                 <property name="context_help"></property>
                 <property name="context_menu">1</property>
@@ -575,7 +575,7 @@
                 <event name="OnSetFocus"></event>
                 <event name="OnSize"></event>
                 <event name="OnUpdateUI"></event>
-                <object class="wxMenu" expanded="0">
+                <object class="wxMenu" expanded="1">
                     <property name="label">&amp;File</property>
                     <property name="name">fileMenu</property>
                     <property name="permission">protected</property>
@@ -622,6 +622,26 @@
                         <property name="shortcut">Alt+F4</property>
                         <property name="unchecked_bitmap"></property>
                         <event name="OnMenuSelection">OnQuit</event>
+                        <event name="OnUpdateUI"></event>
+                    </object>
+                </object>
+                <object class="wxMenu" expanded="1">
+                    <property name="label">&amp;Preferences</property>
+                    <property name="name">Prefsmenu</property>
+                    <property name="permission">protected</property>
+                    <object class="wxMenuItem" expanded="0">
+                        <property name="bitmap"></property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help"></property>
+                        <property name="id">wxID_ANY</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">&amp;Load Commodity.xml</property>
+                        <property name="name">m_LoadComm</property>
+                        <property name="permission">none</property>
+                        <property name="shortcut"></property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">loadMainComms</event>
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
@@ -1105,7 +1125,7 @@
                                                 <event name="OnRightUp"></event>
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
-                                                <event name="OnText"></event>
+                                                <event name="OnText">Name_Changed</event>
                                                 <event name="OnTextEnter"></event>
                                                 <event name="OnTextMaxLen"></event>
                                                 <event name="OnTextURL"></event>
@@ -1309,7 +1329,7 @@
                                                 <event name="OnRightUp"></event>
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
-                                                <event name="OnText"></event>
+                                                <event name="OnText">X_Changed</event>
                                                 <event name="OnTextEnter"></event>
                                                 <event name="OnTextMaxLen"></event>
                                                 <event name="OnTextURL"></event>
@@ -1425,7 +1445,7 @@
                                                 <event name="OnRightUp"></event>
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
-                                                <event name="OnText"></event>
+                                                <event name="OnText">Y_Changed</event>
                                                 <event name="OnTextEnter"></event>
                                                 <event name="OnTextMaxLen"></event>
                                                 <event name="OnTextURL"></event>
@@ -2486,7 +2506,7 @@
                                                                 <event name="OnSetFocus"></event>
                                                                 <event name="OnSize"></event>
                                                                 <event name="OnText"></event>
-                                                                <event name="OnTextEnter"></event>
+                                                                <event name="OnTextEnter">m_text_ClassOnTextEnter</event>
                                                                 <event name="OnTextMaxLen"></event>
                                                                 <event name="OnTextURL"></event>
                                                                 <event name="OnUpdateUI"></event>
@@ -3524,7 +3544,7 @@
                                         <property name="choices"></property>
                                         <property name="context_help"></property>
                                         <property name="context_menu">1</property>
-                                        <property name="enabled">1</property>
+                                        <property name="enabled">0</property>
                                         <property name="fg"></property>
                                         <property name="font"></property>
                                         <property name="hidden">0</property>
@@ -3555,7 +3575,7 @@
                                         <event name="OnLeftDClick"></event>
                                         <event name="OnLeftDown"></event>
                                         <event name="OnLeftUp"></event>
-                                        <event name="OnListBox">sys_click</event>
+                                        <event name="OnListBox">comm_click</event>
                                         <event name="OnListBoxDClick"></event>
                                         <event name="OnMiddleDClick"></event>
                                         <event name="OnMiddleDown"></event>

@@ -72,6 +72,7 @@ class AssetEd : public wxFrame
 	protected:
 		wxMenuBar* mbar;
 		wxMenu* fileMenu;
+		wxMenu* Prefsmenu;
 		wxMenu* helpMenu;
 		wxStaticText* m_staticText_TitleAssets;
 		wxListBox* m_AssetListBox;
@@ -125,8 +126,14 @@ class AssetEd : public wxFrame
 		// Virtual event handlers, overide them in your derived class
 		virtual void OpenFile( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
+		virtual void loadMainComms( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 		virtual void sys_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Name_Changed( wxCommandEvent& event ) { event.Skip(); }
+		virtual void X_Changed( wxCommandEvent& event ) { event.Skip(); }
+		virtual void Y_Changed( wxCommandEvent& event ) { event.Skip(); }
+		virtual void m_text_ClassOnTextEnter( wxCommandEvent& event ) { event.Skip(); }
+		virtual void comm_click( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
