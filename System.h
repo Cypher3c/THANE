@@ -124,7 +124,8 @@ public:
 class XmlO{
 public:
     //Constructors
-    XmlO(){};
+    XmlO(){
+};
 
     //Destructor
     ~XmlO(){};

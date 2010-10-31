@@ -205,14 +205,14 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_staticText5->Wrap( -1 );
 	fgSizer3->Add( m_staticText5, 0, wxALIGN_RIGHT|wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
-	m_textPosX = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_textPosX = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), 0 );
 	fgSizer3->Add( m_textPosX, 0, wxALL|wxALIGN_CENTER_VERTICAL, 1 );
 	
 	m_staticText6 = new wxStaticText( this, wxID_ANY, wxT("Y:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText6->Wrap( -1 );
 	fgSizer3->Add( m_staticText6, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
-	m_textPosY = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_textPosY = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), 0 );
 	fgSizer3->Add( m_textPosY, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	bSizer41->Add( fgSizer3, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
@@ -240,14 +240,14 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_staticText61->Wrap( -1 );
 	fgSizer4->Add( m_staticText61, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
-	m_text_GFXSpace = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_text_GFXSpace = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), 0 );
 	fgSizer4->Add( m_text_GFXSpace, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	m_staticText612 = new wxStaticText( this, wxID_ANY, wxT("Ext:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText612->Wrap( -1 );
 	fgSizer4->Add( m_staticText612, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 	
-	m_text_GFXExt = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_text_GFXExt = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), 0 );
 	fgSizer4->Add( m_text_GFXExt, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 	
 	GFXBox->Add( fgSizer4, 1, wxEXPAND, 5 );
@@ -480,6 +480,16 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	bSizer4->Add( bSizer21, 1, wxEXPAND, 5 );
 	
+	wxBoxSizer* bSizer11;
+	bSizer11 = new wxBoxSizer( wxVERTICAL );
+	
+	m_AssetSaveChanges = new wxButton( this, wxID_ANY, wxT("Save Changes"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_AssetSaveChanges->Enable( false );
+	
+	bSizer11->Add( m_AssetSaveChanges, 0, wxALL, 5 );
+	
+	bSizer4->Add( bSizer11, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
+	
 	fgSizer1->Add( bSizer4, 0, wxBOTTOM|wxRIGHT|wxLEFT|wxALIGN_CENTER_HORIZONTAL, 30 );
 	
 	this->SetSizer( fgSizer1 );
@@ -498,10 +508,13 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	this->Connect( menuHelpAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
 	m_AssetListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
 	m_textPNAME->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Name_Changed ), NULL, this );
-	m_textPosX->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::X_Changed ), NULL, this );
-	m_textPosY->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Y_Changed ), NULL, this );
+	m_textPosX->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_textPosY->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_GFXSpace->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_GFXExt->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_Class->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( AssetEd::m_text_ClassOnTextEnter ), NULL, this );
 	m_ComListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::comm_click ), NULL, this );
+	m_AssetSaveChanges->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( AssetEd::SaveAssetChanges ), NULL, this );
 }
 
 AssetEd::~AssetEd()
@@ -513,10 +526,13 @@ AssetEd::~AssetEd()
 	this->Disconnect( idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
 	m_AssetListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
 	m_textPNAME->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Name_Changed ), NULL, this );
-	m_textPosX->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::X_Changed ), NULL, this );
-	m_textPosY->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Y_Changed ), NULL, this );
+	m_textPosX->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_textPosY->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_GFXSpace->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_GFXExt->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_Class->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( AssetEd::m_text_ClassOnTextEnter ), NULL, this );
 	m_ComListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::comm_click ), NULL, this );
+	m_AssetSaveChanges->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( AssetEd::SaveAssetChanges ), NULL, this );
 	
 }
 

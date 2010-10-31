@@ -18,11 +18,17 @@
 class THANEAsset : public AssetEd
 {
     public:
-        THANEAsset(wxFrame *frame): AssetEd(frame){}
+        THANEAsset(wxFrame *frame): AssetEd(frame){
+            param_flags = 0;
+
+            }
         ~THANEAsset(){};
 
         //Xml object
         XmlO SysX;
+
+        //Parameter flags, stored in hex int
+        int Param_Flags;
     private:
         virtual void OnClose(wxCloseEvent& event);
         virtual void OnQuit(wxCommandEvent& event);
@@ -36,6 +42,26 @@ class THANEAsset : public AssetEd
 
         void clear_params();
         virtual void Name_Changed( wxCommandEvent& event );
+     //   virtual void param_change( wxCommandEvent& event );
+        virtual void SaveAssetChanges( wxCommandEvent& event );
+        void GetChanges_Float(wxTextCtrl*& text_box, float &float_val);
+        void GetChanges_String(wxTextCtrl*& text_box, wxString &float_val);
+        virtual void ChangeMade( wxCommandEvent& event);
+
+        int param_flags; //Parameter flags, for judging whether stuff has been changed, decimal format, compact
+
+        //Here is the format:
+
+        /*
+        1 = changed, 0 = unchanged
+
+        This is backwards:
+        | Name | X | Y | Space | Ext | Faction | AnyFaction | Value | Range | Class | Population -- (continued below)
+        | Land | Refuel | Bar | Missions | Commodity | Outfits | Shipyard | Landing Descrip | Bar Descrip | Commodity list|
+
+       This is correct: Name = 1, X = 2, Y = 4, Space = 8, Ext = 16, Faction = 32
+
+        */
 };
 
 

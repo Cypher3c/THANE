@@ -120,6 +120,7 @@ class AssetEd : public wxFrame
 		wxListBox* m_ComListBox;
 		wxButton* m_buttonAddCom;
 		wxButton* m_buttonDeleteCom;
+		wxButton* m_AssetSaveChanges;
 		wxToolBar* m_toolBar1;
 		wxStatusBar* statusBar;
 		
@@ -130,10 +131,10 @@ class AssetEd : public wxFrame
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 		virtual void sys_click( wxCommandEvent& event ) { event.Skip(); }
 		virtual void Name_Changed( wxCommandEvent& event ) { event.Skip(); }
-		virtual void X_Changed( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Y_Changed( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ChangeMade( wxCommandEvent& event ) { event.Skip(); }
 		virtual void m_text_ClassOnTextEnter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void comm_click( wxCommandEvent& event ) { event.Skip(); }
+		virtual void SaveAssetChanges( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:

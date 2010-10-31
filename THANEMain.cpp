@@ -100,6 +100,9 @@ void THANEAsset::clear_params(){
     m_textLandingDescription->ChangeValue(wxT(""));
     m_textBarDescription->ChangeValue(wxT(""));
 
+    //Reset flags
+    param_flags = 0;
+
 }
 
 void THANEAsset::loadMainComms( wxCommandEvent& event ){
@@ -224,19 +227,13 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
     //Set the description textboxes
     m_textLandingDescription->ChangeValue(SysX.Sys.at(ind).description);
     m_textBarDescription->ChangeValue(SysX.Sys.at(ind).bar_description);
-/*
-    //Set the bitmap
-    //get path
-    wxString tmp_path = wxT("c:\\NaevDev\\naev\\gfx\\planet\\space\\");
-    const wxString tmp_path3 = tmp_path + SysX.Sys.at(ind).gfx_space;
-    //wxBitmapHandler tmp_bit_hand;
-    wxBitmap tmp_bit;
-    tmp_bit.LoadFile(tmp_path3, wxBITMAP_TYPE_BMP);
+}
 
-   // tmp_bit_hand.LoadFile(&tmp_bit, tmp_path3);
-*/
-    //TODO
-  //  m_bpAssetPrev->SetBitmapLabel(tmp_bit}
+void THANEAsset::ChangeMade( wxCommandEvent& event){
+
+    //Enable 'Save Changes' Button
+    m_AssetSaveChanges->Enable(true);
+
 }
 
 //And now, the name and parameter changing functions
@@ -261,9 +258,41 @@ void THANEAsset::Name_Changed( wxCommandEvent& event ){
         m_AssetListBox->SetSelection(ind+1);
         //Delete old item
         m_AssetListBox->Delete(ind);
-        //TODO
     }
 
+}
+
+void THANEAsset::GetChanges_Float(wxTextCtrl*& text_box, float &val){
+    if(text_box->IsModified()){
+        //Turn off 'modified' flag
+        text_box->SetModified(false);
+        //set name in object
+        val = atof((text_box->GetValue()).mb_str());
+    }
+}
+
+void THANEAsset::GetChanges_String(wxTextCtrl*& text_box, wxString &val){
+    if(text_box->IsModified()){
+        //Turn off 'modified' flag
+        text_box->SetModified(false);
+        //set name in object
+        val = text_box->GetValue();
+    }
+}
+
+void THANEAsset::SaveAssetChanges( wxCommandEvent& event ){
+
+    //Get index of selection in asset list box
+    int ind;
+    ind = m_AssetListBox->GetSelection();
+
+    //Save changes
+    GetChanges_Float(m_textPosX, SysX.Sys.at(ind).x_pos); //X Position
+    GetChanges_Float(m_textPosY, SysX.Sys.at(ind).y_pos); //Y Position
+    GetChanges_String(m_text_GFXSpace, SysX.Sys.at(ind).gfx_space); //Space graphics
+    GetChanges_String(m_text_GFXExt, SysX.Sys.at(ind).gfx_ext); //Ext graphics
+    //Disable "Save Changes button"
+    m_AssetSaveChanges->Enable(false);
 }
 
   void THANEFrame::SetNaevDir_ev( wxCommandEvent& event ) {

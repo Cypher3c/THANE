@@ -2,22 +2,22 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="GUIFrame.h" open="1" top="0" tabpos="6">
-		<Cursor position="3400" topLine="113" />
+		<Cursor position="4374" topLine="125" />
 	</File>
 	<File name="System.h" open="1" top="0" tabpos="2">
-		<Cursor position="13702" topLine="389" />
+		<Cursor position="13301" topLine="387" />
 	</File>
 	<File name="THANEApp.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="24" topLine="0" />
+		<Cursor position="459" topLine="5" />
 	</File>
 	<File name="THANEApp.h" open="1" top="0" tabpos="1">
 		<Cursor position="353" topLine="0" />
 	</File>
 	<File name="THANEMain.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="7437" topLine="240" />
+		<Cursor position="7967" topLine="252" />
 	</File>
 	<File name="THANEMain.h" open="1" top="0" tabpos="3">
-		<Cursor position="1062" topLine="22" />
+		<Cursor position="555" topLine="18" />
 	</File>
 	<File name="WxWizFrame.fbp" open="0" top="0" tabpos="0">
 		<Cursor position="1277" topLine="15" />

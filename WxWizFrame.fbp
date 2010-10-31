@@ -526,7 +526,7 @@
             <event name="OnSetFocus"></event>
             <event name="OnSize"></event>
             <event name="OnUpdateUI"></event>
-            <object class="wxMenuBar" expanded="1">
+            <object class="wxMenuBar" expanded="0">
                 <property name="bg"></property>
                 <property name="context_help"></property>
                 <property name="context_menu">1</property>
@@ -575,7 +575,7 @@
                 <event name="OnSetFocus"></event>
                 <event name="OnSize"></event>
                 <event name="OnUpdateUI"></event>
-                <object class="wxMenu" expanded="1">
+                <object class="wxMenu" expanded="0">
                     <property name="label">&amp;File</property>
                     <property name="name">fileMenu</property>
                     <property name="permission">protected</property>
@@ -625,7 +625,7 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
-                <object class="wxMenu" expanded="1">
+                <object class="wxMenu" expanded="0">
                     <property name="label">&amp;Preferences</property>
                     <property name="name">Prefsmenu</property>
                     <property name="permission">protected</property>
@@ -666,7 +666,7 @@
                     </object>
                 </object>
             </object>
-            <object class="wxFlexGridSizer" expanded="0">
+            <object class="wxFlexGridSizer" expanded="1">
                 <property name="cols">3</property>
                 <property name="flexible_direction">wxBOTH</property>
                 <property name="growablecols"></property>
@@ -1295,7 +1295,7 @@
                                                 <property name="name">m_textPosX</property>
                                                 <property name="permission">protected</property>
                                                 <property name="pos"></property>
-                                                <property name="size"></property>
+                                                <property name="size">100,-1</property>
                                                 <property name="style"></property>
                                                 <property name="subclass"></property>
                                                 <property name="tooltip"></property>
@@ -1329,7 +1329,7 @@
                                                 <event name="OnRightUp"></event>
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
-                                                <event name="OnText">X_Changed</event>
+                                                <event name="OnText">ChangeMade</event>
                                                 <event name="OnTextEnter"></event>
                                                 <event name="OnTextMaxLen"></event>
                                                 <event name="OnTextURL"></event>
@@ -1411,7 +1411,7 @@
                                                 <property name="name">m_textPosY</property>
                                                 <property name="permission">protected</property>
                                                 <property name="pos"></property>
-                                                <property name="size"></property>
+                                                <property name="size">100,-1</property>
                                                 <property name="style"></property>
                                                 <property name="subclass"></property>
                                                 <property name="tooltip"></property>
@@ -1445,7 +1445,7 @@
                                                 <event name="OnRightUp"></event>
                                                 <event name="OnSetFocus"></event>
                                                 <event name="OnSize"></event>
-                                                <event name="OnText">Y_Changed</event>
+                                                <event name="OnText">ChangeMade</event>
                                                 <event name="OnTextEnter"></event>
                                                 <event name="OnTextMaxLen"></event>
                                                 <event name="OnTextURL"></event>
@@ -1624,7 +1624,7 @@
                                                         <property name="name">m_text_GFXSpace</property>
                                                         <property name="permission">protected</property>
                                                         <property name="pos"></property>
-                                                        <property name="size"></property>
+                                                        <property name="size">100,-1</property>
                                                         <property name="style"></property>
                                                         <property name="subclass"></property>
                                                         <property name="tooltip"></property>
@@ -1658,7 +1658,7 @@
                                                         <event name="OnRightUp"></event>
                                                         <event name="OnSetFocus"></event>
                                                         <event name="OnSize"></event>
-                                                        <event name="OnText"></event>
+                                                        <event name="OnText">ChangeMade</event>
                                                         <event name="OnTextEnter"></event>
                                                         <event name="OnTextMaxLen"></event>
                                                         <event name="OnTextURL"></event>
@@ -1740,7 +1740,7 @@
                                                         <property name="name">m_text_GFXExt</property>
                                                         <property name="permission">protected</property>
                                                         <property name="pos"></property>
-                                                        <property name="size"></property>
+                                                        <property name="size">100,-1</property>
                                                         <property name="style"></property>
                                                         <property name="subclass"></property>
                                                         <property name="tooltip"></property>
@@ -1774,7 +1774,7 @@
                                                         <event name="OnRightUp"></event>
                                                         <event name="OnSetFocus"></event>
                                                         <event name="OnSize"></event>
-                                                        <event name="OnText"></event>
+                                                        <event name="OnText">ChangeMade</event>
                                                         <event name="OnTextEnter"></event>
                                                         <event name="OnTextMaxLen"></event>
                                                         <event name="OnTextURL"></event>
@@ -3461,11 +3461,11 @@
                         </object>
                     </object>
                 </object>
-                <object class="sizeritem" expanded="0">
+                <object class="sizeritem" expanded="1">
                     <property name="border">30</property>
                     <property name="flag">wxBOTTOM|wxRIGHT|wxLEFT|wxALIGN_CENTER_HORIZONTAL</property>
                     <property name="proportion">0</property>
-                    <object class="wxBoxSizer" expanded="0">
+                    <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
                         <property name="name">bSizer4</property>
                         <property name="orient">wxVERTICAL</property>
@@ -3718,6 +3718,74 @@
                                                 <event name="OnUpdateUI"></event>
                                             </object>
                                         </object>
+                                    </object>
+                                </object>
+                            </object>
+                        </object>
+                        <object class="sizeritem" expanded="1">
+                            <property name="border">5</property>
+                            <property name="flag">wxALIGN_CENTER_HORIZONTAL</property>
+                            <property name="proportion">0</property>
+                            <object class="wxBoxSizer" expanded="1">
+                                <property name="minimum_size"></property>
+                                <property name="name">bSizer11</property>
+                                <property name="orient">wxVERTICAL</property>
+                                <property name="permission">none</property>
+                                <object class="sizeritem" expanded="1">
+                                    <property name="border">5</property>
+                                    <property name="flag">wxALL</property>
+                                    <property name="proportion">0</property>
+                                    <object class="wxButton" expanded="1">
+                                        <property name="bg"></property>
+                                        <property name="context_help"></property>
+                                        <property name="context_menu">1</property>
+                                        <property name="default">0</property>
+                                        <property name="enabled">0</property>
+                                        <property name="fg"></property>
+                                        <property name="font"></property>
+                                        <property name="hidden">0</property>
+                                        <property name="id">wxID_ANY</property>
+                                        <property name="label">Save Changes</property>
+                                        <property name="maximum_size"></property>
+                                        <property name="minimum_size"></property>
+                                        <property name="name">m_AssetSaveChanges</property>
+                                        <property name="permission">protected</property>
+                                        <property name="pos"></property>
+                                        <property name="size"></property>
+                                        <property name="style"></property>
+                                        <property name="subclass"></property>
+                                        <property name="tooltip"></property>
+                                        <property name="validator_data_type"></property>
+                                        <property name="validator_style">wxFILTER_NONE</property>
+                                        <property name="validator_type">wxDefaultValidator</property>
+                                        <property name="validator_variable"></property>
+                                        <property name="window_extra_style"></property>
+                                        <property name="window_name"></property>
+                                        <property name="window_style"></property>
+                                        <event name="OnButtonClick">SaveAssetChanges</event>
+                                        <event name="OnChar"></event>
+                                        <event name="OnEnterWindow"></event>
+                                        <event name="OnEraseBackground"></event>
+                                        <event name="OnKeyDown"></event>
+                                        <event name="OnKeyUp"></event>
+                                        <event name="OnKillFocus"></event>
+                                        <event name="OnLeaveWindow"></event>
+                                        <event name="OnLeftDClick"></event>
+                                        <event name="OnLeftDown"></event>
+                                        <event name="OnLeftUp"></event>
+                                        <event name="OnMiddleDClick"></event>
+                                        <event name="OnMiddleDown"></event>
+                                        <event name="OnMiddleUp"></event>
+                                        <event name="OnMotion"></event>
+                                        <event name="OnMouseEvents"></event>
+                                        <event name="OnMouseWheel"></event>
+                                        <event name="OnPaint"></event>
+                                        <event name="OnRightDClick"></event>
+                                        <event name="OnRightDown"></event>
+                                        <event name="OnRightUp"></event>
+                                        <event name="OnSetFocus"></event>
+                                        <event name="OnSize"></event>
+                                        <event name="OnUpdateUI"></event>
                                     </object>
                                 </object>
                             </object>
