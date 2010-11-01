@@ -10,11 +10,13 @@
 #include <wx/msgdlg.h>
 
 
-class Commodity{
+class Commodity
+{
 public:
     //Constructors
     Commodity(){};
-    Commodity(const char* p_name, const char* p_descrip, float p_price){
+    Commodity(const char* p_name, const char* p_descrip, float p_price)
+    {
         name = wxString::FromAscii(p_name);
         description = wxString::FromAscii(p_descrip);
         price = p_price;
@@ -27,9 +29,11 @@ public:
 
 };
 
-class Item{
+class Item
+{
 public:
-    Item(const char* p_name){
+    Item(const char* p_name)
+    {
         name = wxString::FromAscii(p_name);
     }
 
@@ -42,7 +46,8 @@ private:
 };
 
 
-class Asset{
+class Asset
+{
 public:
     //Constructors
     Asset(){};
@@ -56,7 +61,8 @@ public:
     //outfits, shipyard, description, bar description
     Asset(int p_ID, mxml_node_t *sysnode_t, const char* p_name, float p_x, float p_y, const char* gfx_space_tmp, const char* gfx_ext_tmp,
           const char* p_fac, float p_presval, int p_presrange, const char* p_plan_class, int p_pop, bool p_land, bool p_refuel, bool p_bar, bool p_missions, bool p_commodity,
-          bool p_outfits, bool p_shipyard, const char* p_descrip, const char* p_bar_descrip){
+          bool p_outfits, bool p_shipyard, const char* p_descrip, const char* p_bar_descrip)
+    {
         //Set ID
         ID = p_ID;
         sys_node = sysnode_t;
@@ -66,10 +72,12 @@ public:
         gfx_space = wxString::FromAscii(gfx_space_tmp);
         gfx_ext = wxString::FromAscii(gfx_ext_tmp);
         //See if faction is present
-        if(p_fac != NULL){
+        if (p_fac != NULL)
+        {
             pres_faction = wxString::FromAscii(p_fac);
         }
-        else{
+        else
+        {
             pres_faction = wxT("n");
         }
         pres_value = p_presval;
@@ -121,79 +129,90 @@ public:
 
 };
 
-class XmlO{
+class XmlO
+{
 public:
-    //Constructors
-    XmlO(){
-};
-
-    //Destructor
-    ~XmlO(){};
     /**Methods */
     //(Re)Set file
-    void Set(std::string fname){
+    void Set(std::string fname)
+    {
         //TODO
     }
 
     //XML Reading Functions
 
-    const char* GetString(mxml_node_t *nd, const char* tag){
+    const char* GetString(mxml_node_t *nd, const char* tag)
+    {
         mxml_node_t *temp_sub_node;
         temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
-        if(temp_sub_node != NULL){
+        if (temp_sub_node != NULL)
+        {
             return temp_sub_node->child->value.text.string;
         }
-        else{
+        else
+        {
             return NULL;
         }
     }
 
 
 
-    const char* GetStringOpaque(mxml_node_t *nd, const char* tag){
+    const char* GetStringOpaque(mxml_node_t *nd, const char* tag)
+    {
         mxml_node_t *temp_sub_node;
         temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND_FIRST);
-        if(temp_sub_node != NULL){
+        if (temp_sub_node != NULL)
+        {
             return temp_sub_node->child->value.opaque;
         }
-        else{
+        else
+        {
             return NULL;
         }
     }
 
-    int GetInt(mxml_node_t *nd, const char* tag){
+    int GetInt(mxml_node_t *nd, const char* tag)
+    {
         mxml_node_t *temp_sub_node;
         temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
-        if(temp_sub_node != NULL){
-          //  tmp_str = (temp_sub_node->child->value.text.string);
+        if (temp_sub_node != NULL)
+        {
+            //  tmp_str = (temp_sub_node->child->value.text.string);
             return atoi(temp_sub_node->child->value.opaque);
         }
-        else{
+        else
+        {
             return NULL;
         }
 
     }
-    float GetFloat(mxml_node_t *nd, const char* tag){
+    float GetFloat(mxml_node_t *nd, const char* tag)
+    {
         mxml_node_t *temp_sub_node;
         temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
-        if(temp_sub_node != NULL){
-          //  tmp_str = (temp_sub_node->child->value.text.string);
+        if (temp_sub_node != NULL)
+        {
+            //  tmp_str = (temp_sub_node->child->value.text.string);
             return atof(temp_sub_node->child->value.opaque);
         }
-        else{
+        else
+        {
             return NULL;
         }
 
     }
 
-        bool TagIsPresent(mxml_node_t *nd, const char* tag){
+    bool TagIsPresent(mxml_node_t *nd, const char* tag)
+    {
         mxml_node_t *temp_sub_node;
         temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
 
-        if(temp_sub_node != NULL){
+        if (temp_sub_node != NULL)
+        {
             return true;
         }
-        else{
+        else
+        {
             return false;
         }
     }
@@ -203,23 +222,27 @@ public:
     //Return code to signify completion status
 
     //Params: asset node pointer, tag to change text in, text to add
-    int SetStringOpaque(mxml_node_t *nd, const char * tag, const char* text){
+    int SetStringOpaque(mxml_node_t *nd, const char * tag, const char* text)
+    {
         mxml_node_t *temp_sub_node;
         temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
 
         //If node exists:
-        if(temp_sub_node != NULL){
+        if (temp_sub_node != NULL)
+        {
             mxmlSetOpaque(temp_sub_node->child, text);
             return 1; //success
         }
-        else{
+        else
+        {
             return 0; //no node exists
         }
     }
 
     //Load XML file into XmlO
     //Filename, type (1 = assets.xml, 2 = commodities.xml)
-    void load(wxString filenam, int type_id){
+    void load(wxString filenam)
+    {
         //First, convert wxString to std::string for safety (char* is transient), then to const char*
         std::string tmp_filenam = std::string(filenam.mb_str());
         const char* tmp_filenam2 = tmp_filenam.c_str();
@@ -231,219 +254,232 @@ public:
         //Close file (be nice!)
         fclose(fp);
 
-        if(type_id == 1){
-            ParseAssets(tree);
-        }
-        else if (type_id == 2){
-            ParseCommodities(tree);
-
-        }
-
     }
-    void save(wxString filenam, int type_id){
+    void save(wxString filenam)
+    {
         std::string tmp_filenam = std::string(filenam.mb_str());
         const char* tmp_filenam2 = tmp_filenam.c_str();
         //Create/Open file for editing, wiping its contents
         fp = fopen(tmp_filenam2,"w");
 
-        //Check what type of file we are working with
-        if (type_id == 1){
         //Save XML tree to file
         mxmlSaveFile(tree, fp, MXML_NO_CALLBACK);
-
-        }
         //Close file
         fclose(fp);
 
     }
 
-     int ParseCommodities(mxml_node_t *p_tree){
+    virtual int Parse(){}
 
-            //Load <Systems> node
-            Comm_elem = mxmlWalkNext(p_tree, p_tree, MXML_DESCEND_FIRST);
-
-            //Start loading <asset> elements
-
-            //Temporary Elements
-            mxml_node_t *node; //Node to save
-            const char* name; //String for names of commodity
-            const char* description; //String for description
-            float price;
-
-            //Load first commodity
-            node = mxmlFindElement(Comm_elem, tree, "Commodities", NULL, NULL, MXML_DESCEND);
-            node = mxmlFindElement(node, tree, "commodity", NULL, NULL, MXML_DESCEND);
-            //Start loading the rest of the ssys elements (but fail if first element is NULL)
-            int i = 1;
-                while (node){
-                    //Load name attrib
-                    name = mxmlElementGetAttr(node, "name");
-
-                    //Get description, if any
-                    description = GetStringOpaque(node, "description");
-
-                    //Get Price, if any
-                    price = GetFloat(node, "price");
-
-                //Generate tmp Asset
-                Commodity comms_tmp(name, description, price);
-                //Load system with its node into vector of Assets
-                MainCommodities.push_back(comms_tmp);
-                //Load next Asset
-                node = mxmlFindElement(node, tree, "commodity", NULL, NULL, MXML_DESCEND);
-                //Increment ID counter
-               i++;
-           }
-           return 1; //Success
-        }
-    int ParseAssets(mxml_node_t *p_tree){
-
-            //Load <Systems> node
-            Asset_elem = mxmlWalkNext(p_tree, p_tree, MXML_DESCEND_FIRST);
-
-            //Start loading <asset> elements
-
-            //Temporary Elements
-            mxml_node_t *node; //Node to save
-            mxml_node_t *subnode_pos; //Subnode for pos nodes
-            mxml_node_t *subnode_GFX; //Subnode for GFX nodes
-            mxml_node_t *subnode_pres; //Subnode for presence nodes
-            mxml_node_t *subnode_gen; //Subnode for general nodes
-            mxml_node_t *subnode_serv; //Subnode for services nodes
-        //    mxml_node_t *subnode; //Subnode
-            const char* name_tmp; //String for names of asset
-            const char* tmp_str; //String for anything :P
-            float x_pos; //X_pos Float
-            float y_pos; //Y_pos Float
-            const char* gfx_space;
-            const char* gfx_ext;
-            const char* pres_fac;
-            float pres_val;
-            int pres_range;
-            const char* plan_class;
-            int population;
-            bool land;
-            bool refuel;
-            bool bar;
-            bool missions;
-            bool commodity;
-            bool outfits;
-            bool shipyard;
-            const char* descrip;
-            const char* bar_descrip;
-            std::vector<const char*> temp_commodities;
-
-            //Load first asset
-            node = mxmlFindElement(Asset_elem, tree, "asset", NULL, NULL, MXML_DESCEND);
-            //Start loading the rest of the ssys elements (but fail if first element is NULL)
-            int i = 1;
-                while (node){
-                //Load name attrib
-               name_tmp = mxmlElementGetAttr(node, "name");
-
-                //Mark Branching nodes
-                //Pos Element
-                subnode_pos = mxmlFindElement(node, Asset_elem, "pos", NULL, NULL, MXML_DESCEND);
-                //GFX Element
-                subnode_GFX = mxmlFindElement(node, Asset_elem, "GFX", NULL, NULL, MXML_DESCEND);
-                //Presence Element
-                subnode_pres = mxmlFindElement(node, Asset_elem, "presence", NULL, NULL, MXML_DESCEND);
-                //General Element
-                subnode_gen = mxmlFindElement(node, Asset_elem, "general", NULL, NULL, MXML_DESCEND);
-                //Services Sub-element
-                subnode_serv = mxmlFindElement(subnode_gen, Asset_elem, "services", NULL, NULL, MXML_DESCEND);
-                //Get Pos parameters x and y
-                x_pos = GetFloat(subnode_pos, "x");
-
-                y_pos = GetFloat(subnode_pos, "y");
-
-                //Get GFX filenames
-                gfx_space = GetStringOpaque(subnode_GFX, "space");
-
-                gfx_ext = GetStringOpaque(subnode_GFX, "exterior");
-
-                //Get Presence Parameters (faction, value, and range)
-
-                pres_fac = GetStringOpaque(subnode_pres, "faction");
-
-                pres_val = GetFloat(subnode_pres, "value");
-
-                pres_range = GetInt(subnode_pres, "range");
-
-                //Get elements from general node (class, population, servicesTODO, description, bar)
-                plan_class = GetStringOpaque(subnode_gen, "class");
-
-                population = GetInt(subnode_gen, "population");
-
-                //Get available services as true/false values
-                land = TagIsPresent(subnode_serv, "land");
-                refuel = TagIsPresent(subnode_serv, "refuel");
-                bar = TagIsPresent(subnode_serv, "bar");
-                missions = TagIsPresent(subnode_serv, "missions");
-                commodity = TagIsPresent(subnode_serv, "commodity");
-                outfits = TagIsPresent(subnode_serv, "outfits");
-                shipyard = TagIsPresent(subnode_serv, "shipyard");
-
-
-                //Get Descriptions
-
-                descrip = GetStringOpaque(subnode_gen, "description");
-                bar_descrip = GetStringOpaque(subnode_gen, "bar");
-
-                //Get commodities (Temp, will be checked against list in future versions)
-                ParseCommodities(subnode_gen);
-
-                //Generate tmp Asset
-                Asset asset_sys(i, node, name_tmp, x_pos, y_pos, gfx_space, gfx_ext, pres_fac,
-                                pres_val, pres_range, plan_class, population, land, refuel,
-                                bar, missions, commodity, outfits, shipyard, descrip, bar_descrip);
-                //Load system with its node into vector of Assets
-                Sys.push_back(asset_sys);
-
-                //Load next Asset
-                node = mxmlFindElement(node, tree, "asset", NULL, NULL, MXML_DESCEND);
-                //Increment ID counter
-               i++;
-           }
-           return 1; //Success
-        }
     //Update a parameter in the xml tree from the correct form. obj a node pointer to the asset/commodity to be updated
     //param is the name of the parameter, and obj_type is the type of object: 1 = asset, 2 = commodity
     //data is the (text) value to change the param to
-    int UpdateParam_Str(mxml_node_t *obj,  int obj_type, const char* param, wxString data){
-        switch(obj_type)
+    int UpdateParam_Str(mxml_node_t *obj,  int obj_type, const char* param, wxString data)
+    {
+        switch (obj_type)
         {
-            case 1 :
+        case 1 :
             //Special case for changing name param (the only attribute so far in asset.xml)
-            if(param == "name"){
+            if (param == "name")
+            {
                 mxmlElementSetAttr(obj, "name", data.mb_str());
                 return 1; //Success
             }
-            else{
+            else
+            {
 
             }
 
             break;
 
-            default :
+        default :
             return 0; //Error
         }
 
     }
     //Same as above, but for updating object name. Only need the node pointer and the data to write
-    int UpdateName(mxml_node_t *obj, wxString data){
+    int UpdateName(mxml_node_t *obj, wxString data)
+    {
 
 
         return 1; //Hopefully success, error handling to be written later
     }
 
 
-    std::vector<Asset> Sys; //Vector of Assets --MUAHAHAHAHA!, we are vectorized. All Assets under my command! -- Sorry
-    std::vector<Commodity> MainCommodities; //Vector of commodities
     FILE *fp; //pointer to file of interest
     mxml_node_t *tree; //Pointer to main node
     mxml_node_t *Asset_elem; //Pointer to Main Asset Element
     mxml_node_t *Comm_elem; //Pointer to Main Commodities element
 };
+
+class XmlAsset : public XmlO
+{
+public:
+
+    int Parse()
+    {
+
+        //Load <Systems> node
+        Asset_elem = mxmlWalkNext(tree, tree, MXML_DESCEND_FIRST);
+
+        //Start loading <asset> elements
+
+        //Temporary Elements
+        mxml_node_t *node; //Node to save
+        mxml_node_t *subnode_pos; //Subnode for pos nodes
+        mxml_node_t *subnode_GFX; //Subnode for GFX nodes
+        mxml_node_t *subnode_pres; //Subnode for presence nodes
+        mxml_node_t *subnode_gen; //Subnode for general nodes
+        mxml_node_t *subnode_serv; //Subnode for services nodes
+        const char* name_tmp; //String for names of asset
+        const char* tmp_str; //String for anything :P
+        float x_pos; //X_pos Float
+        float y_pos; //Y_pos Float
+        const char* gfx_space;
+        const char* gfx_ext;
+        const char* pres_fac;
+        float pres_val;
+        int pres_range;
+        const char* plan_class;
+        int population;
+        bool land;
+        bool refuel;
+        bool bar;
+        bool missions;
+        bool commodity;
+        bool outfits;
+        bool shipyard;
+        const char* descrip;
+        const char* bar_descrip;
+        std::vector<const char*> temp_commodities;
+
+        //Load first asset
+        node = mxmlFindElement(Asset_elem, tree, "asset", NULL, NULL, MXML_DESCEND);
+        //Start loading the rest of the ssys elements (but fail if first element is NULL)
+        int i = 1;
+        while (node)
+        {
+            //Load name attrib
+            name_tmp = mxmlElementGetAttr(node, "name");
+
+            //Mark Branching nodes
+            //Pos Element
+            subnode_pos = mxmlFindElement(node, Asset_elem, "pos", NULL, NULL, MXML_DESCEND);
+            //GFX Element
+            subnode_GFX = mxmlFindElement(node, Asset_elem, "GFX", NULL, NULL, MXML_DESCEND);
+            //Presence Element
+            subnode_pres = mxmlFindElement(node, Asset_elem, "presence", NULL, NULL, MXML_DESCEND);
+            //General Element
+            subnode_gen = mxmlFindElement(node, Asset_elem, "general", NULL, NULL, MXML_DESCEND);
+            //Services Sub-element
+            subnode_serv = mxmlFindElement(subnode_gen, Asset_elem, "services", NULL, NULL, MXML_DESCEND);
+            //Get Pos parameters x and y
+            x_pos = GetFloat(subnode_pos, "x");
+
+            y_pos = GetFloat(subnode_pos, "y");
+
+            //Get GFX filenames
+            gfx_space = GetStringOpaque(subnode_GFX, "space");
+
+            gfx_ext = GetStringOpaque(subnode_GFX, "exterior");
+
+            //Get Presence Parameters (faction, value, and range)
+
+            pres_fac = GetStringOpaque(subnode_pres, "faction");
+
+            pres_val = GetFloat(subnode_pres, "value");
+
+            pres_range = GetInt(subnode_pres, "range");
+
+            //Get elements from general node (class, population, servicesTODO, description, bar)
+            plan_class = GetStringOpaque(subnode_gen, "class");
+
+            population = GetInt(subnode_gen, "population");
+
+            //Get available services as true/false values
+            land = TagIsPresent(subnode_serv, "land");
+            refuel = TagIsPresent(subnode_serv, "refuel");
+            bar = TagIsPresent(subnode_serv, "bar");
+            missions = TagIsPresent(subnode_serv, "missions");
+            commodity = TagIsPresent(subnode_serv, "commodity");
+            outfits = TagIsPresent(subnode_serv, "outfits");
+            shipyard = TagIsPresent(subnode_serv, "shipyard");
+
+
+            //Get Descriptions
+
+            descrip = GetStringOpaque(subnode_gen, "description");
+            bar_descrip = GetStringOpaque(subnode_gen, "bar");
+
+            //Get commodities (Temp, will be checked against list in future versions)
+         //   ParseCommodities(subnode_gen);
+
+            //Generate tmp Asset
+            Asset asset_sys(i, node, name_tmp, x_pos, y_pos, gfx_space, gfx_ext, pres_fac,
+                            pres_val, pres_range, plan_class, population, land, refuel,
+                            bar, missions, commodity, outfits, shipyard, descrip, bar_descrip);
+            //Load system with its node into vector of Assets
+            Assets.push_back(asset_sys);
+
+            //Load next Asset
+            node = mxmlFindElement(node, tree, "asset", NULL, NULL, MXML_DESCEND);
+            //Increment ID counter
+            i++;
+        }
+        return 1; //Success
+    }
+
+    std::vector<Asset> Assets; //Vector of Assets --MUAHAHAHAHA!, we are vectorized. All Assets under my command! -- Sorry
+};
+
+class XmlCommodity : public XmlO
+{
+public:
+    int Parse()
+    {
+
+        //Load <Systems> node
+        Comm_elem = mxmlWalkNext(tree, tree, MXML_DESCEND_FIRST);
+
+        //Start loading <asset> elements
+
+        //Temporary Elements
+        mxml_node_t *node; //Node to save
+        const char* name; //String for names of commodity
+        const char* description; //String for description
+        float price;
+
+        //Load first commodity
+        node = mxmlFindElement(Comm_elem, tree, "Commodities", NULL, NULL, MXML_DESCEND);
+        node = mxmlFindElement(node, tree, "commodity", NULL, NULL, MXML_DESCEND);
+        //Start loading the rest of the ssys elements (but fail if first element is NULL)
+        int i = 1;
+        while (node)
+        {
+            //Load name attrib
+            name = mxmlElementGetAttr(node, "name");
+
+            //Get description, if any
+            description = GetStringOpaque(node, "description");
+
+            //Get Price, if any
+            price = GetFloat(node, "price");
+
+            //Generate tmp Asset
+            Commodity comms_tmp(name, description, price);
+            //Load system with its node into vector of Assets
+            Commodities.push_back(comms_tmp);
+            //Load next Asset
+            node = mxmlFindElement(node, tree, "commodity", NULL, NULL, MXML_DESCEND);
+            //Increment ID counter
+            i++;
+        }
+        return 1; //Success
+    }
+
+    std::vector<Commodity> Commodities; //Vector of commodities
+
+};
+
 
 #endif // SYSTEM_H_INCLUDED

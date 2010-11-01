@@ -24,8 +24,11 @@ class THANEAsset : public AssetEd
             }
         ~THANEAsset(){};
 
-        //Xml object
-        XmlO SysX;
+        //Xml Asset object
+        XmlAsset SysA;
+
+        //Mini-commodity Xml object
+        XmlCommodity  SysC;
 
         //Parameter flags, stored in hex int
         int Param_Flags;

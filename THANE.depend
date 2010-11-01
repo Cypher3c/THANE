@@ -1549,20 +1549,20 @@
 1287967205 /home/chris/workspace/THANE_wx/THANE/THANEApp.h
 	<wx/app.h>
 
-1288564008 /home/chris/workspace/THANE_wx/THANE/THANEMain.h
+1288585638 /home/chris/workspace/THANE_wx/THANE/THANEMain.h
 	"System.h"
 	"THANEApp.h"
 	"GUIFrame.h"
 	<wx/wx.h>
 
-1288564915 /home/chris/workspace/THANE_wx/THANE/System.h
+1288585989 /home/chris/workspace/THANE_wx/THANE/System.h
 	<string>
 	<vector>
 	<wx/wx.h>
 	<mxml.h>
 	<wx/msgdlg.h>
 
-1288564256 source:/home/chris/workspace/THANE_wx/THANE/THANEMain.cpp
+1288585763 source:/home/chris/workspace/THANE_wx/THANE/THANEMain.cpp
 	"wx_pch.h"
 	<wx/bitmap.h>
 	"THANEMain.h"

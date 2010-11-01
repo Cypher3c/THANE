@@ -112,11 +112,12 @@ void THANEAsset::loadMainComms( wxCommandEvent& event ){
     if (OpenDialog2->ShowModal() == wxID_OK) // if the user click "Open" instead of "Cancel"
     {
         //Set m_ComListBox contents to names from commodity.xml
-        SysX.load(OpenDialog2->GetPath(), 2);
+        SysC.load(OpenDialog2->GetPath());
+        SysC.Parse();
         Commodity comm_temp;
         //Start adding names to m_ComListBox
-        for(unsigned int i = 0; i < SysX.MainCommodities.size(); i++){
-           comm_temp = SysX.MainCommodities.at(i);
+        for(unsigned int i = 0; i < SysC.Commodities.size(); i++){
+           comm_temp = SysC.Commodities.at(i);
             //Get name of system as string
             //Convert name from string to wxString
             m_ComListBox->AppendString(comm_temp.name);
@@ -137,12 +138,13 @@ void THANEAsset::OpenFile( wxCommandEvent& event ){
                 SetStatusText(OpenDialog->GetPath(),0);
 
                 //Set m_SysListBox contents to names from ssys.xml
-                SysX.load(OpenDialog->GetPath(), 1);
+                SysA.load(OpenDialog->GetPath());
+                SysA.Parse();
                 Asset assetsys;
                 //Start adding names to m_SysListbox
                 //Pointer to system
-                for(unsigned int i = 0; i < SysX.Sys.size(); i++){
-                   assetsys = SysX.Sys.at(i);
+                for(unsigned int i = 0; i < SysA.Assets.size(); i++){
+                   assetsys = SysA.Assets.at(i);
                     //Get name of system as string
                     m_AssetListBox->AppendString(assetsys.name);
                 }
@@ -174,9 +176,9 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
     wxString tmp_tmp;
     wxString tmp_tmp2;
 
-    tmp_asset_nam = SysX.Sys.at(ind).name;
-    tmp_x << SysX.Sys.at(ind).x_pos;
-    tmp_y << SysX.Sys.at(ind).y_pos;
+    tmp_asset_nam = SysA.Assets.at(ind).name;
+    tmp_x << SysA.Assets.at(ind).x_pos;
+    tmp_y << SysA.Assets.at(ind).y_pos;
 
     //Set the asset name textbox
     m_textPNAME->ChangeValue(tmp_asset_nam);
@@ -188,13 +190,13 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
     m_textPosY->ChangeValue(tmp_y);
 
     //Set the GFX_space textbox
-    m_text_GFXSpace->ChangeValue(SysX.Sys.at(ind).gfx_space);
+    m_text_GFXSpace->ChangeValue(SysA.Assets.at(ind).gfx_space);
     //Set the GFX_space textbox
-    m_text_GFXExt->ChangeValue(SysX.Sys.at(ind).gfx_ext);
+    m_text_GFXExt->ChangeValue(SysA.Assets.at(ind).gfx_ext);
 
     //Set the faction textbox and checkbox
-    if(SysX.Sys.at(ind).pres_faction != wxT("n")){
-        m_text_Faction->ChangeValue(SysX.Sys.at(ind).pres_faction);
+    if(SysA.Assets.at(ind).pres_faction != wxT("n")){
+        m_text_Faction->ChangeValue(SysA.Assets.at(ind).pres_faction);
         m_checkFac->SetValue(true);
     }
     else{
@@ -202,35 +204,35 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
     }
 
     //Set the value textbox
-    tmp_tmp << SysX.Sys.at(ind).pres_value;
+    tmp_tmp << SysA.Assets.at(ind).pres_value;
     m_text_PresVal->ChangeValue(tmp_tmp);
     //Set the range textbox
-    tmp_tmp2 << SysX.Sys.at(ind).pres_range;
+    tmp_tmp2 << SysA.Assets.at(ind).pres_range;
     m_text_PresRange->ChangeValue(tmp_tmp2);
 
     //Set the Class and Population Boxes
 
-    tmp_tmp = SysX.Sys.at(ind).planet_class;
+    tmp_tmp = SysA.Assets.at(ind).planet_class;
     m_text_Class->ChangeValue(tmp_tmp);
 
     tmp_tmp = wxT(""); //Clear it
 
-    tmp_tmp << SysX.Sys.at(ind).population;
+    tmp_tmp << SysA.Assets.at(ind).population;
 
     m_text_Population->ChangeValue(tmp_tmp);
 
     //Set Services Checkboxes
-    m_checkBoxLand->SetValue(SysX.Sys.at(ind).land);
-    m_checkBoxRefuel->SetValue(SysX.Sys.at(ind).refuel);
-    m_checkBoxBar->SetValue(SysX.Sys.at(ind).bar);
-    m_checkBoxMissions->SetValue(SysX.Sys.at(ind).missions);
-    m_checkBoxCommodity->SetValue(SysX.Sys.at(ind).commodity);
-    m_checkBoxOutfits->SetValue(SysX.Sys.at(ind).outfits);
-    m_checkBoxShipyard->SetValue(SysX.Sys.at(ind).shipyard);
+    m_checkBoxLand->SetValue(SysA.Assets.at(ind).land);
+    m_checkBoxRefuel->SetValue(SysA.Assets.at(ind).refuel);
+    m_checkBoxBar->SetValue(SysA.Assets.at(ind).bar);
+    m_checkBoxMissions->SetValue(SysA.Assets.at(ind).missions);
+    m_checkBoxCommodity->SetValue(SysA.Assets.at(ind).commodity);
+    m_checkBoxOutfits->SetValue(SysA.Assets.at(ind).outfits);
+    m_checkBoxShipyard->SetValue(SysA.Assets.at(ind).shipyard);
 
     //Set the description textboxes
-    m_textLandingDescription->ChangeValue(SysX.Sys.at(ind).description);
-    m_textBarDescription->ChangeValue(SysX.Sys.at(ind).bar_description);
+    m_textLandingDescription->ChangeValue(SysA.Assets.at(ind).description);
+    m_textBarDescription->ChangeValue(SysA.Assets.at(ind).bar_description);
 }
 
 void THANEAsset::ChangeMade( wxCommandEvent& event){
@@ -252,11 +254,11 @@ void THANEAsset::Name_Changed( wxCommandEvent& event ){
         ind = m_AssetListBox->GetSelection();
 
         //set name in object
-        SysX.Sys.at(ind).name = m_textPNAME->GetValue();
+        SysA.Assets.at(ind).name = m_textPNAME->GetValue();
 
         //set name in listbox by first inserting new name before last one, then deleting existing name off list
         //Insert new item
-        m_AssetListBox->Insert(SysX.Sys.at(ind).name, ind+1);
+        m_AssetListBox->Insert(SysA.Assets.at(ind).name, ind+1);
 
         //Select new item
         m_AssetListBox->SetSelection(ind+1);
@@ -291,10 +293,10 @@ void THANEAsset::SaveAssetChanges( wxCommandEvent& event ){
     ind = m_AssetListBox->GetSelection();
 
     //Save changes
-    GetChanges_Float(m_textPosX, SysX.Sys.at(ind).x_pos); //X Position
-    GetChanges_Float(m_textPosY, SysX.Sys.at(ind).y_pos); //Y Position
-    GetChanges_String(m_text_GFXSpace, SysX.Sys.at(ind).gfx_space); //Space graphics
-    GetChanges_String(m_text_GFXExt, SysX.Sys.at(ind).gfx_ext); //Ext graphics
+    GetChanges_Float(m_textPosX, SysA.Assets.at(ind).x_pos); //X Position
+    GetChanges_Float(m_textPosY, SysA.Assets.at(ind).y_pos); //Y Position
+    GetChanges_String(m_text_GFXSpace, SysA.Assets.at(ind).gfx_space); //Space graphics
+    GetChanges_String(m_text_GFXExt, SysA.Assets.at(ind).gfx_ext); //Ext graphics
     //Disable "Save Changes button"
     m_AssetSaveChanges->Enable(false);
 }
