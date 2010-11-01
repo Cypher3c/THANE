@@ -144,7 +144,6 @@ void THANEAsset::OpenFile( wxCommandEvent& event ){
                 for(unsigned int i = 0; i < SysX.Sys.size(); i++){
                    assetsys = SysX.Sys.at(i);
                     //Get name of system as string
-                    //Convert name from string to wxString
                     m_AssetListBox->AppendString(assetsys.name);
                 }
             }
@@ -154,6 +153,11 @@ void THANEAsset::OpenFile( wxCommandEvent& event ){
         // Clean up after ourselves
         OpenDialog->Destroy();
   }
+
+void THANEAsset::FileSave( wxCommandEvent& event ){
+
+
+}
 
 
 void THANEAsset::sys_click( wxCommandEvent& event ) {

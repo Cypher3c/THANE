@@ -32,6 +32,7 @@ class THANEAsset : public AssetEd
     private:
         virtual void OnClose(wxCloseEvent& event);
         virtual void OnQuit(wxCommandEvent& event);
+        virtual void FileSave( wxCommandEvent& event );
         virtual void OnAbout(wxCommandEvent& event);
         virtual void loadMainComms( wxCommandEvent& event );
 

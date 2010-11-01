@@ -240,6 +240,22 @@ public:
         }
 
     }
+    void save(wxString filenam, int type_id){
+        std::string tmp_filenam = std::string(filenam.mb_str());
+        const char* tmp_filenam2 = tmp_filenam.c_str();
+        //Create/Open file for editing, wiping its contents
+        fp = fopen(tmp_filenam2,"w");
+
+        //Check what type of file we are working with
+        if (type_id == 1){
+        //Save XML tree to file
+        mxmlSaveFile(tree, fp, MXML_NO_CALLBACK);
+
+        }
+        //Close file
+        fclose(fp);
+
+    }
 
      int ParseCommodities(mxml_node_t *p_tree){
 
@@ -394,11 +410,18 @@ public:
     //Update a parameter in the xml tree from the correct form. obj a node pointer to the asset/commodity to be updated
     //param is the name of the parameter, and obj_type is the type of object: 1 = asset, 2 = commodity
     //data is the (text) value to change the param to
-    int UpdateParam(mxml_node_t *obj,  int obj_type, const char* param, wxString data){
+    int UpdateParam_Str(mxml_node_t *obj,  int obj_type, const char* param, wxString data){
         switch(obj_type)
         {
             case 1 :
-            //Special case for changing name param (the only attribute so far)
+            //Special case for changing name param (the only attribute so far in asset.xml)
+            if(param == "name"){
+                mxmlElementSetAttr(obj, "name", data.mb_str());
+                return 1; //Success
+            }
+            else{
+
+            }
 
             break;
 
@@ -409,13 +432,13 @@ public:
     }
     //Same as above, but for updating object name. Only need the node pointer and the data to write
     int UpdateName(mxml_node_t *obj, wxString data){
-        mxmlElementSetAttr(obj, "name", data.mb_str());
+
 
         return 1; //Hopefully success, error handling to be written later
     }
 
 
-    std::vector<Asset> Sys; //Vector of Systems --MUAHAHAHAHA!, we are vectorized. All Systems under my command! -- Sorry
+    std::vector<Asset> Sys; //Vector of Assets --MUAHAHAHAHA!, we are vectorized. All Assets under my command! -- Sorry
     std::vector<Commodity> MainCommodities; //Vector of commodities
     FILE *fp; //pointer to file of interest
     mxml_node_t *tree; //Pointer to main node

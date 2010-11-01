@@ -98,13 +98,18 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	wxMenuItem* menuFileNew;
 	menuFileNew = new wxMenuItem( fileMenu, wxID_ANY, wxString( wxT("&New") ) , wxT("Create a new Naev System File"), wxITEM_NORMAL );
 	fileMenu->Append( menuFileNew );
+	menuFileNew->Enable( false );
 	
 	wxMenuItem* menuFileOpen;
 	menuFileOpen = new wxMenuItem( fileMenu, wxID_ANY, wxString( wxT("&Open") ) , wxEmptyString, wxITEM_NORMAL );
 	fileMenu->Append( menuFileOpen );
 	
+	wxMenuItem* m_menuSaveFile;
+	m_menuSaveFile = new wxMenuItem( fileMenu, wxID_ANY, wxString( wxT("&Save") ) , wxEmptyString, wxITEM_NORMAL );
+	fileMenu->Append( m_menuSaveFile );
+	
 	wxMenuItem* menuFileQuit;
-	menuFileQuit = new wxMenuItem( fileMenu, idMenuQuit, wxString( wxT("&Quit") ) + wxT('\t') + wxT("Alt+F4"), wxT("Quit the application"), wxITEM_NORMAL );
+	menuFileQuit = new wxMenuItem( fileMenu, idMenuQuit, wxString( wxT("&Close Editor") ) + wxT('\t') + wxT("Alt+F4"), wxT("Quit the application"), wxITEM_NORMAL );
 	fileMenu->Append( menuFileQuit );
 	
 	mbar->Append( fileMenu, wxT("&File") ); 
@@ -507,7 +512,7 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	this->Connect( m_LoadComm->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::loadMainComms ) );
 	this->Connect( menuHelpAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
 	m_AssetListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
-	m_textPNAME->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Name_Changed ), NULL, this );
+	m_textPNAME->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_textPosX->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_textPosY->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_GFXSpace->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
@@ -525,7 +530,7 @@ AssetEd::~AssetEd()
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::loadMainComms ) );
 	this->Disconnect( idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
 	m_AssetListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::sys_click ), NULL, this );
-	m_textPNAME->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::Name_Changed ), NULL, this );
+	m_textPNAME->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_textPosX->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_textPosY->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_GFXSpace->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );

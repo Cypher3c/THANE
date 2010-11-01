@@ -130,7 +130,6 @@ class AssetEd : public wxFrame
 		virtual void loadMainComms( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 		virtual void sys_click( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Name_Changed( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ChangeMade( wxCommandEvent& event ) { event.Skip(); }
 		virtual void m_text_ClassOnTextEnter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void comm_click( wxCommandEvent& event ) { event.Skip(); }
