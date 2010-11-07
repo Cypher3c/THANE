@@ -126,6 +126,7 @@ class AssetEd : public wxFrame
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OpenFile( wxCommandEvent& event ) { event.Skip(); }
+		virtual void FileSave( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void loadMainComms( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }

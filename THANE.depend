@@ -1516,12 +1516,12 @@
 	<wx/bitmap.h>
 	"NUEMain.h"
 
-1288564139 source:/home/chris/workspace/THANE_wx/THANE/GUIFrame.cpp
+1288836414 source:/home/chris/workspace/THANE_wx/THANE/GUIFrame.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIFrame.h"
 
-1288564139 /home/chris/workspace/THANE_wx/THANE/GUIFrame.h
+1288836414 /home/chris/workspace/THANE_wx/THANE/GUIFrame.h
 	<wx/string.h>
 	<wx/bitmap.h>
 	<wx/image.h>
@@ -1555,14 +1555,15 @@
 	"GUIFrame.h"
 	<wx/wx.h>
 
-1288585989 /home/chris/workspace/THANE_wx/THANE/System.h
+1289089936 /home/chris/workspace/THANE_wx/THANE/System.h
 	<string>
 	<vector>
+	<sstream>
 	<wx/wx.h>
 	<mxml.h>
 	<wx/msgdlg.h>
 
-1288585763 source:/home/chris/workspace/THANE_wx/THANE/THANEMain.cpp
+1289085964 source:/home/chris/workspace/THANE_wx/THANE/THANEMain.cpp
 	"wx_pch.h"
 	<wx/bitmap.h>
 	"THANEMain.h"

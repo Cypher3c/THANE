@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <sstream>
 #include <wx/wx.h>
 //#include "nxml.h"
 //#include "space.h"
@@ -59,16 +60,16 @@ public:
     //planet/station class, population, land,
     //refuel, bar, missions, commodity
     //outfits, shipyard, description, bar description
-    Asset(int p_ID, mxml_node_t *sysnode_t, const char* p_name, float p_x, float p_y, const char* gfx_space_tmp, const char* gfx_ext_tmp,
-          const char* p_fac, float p_presval, int p_presrange, const char* p_plan_class, int p_pop, bool p_land, bool p_refuel, bool p_bar, bool p_missions, bool p_commodity,
+    Asset(int p_ID, mxml_node_t *sysnode_t, const char* p_name, const char* p_x, const char* p_y, const char* gfx_space_tmp, const char* gfx_ext_tmp,
+          const char* p_fac, const char* p_presval, const char* p_presrange, const char* p_plan_class, const char* p_pop, bool p_land, bool p_refuel, bool p_bar, bool p_missions, bool p_commodity,
           bool p_outfits, bool p_shipyard, const char* p_descrip, const char* p_bar_descrip)
     {
         //Set ID
         ID = p_ID;
         sys_node = sysnode_t;
         name = wxString::FromAscii(p_name);
-        x_pos  = p_x;
-        y_pos = p_y;
+        x_pos = wxString::FromAscii(p_x);
+        y_pos = wxString::FromAscii(p_y);
         gfx_space = wxString::FromAscii(gfx_space_tmp);
         gfx_ext = wxString::FromAscii(gfx_ext_tmp);
         //See if faction is present
@@ -80,10 +81,10 @@ public:
         {
             pres_faction = wxT("n");
         }
-        pres_value = p_presval;
-        pres_range = p_presrange;
+        pres_value = wxString::FromAscii(p_presval);
+        pres_range = wxString::FromAscii(p_presrange);
         planet_class = wxString::FromAscii(p_plan_class);
-        population = p_pop;
+        population = wxString::FromAscii(p_pop);
         land = p_land;
         refuel = p_refuel;
         bar = p_bar;
@@ -91,8 +92,18 @@ public:
         commodity = p_commodity;
         outfits = p_outfits;
         shipyard = p_shipyard;
-        description = wxString(p_descrip, wxConvUTF8);
+        //set Description string to (null) if empty
+        if (p_descrip != NULL)
+        {
+            description = wxString(p_descrip, wxConvUTF8);
+        }
+        else
+        {
+            description = wxString("(null)", wxConvUTF8);
+        }
         bar_description = wxString(p_bar_descrip, wxConvUTF8);
+
+        IsModified = false;
 
     }
     //Destructor
@@ -107,13 +118,13 @@ public:
     //GFX Files
     wxString gfx_space;
     wxString gfx_ext;
-    float x_pos;
-    float y_pos;
+    wxString x_pos;
+    wxString y_pos;
     wxString pres_faction;
-    float pres_value;
-    int pres_range;
+    wxString pres_value;
+    wxString pres_range;
     wxString planet_class;
-    int population;
+    wxString population;
     bool land;
     bool refuel;
     bool bar;
@@ -125,6 +136,7 @@ public:
     wxString bar_description;
     std::vector<Commodity> Commodities;
     std::vector<Item> Items;
+    bool IsModified;
 
 
 };
@@ -239,6 +251,68 @@ public:
         }
     }
 
+    int SetFloat(mxml_node_t *nd, const char * tag, float value)
+    {
+        mxml_node_t *temp_sub_node;
+        temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
+
+        //If node exists:
+        if (temp_sub_node != NULL)
+        {
+            char* tmp;
+            snprintf(tmp, 79, "%f",value);
+            mxmlSetOpaque(temp_sub_node->child, tmp);
+            return 1; //success
+        }
+        else
+        {
+            return 0; //no node exists
+        }
+    }
+        int SetBool(mxml_node_t *nd, const char * parent_tag, const char * tag, bool value)
+        {
+            mxml_node_t *temp_sub_node;
+            temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
+
+            //If node exists:
+            if (temp_sub_node != NULL)
+            {
+                if (!value) //if value is false
+                {
+                    mxmlDelete(temp_sub_node); //delete element to turn off flag
+                }
+                //Otherwise do nothing
+                return 1; //success
+            }
+            else //If flag is not already present
+            {
+                if(value) //if value is true
+                {
+                    //Set temp node to parent element
+                    temp_sub_node = mxmlFindElement(nd, nd, parent_tag, NULL, NULL, MXML_DESCEND);
+                    if (temp_sub_node != NULL) //Make sure the parent element exists
+                    {
+                        //Create element with appropriate name
+                        mxml_node_t *flag = mxmlNewElement(temp_sub_node, tag);
+                        return 1; //Success
+                    }
+                    else
+                    {
+                        return 0; //Something went wrong
+                    }
+                }
+            }
+    }
+
+    //Massively Enormous saving loop
+
+    virtual int WriteChanges(){}
+
+    //Generate New XML file
+    //TODO
+
+    void MakeNew();
+
     //Load XML file into XmlO
     //Filename, type (1 = assets.xml, 2 = commodities.xml)
     void load(wxString filenam)
@@ -274,11 +348,10 @@ public:
     //Update a parameter in the xml tree from the correct form. obj a node pointer to the asset/commodity to be updated
     //param is the name of the parameter, and obj_type is the type of object: 1 = asset, 2 = commodity
     //data is the (text) value to change the param to
-    int UpdateParam_Str(mxml_node_t *obj,  int obj_type, const char* param, wxString data)
+    int UpdateParam_Str(mxml_node_t *obj, const char* param, wxString data)
     {
-        switch (obj_type)
-        {
-        case 1 :
+            mxml_node_t *tmp;
+            char* tmp_str;
             //Special case for changing name param (the only attribute so far in asset.xml)
             if (param == "name")
             {
@@ -287,14 +360,12 @@ public:
             }
             else
             {
-
+                //Descend to proper depth
+                tmp = mxmlFindElement(obj, obj, param, NULL, NULL, MXML_DESCEND);
+                strncpy(tmp_str, data.mb_str(), 1024);
+                mxmlSetOpaque(tmp, tmp_str);
+                return 1; //Success
             }
-
-            break;
-
-        default :
-            return 0; //Error
-        }
 
     }
     //Same as above, but for updating object name. Only need the node pointer and the data to write
@@ -333,15 +404,15 @@ public:
         mxml_node_t *subnode_serv; //Subnode for services nodes
         const char* name_tmp; //String for names of asset
         const char* tmp_str; //String for anything :P
-        float x_pos; //X_pos Float
-        float y_pos; //Y_pos Float
+        const char* x_pos; //X_pos Float
+        const char* y_pos; //Y_pos Float
         const char* gfx_space;
         const char* gfx_ext;
         const char* pres_fac;
-        float pres_val;
-        int pres_range;
+        const char* pres_val;
+        const char* pres_range;
         const char* plan_class;
-        int population;
+        const char* population;
         bool land;
         bool refuel;
         bool bar;
@@ -374,9 +445,9 @@ public:
             //Services Sub-element
             subnode_serv = mxmlFindElement(subnode_gen, Asset_elem, "services", NULL, NULL, MXML_DESCEND);
             //Get Pos parameters x and y
-            x_pos = GetFloat(subnode_pos, "x");
+            x_pos = GetStringOpaque(subnode_pos, "x");
 
-            y_pos = GetFloat(subnode_pos, "y");
+            y_pos = GetStringOpaque(subnode_pos, "y");
 
             //Get GFX filenames
             gfx_space = GetStringOpaque(subnode_GFX, "space");
@@ -387,14 +458,14 @@ public:
 
             pres_fac = GetStringOpaque(subnode_pres, "faction");
 
-            pres_val = GetFloat(subnode_pres, "value");
+            pres_val = GetStringOpaque(subnode_pres, "value");
 
-            pres_range = GetInt(subnode_pres, "range");
+            pres_range = GetStringOpaque(subnode_pres, "range");
 
             //Get elements from general node (class, population, servicesTODO, description, bar)
             plan_class = GetStringOpaque(subnode_gen, "class");
 
-            population = GetInt(subnode_gen, "population");
+            population = GetStringOpaque(subnode_gen, "population");
 
             //Get available services as true/false values
             land = TagIsPresent(subnode_serv, "land");
@@ -427,6 +498,46 @@ public:
             i++;
         }
         return 1; //Success
+    }
+
+    virtual int WriteChanges(){
+
+        //Parse through Asset objects
+        for(int i = 0; i < Assets.size(); i++)
+        {
+            //Check and see if Asset is modified
+            if(Assets.at(i).IsModified){
+
+                SetStringOpaque(Assets.at(i).sys_node, "x", Assets.at(i).x_pos.mb_str()); //Set X
+                SetStringOpaque(Assets.at(i).sys_node, "y", Assets.at(i).y_pos.mb_str()); //Set Y
+                SetStringOpaque(Assets.at(i).sys_node, "space", Assets.at(i).gfx_space.mb_str()); //Set GFX_space
+                SetStringOpaque(Assets.at(i).sys_node, "exterior", Assets.at(i).gfx_ext.mb_str()); //Set GFX_ext
+               // SetStringOpaque(Assets.at(i).sys_node, "value", Assets.at(i).pres_value.mb_str()); //Set Faction
+                SetStringOpaque(Assets.at(i).sys_node, "value", Assets.at(i).pres_value.mb_str()); //Set Presence value
+                SetStringOpaque(Assets.at(i).sys_node, "range", Assets.at(i).pres_range.mb_str()); //Set Presence range
+
+                SetStringOpaque(Assets.at(i).sys_node, "class", Assets.at(i).planet_class.mb_str()); //Set Planet Class
+                SetStringOpaque(Assets.at(i).sys_node, "population", Assets.at(i).population.mb_str()); //Set Population
+
+
+                SetBool(Assets.at(i).sys_node, "services", "land", Assets.at(i).land); //Set Land flag
+                SetBool(Assets.at(i).sys_node, "services", "refuel", Assets.at(i).refuel); //Set Refuel flag
+                SetBool(Assets.at(i).sys_node, "services", "bar", Assets.at(i).bar); //Set Bar flag
+                SetBool(Assets.at(i).sys_node, "services", "missions", Assets.at(i).missions); //Set Missions flag
+                SetBool(Assets.at(i).sys_node, "services", "commodity", Assets.at(i).commodity); //Set Commodity flag
+                SetBool(Assets.at(i).sys_node, "services", "outfits", Assets.at(i).outfits); //Set Outfits flag
+                SetBool(Assets.at(i).sys_node, "services", "shipyard", Assets.at(i).shipyard); //Set Shipyard flag
+
+                SetStringOpaque(Assets.at(i).sys_node, "description", Assets.at(i).description.mb_str()); //Set Description
+                SetStringOpaque(Assets.at(i).sys_node, "bar", Assets.at(i).bar_description.mb_str()); //Set Bar Description
+
+
+                //Turn off 'modified' flag for asset
+                Assets.at(i).IsModified = false;
+
+            }
+
+        }
     }
 
     std::vector<Asset> Assets; //Vector of Assets --MUAHAHAHAHA!, we are vectorized. All Assets under my command! -- Sorry

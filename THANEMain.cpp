@@ -108,7 +108,7 @@ void THANEAsset::clear_params(){
 void THANEAsset::loadMainComms( wxCommandEvent& event ){
     wxFileDialog* OpenDialog2 = new wxFileDialog(this, _("Choose commodity file to open"), wxEmptyString, wxEmptyString,_("XML Files (*.xml)|*.xml"),wxFD_OPEN, wxDefaultPosition);
 
-    // Creates a "open file" dialog with 4 file types
+    // Creates a "open file" dialog
     if (OpenDialog2->ShowModal() == wxID_OK) // if the user click "Open" instead of "Cancel"
     {
         //Set m_ComListBox contents to names from commodity.xml
@@ -156,7 +156,15 @@ void THANEAsset::OpenFile( wxCommandEvent& event ){
         OpenDialog->Destroy();
   }
 
-void THANEAsset::FileSave( wxCommandEvent& event ){
+void THANEAsset::FileSave( wxCommandEvent& event )
+{
+    SysA.WriteChanges(); //Write Changes from object to XML tree
+
+    wxFileDialog* SaveDialog = new wxFileDialog(this, _("Select Path to Save File"), wxEmptyString, wxEmptyString,_("XML Files (*.xml)|*.xml"),wxFD_SAVE, wxDefaultPosition);
+    if (SaveDialog->ShowModal() == wxID_OK)
+    {
+        SysA.save(SaveDialog->GetPath());
+    }
 
 
 }
@@ -171,23 +179,23 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
     ind = m_AssetListBox->GetSelection();
 
     wxString tmp_asset_nam;
-    wxString tmp_x;
-    wxString tmp_y;
+  //  wxString tmp_x;
+  //  wxString tmp_y;
     wxString tmp_tmp;
     wxString tmp_tmp2;
 
     tmp_asset_nam = SysA.Assets.at(ind).name;
-    tmp_x << SysA.Assets.at(ind).x_pos;
-    tmp_y << SysA.Assets.at(ind).y_pos;
+  //  tmp_x << SysA.Assets.at(ind).x_pos;
+  //  tmp_y << SysA.Assets.at(ind).y_pos;
 
     //Set the asset name textbox
     m_textPNAME->ChangeValue(tmp_asset_nam);
 
     //Set the X_pos textbok
-    m_textPosX->ChangeValue(tmp_x);
+    m_textPosX->ChangeValue(SysA.Assets.at(ind).x_pos);
 
     //Set the Y_pos textbox
-    m_textPosY->ChangeValue(tmp_y);
+    m_textPosY->ChangeValue(SysA.Assets.at(ind).y_pos);
 
     //Set the GFX_space textbox
     m_text_GFXSpace->ChangeValue(SysA.Assets.at(ind).gfx_space);
@@ -204,11 +212,11 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
     }
 
     //Set the value textbox
-    tmp_tmp << SysA.Assets.at(ind).pres_value;
-    m_text_PresVal->ChangeValue(tmp_tmp);
+  //  tmp_tmp << SysA.Assets.at(ind).pres_value;
+    m_text_PresVal->ChangeValue(SysA.Assets.at(ind).pres_value);
     //Set the range textbox
-    tmp_tmp2 << SysA.Assets.at(ind).pres_range;
-    m_text_PresRange->ChangeValue(tmp_tmp2);
+   // tmp_tmp2 << SysA.Assets.at(ind).pres_range;
+    m_text_PresRange->ChangeValue(SysA.Assets.at(ind).pres_range);
 
     //Set the Class and Population Boxes
 
@@ -217,9 +225,9 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
 
     tmp_tmp = wxT(""); //Clear it
 
-    tmp_tmp << SysA.Assets.at(ind).population;
+   // tmp_tmp << SysA.Assets.at(ind).population;
 
-    m_text_Population->ChangeValue(tmp_tmp);
+    m_text_Population->ChangeValue(SysA.Assets.at(ind).population);
 
     //Set Services Checkboxes
     m_checkBoxLand->SetValue(SysA.Assets.at(ind).land);
@@ -270,7 +278,7 @@ void THANEAsset::Name_Changed( wxCommandEvent& event ){
 
 void THANEAsset::GetChanges_Float(wxTextCtrl*& text_box, float &val){
     if(text_box->IsModified()){
-        //Turn off 'modified' flag
+        //Turn off 'modified' flag for GUI
         text_box->SetModified(false);
         //set name in object
         val = atof((text_box->GetValue()).mb_str());
@@ -293,12 +301,15 @@ void THANEAsset::SaveAssetChanges( wxCommandEvent& event ){
     ind = m_AssetListBox->GetSelection();
 
     //Save changes
-    GetChanges_Float(m_textPosX, SysA.Assets.at(ind).x_pos); //X Position
-    GetChanges_Float(m_textPosY, SysA.Assets.at(ind).y_pos); //Y Position
+    GetChanges_String(m_textPosX, SysA.Assets.at(ind).x_pos); //X Position
+    GetChanges_String(m_textPosY, SysA.Assets.at(ind).y_pos); //Y Position
     GetChanges_String(m_text_GFXSpace, SysA.Assets.at(ind).gfx_space); //Space graphics
     GetChanges_String(m_text_GFXExt, SysA.Assets.at(ind).gfx_ext); //Ext graphics
     //Disable "Save Changes button"
     m_AssetSaveChanges->Enable(false);
+
+    //Set 'modified' flag in Asset object
+    SysA.Assets.at(ind).IsModified = true;
 }
 
   void THANEFrame::SetNaevDir_ev( wxCommandEvent& event ) {

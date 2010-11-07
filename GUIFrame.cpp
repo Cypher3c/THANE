@@ -508,6 +508,7 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	
 	// Connect Events
 	this->Connect( menuFileOpen->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OpenFile ) );
+	this->Connect( m_menuSaveFile->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::FileSave ) );
 	this->Connect( menuFileQuit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnQuit ) );
 	this->Connect( m_LoadComm->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::loadMainComms ) );
 	this->Connect( menuHelpAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
@@ -526,6 +527,7 @@ AssetEd::~AssetEd()
 {
 	// Disconnect Events
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OpenFile ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::FileSave ) );
 	this->Disconnect( idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnQuit ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::loadMainComms ) );
 	this->Disconnect( idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( AssetEd::OnAbout ) );
