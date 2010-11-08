@@ -21,7 +21,7 @@
         <property name="skip_python_events">1</property>
         <property name="use_enum">0</property>
         <property name="use_microsoft_bom">0</property>
-        <object class="Frame" expanded="0">
+        <object class="Frame" expanded="1">
             <property name="bg"></property>
             <property name="center"></property>
             <property name="context_help"></property>
@@ -40,7 +40,7 @@
             <property name="size">242,200</property>
             <property name="style">wxDEFAULT_FRAME_STYLE</property>
             <property name="subclass"></property>
-            <property name="title">THANE v0.0.2a</property>
+            <property name="title">THANE v0.0.3a</property>
             <property name="tooltip"></property>
             <property name="validator_data_type"></property>
             <property name="validator_style">wxFILTER_NONE</property>
@@ -468,7 +468,7 @@
                 </object>
             </object>
         </object>
-        <object class="Frame" expanded="1">
+        <object class="Frame" expanded="0">
             <property name="bg"></property>
             <property name="center">wxBOTH</property>
             <property name="context_help"></property>
@@ -526,7 +526,7 @@
             <event name="OnSetFocus"></event>
             <event name="OnSize"></event>
             <event name="OnUpdateUI"></event>
-            <object class="wxMenuBar" expanded="1">
+            <object class="wxMenuBar" expanded="0">
                 <property name="bg"></property>
                 <property name="context_help"></property>
                 <property name="context_menu">1</property>
@@ -575,7 +575,7 @@
                 <event name="OnSetFocus"></event>
                 <event name="OnSize"></event>
                 <event name="OnUpdateUI"></event>
-                <object class="wxMenu" expanded="1">
+                <object class="wxMenu" expanded="0">
                     <property name="label">&amp;File</property>
                     <property name="name">fileMenu</property>
                     <property name="permission">protected</property>
@@ -609,7 +609,7 @@
                         <event name="OnMenuSelection">OpenFile</event>
                         <event name="OnUpdateUI"></event>
                     </object>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap"></property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -2000,7 +2000,7 @@
                                                         <event name="OnRightUp"></event>
                                                         <event name="OnSetFocus"></event>
                                                         <event name="OnSize"></event>
-                                                        <event name="OnText"></event>
+                                                        <event name="OnText">ChangeMade</event>
                                                         <event name="OnTextEnter"></event>
                                                         <event name="OnTextMaxLen"></event>
                                                         <event name="OnTextURL"></event>
@@ -2039,7 +2039,7 @@
                                                         <property name="window_name"></property>
                                                         <property name="window_style"></property>
                                                         <event name="OnChar"></event>
-                                                        <event name="OnCheckBox"></event>
+                                                        <event name="OnCheckBox">ChangeMade</event>
                                                         <event name="OnEnterWindow"></event>
                                                         <event name="OnEraseBackground"></event>
                                                         <event name="OnKeyDown"></event>
@@ -2191,7 +2191,7 @@
                                                         <event name="OnRightUp"></event>
                                                         <event name="OnSetFocus"></event>
                                                         <event name="OnSize"></event>
-                                                        <event name="OnText"></event>
+                                                        <event name="OnText">ChangeMade</event>
                                                         <event name="OnTextEnter"></event>
                                                         <event name="OnTextMaxLen"></event>
                                                         <event name="OnTextURL"></event>
@@ -2307,7 +2307,7 @@
                                                         <event name="OnRightUp"></event>
                                                         <event name="OnSetFocus"></event>
                                                         <event name="OnSize"></event>
-                                                        <event name="OnText"></event>
+                                                        <event name="OnText">ChangeMade</event>
                                                         <event name="OnTextEnter"></event>
                                                         <event name="OnTextMaxLen"></event>
                                                         <event name="OnTextURL"></event>
@@ -2520,7 +2520,7 @@
                                                                 <event name="OnRightUp"></event>
                                                                 <event name="OnSetFocus"></event>
                                                                 <event name="OnSize"></event>
-                                                                <event name="OnText"></event>
+                                                                <event name="OnText">ChangeMade</event>
                                                                 <event name="OnTextEnter">m_text_ClassOnTextEnter</event>
                                                                 <event name="OnTextMaxLen"></event>
                                                                 <event name="OnTextURL"></event>
@@ -2636,7 +2636,7 @@
                                                                 <event name="OnRightUp"></event>
                                                                 <event name="OnSetFocus"></event>
                                                                 <event name="OnSize"></event>
-                                                                <event name="OnText"></event>
+                                                                <event name="OnText">ChangeMade</event>
                                                                 <event name="OnTextEnter"></event>
                                                                 <event name="OnTextMaxLen"></event>
                                                                 <event name="OnTextURL"></event>
@@ -2802,7 +2802,7 @@
                                                                 <property name="window_name"></property>
                                                                 <property name="window_style"></property>
                                                                 <event name="OnChar"></event>
-                                                                <event name="OnCheckBox"></event>
+                                                                <event name="OnCheckBox">ChangeMade</event>
                                                                 <event name="OnEnterWindow"></event>
                                                                 <event name="OnEraseBackground"></event>
                                                                 <event name="OnKeyDown"></event>
@@ -2859,7 +2859,7 @@
                                                                 <property name="window_name"></property>
                                                                 <property name="window_style"></property>
                                                                 <event name="OnChar"></event>
-                                                                <event name="OnCheckBox"></event>
+                                                                <event name="OnCheckBox">ChangeMade</event>
                                                                 <event name="OnEnterWindow"></event>
                                                                 <event name="OnEraseBackground"></event>
                                                                 <event name="OnKeyDown"></event>
@@ -2916,7 +2916,7 @@
                                                                 <property name="window_name"></property>
                                                                 <property name="window_style"></property>
                                                                 <event name="OnChar"></event>
-                                                                <event name="OnCheckBox"></event>
+                                                                <event name="OnCheckBox">ChangeMade</event>
                                                                 <event name="OnEnterWindow"></event>
                                                                 <event name="OnEraseBackground"></event>
                                                                 <event name="OnKeyDown"></event>
@@ -2973,7 +2973,7 @@
                                                                 <property name="window_name"></property>
                                                                 <property name="window_style"></property>
                                                                 <event name="OnChar"></event>
-                                                                <event name="OnCheckBox"></event>
+                                                                <event name="OnCheckBox">ChangeMade</event>
                                                                 <event name="OnEnterWindow"></event>
                                                                 <event name="OnEraseBackground"></event>
                                                                 <event name="OnKeyDown"></event>
@@ -3048,7 +3048,7 @@
                                                                 <property name="window_name"></property>
                                                                 <property name="window_style"></property>
                                                                 <event name="OnChar"></event>
-                                                                <event name="OnCheckBox"></event>
+                                                                <event name="OnCheckBox">ChangeMade</event>
                                                                 <event name="OnEnterWindow"></event>
                                                                 <event name="OnEraseBackground"></event>
                                                                 <event name="OnKeyDown"></event>
@@ -3105,7 +3105,7 @@
                                                                 <property name="window_name"></property>
                                                                 <property name="window_style"></property>
                                                                 <event name="OnChar"></event>
-                                                                <event name="OnCheckBox"></event>
+                                                                <event name="OnCheckBox">ChangeMade</event>
                                                                 <event name="OnEnterWindow"></event>
                                                                 <event name="OnEraseBackground"></event>
                                                                 <event name="OnKeyDown"></event>
@@ -3162,7 +3162,7 @@
                                                                 <property name="window_name"></property>
                                                                 <property name="window_style"></property>
                                                                 <event name="OnChar"></event>
-                                                                <event name="OnCheckBox"></event>
+                                                                <event name="OnCheckBox">ChangeMade</event>
                                                                 <event name="OnEnterWindow"></event>
                                                                 <event name="OnEraseBackground"></event>
                                                                 <event name="OnKeyDown"></event>
@@ -3325,7 +3325,7 @@
                                                                 <event name="OnRightUp"></event>
                                                                 <event name="OnSetFocus"></event>
                                                                 <event name="OnSize"></event>
-                                                                <event name="OnText"></event>
+                                                                <event name="OnText">ChangeMade</event>
                                                                 <event name="OnTextEnter"></event>
                                                                 <event name="OnTextMaxLen"></event>
                                                                 <event name="OnTextURL"></event>
@@ -3459,7 +3459,7 @@
                                                                 <event name="OnRightUp"></event>
                                                                 <event name="OnSetFocus"></event>
                                                                 <event name="OnSize"></event>
-                                                                <event name="OnText"></event>
+                                                                <event name="OnText">ChangeMade</event>
                                                                 <event name="OnTextEnter"></event>
                                                                 <event name="OnTextMaxLen"></event>
                                                                 <event name="OnTextURL"></event>

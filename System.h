@@ -61,7 +61,7 @@ public:
     //refuel, bar, missions, commodity
     //outfits, shipyard, description, bar description
     Asset(int p_ID, mxml_node_t *sysnode_t, const char* p_name, const char* p_x, const char* p_y, const char* gfx_space_tmp, const char* gfx_ext_tmp,
-          const char* p_fac, const char* p_presval, const char* p_presrange, const char* p_plan_class, const char* p_pop, bool p_land, bool p_refuel, bool p_bar, bool p_missions, bool p_commodity,
+          bool p_isfac, const char* p_fac, const char* p_presval, const char* p_presrange, const char* p_plan_class, const char* p_pop, bool p_land, bool p_refuel, bool p_bar, bool p_missions, bool p_commodity,
           bool p_outfits, bool p_shipyard, const char* p_descrip, const char* p_bar_descrip)
     {
         //Set ID
@@ -70,17 +70,12 @@ public:
         name = wxString::FromAscii(p_name);
         x_pos = wxString::FromAscii(p_x);
         y_pos = wxString::FromAscii(p_y);
+
         gfx_space = wxString::FromAscii(gfx_space_tmp);
         gfx_ext = wxString::FromAscii(gfx_ext_tmp);
-        //See if faction is present
-        if (p_fac != NULL)
-        {
-            pres_faction = wxString::FromAscii(p_fac);
-        }
-        else
-        {
-            pres_faction = wxT("n");
-        }
+
+        faction = p_isfac;
+        pres_faction = wxString::FromAscii(p_fac);
         pres_value = wxString::FromAscii(p_presval);
         pres_range = wxString::FromAscii(p_presrange);
         planet_class = wxString::FromAscii(p_plan_class);
@@ -101,8 +96,14 @@ public:
         {
             description = wxString("(null)", wxConvUTF8);
         }
-        bar_description = wxString(p_bar_descrip, wxConvUTF8);
-
+        if (p_bar_descrip != NULL)
+        {
+            bar_description = wxString(p_bar_descrip, wxConvUTF8);
+        }
+        else
+        {
+            bar_description = wxString("(null)", wxConvUTF8);
+        }
         IsModified = false;
 
     }
@@ -120,6 +121,7 @@ public:
     wxString gfx_ext;
     wxString x_pos;
     wxString y_pos;
+    bool faction;
     wxString pres_faction;
     wxString pres_value;
     wxString pres_range;
@@ -272,34 +274,38 @@ public:
         int SetBool(mxml_node_t *nd, const char * parent_tag, const char * tag, bool value)
         {
             mxml_node_t *temp_sub_node;
-            temp_sub_node = mxmlFindElement(nd, nd, tag, NULL, NULL, MXML_DESCEND);
+            mxml_node_t *temp_sub_node2;
+            temp_sub_node = mxmlFindElement(nd, nd, parent_tag, NULL, NULL, MXML_DESCEND);
 
+            temp_sub_node2 = mxmlFindElement(temp_sub_node, temp_sub_node, tag, NULL, NULL, MXML_DESCEND);
             //If node exists:
-            if (temp_sub_node != NULL)
+            if (temp_sub_node2)
             {
-                if (!value) //if value is false
+                if (value) //if value is true
                 {
-                    mxmlDelete(temp_sub_node); //delete element to turn off flag
+                    //Do Nothing
+                    return 3; //node exists, left in place
                 }
-                //Otherwise do nothing
-                return 1; //success
+                //Otherwise delete node
+                else
+                {
+                    mxmlDelete(temp_sub_node2); //delete element to turn off flag
+                    return 1; //node exists, deleted
+                }
             }
             else //If flag is not already present
             {
                 if(value) //if value is true
                 {
-                    //Set temp node to parent element
-                    temp_sub_node = mxmlFindElement(nd, nd, parent_tag, NULL, NULL, MXML_DESCEND);
-                    if (temp_sub_node != NULL) //Make sure the parent element exists
-                    {
-                        //Create element with appropriate name
-                        mxml_node_t *flag = mxmlNewElement(temp_sub_node, tag);
-                        return 1; //Success
-                    }
-                    else
-                    {
-                        return 0; //Something went wrong
-                    }
+                    //Create element with appropriate name
+                    mxml_node_t *flag;
+                    flag = mxmlNewElement(temp_sub_node, tag);
+                    return 2; //Success, node created
+
+                }
+                else
+                {
+                    return 0; //node doesn't exist, left alone
                 }
             }
     }
@@ -408,6 +414,7 @@ public:
         const char* y_pos; //Y_pos Float
         const char* gfx_space;
         const char* gfx_ext;
+        bool fac;
         const char* pres_fac;
         const char* pres_val;
         const char* pres_range;
@@ -456,13 +463,16 @@ public:
 
             //Get Presence Parameters (faction, value, and range)
 
-            pres_fac = GetStringOpaque(subnode_pres, "faction");
+            if(fac = TagIsPresent(subnode_pres, "faction")) //Yes, I mean =, not ==
+            {
+                pres_fac = GetStringOpaque(subnode_pres, "faction");
+            }
 
             pres_val = GetStringOpaque(subnode_pres, "value");
 
             pres_range = GetStringOpaque(subnode_pres, "range");
 
-            //Get elements from general node (class, population, servicesTODO, description, bar)
+            //Get elements from general node (class, population, services, description, bar)
             plan_class = GetStringOpaque(subnode_gen, "class");
 
             population = GetStringOpaque(subnode_gen, "population");
@@ -486,7 +496,7 @@ public:
          //   ParseCommodities(subnode_gen);
 
             //Generate tmp Asset
-            Asset asset_sys(i, node, name_tmp, x_pos, y_pos, gfx_space, gfx_ext, pres_fac,
+            Asset asset_sys(i, node, name_tmp, x_pos, y_pos, gfx_space, gfx_ext, fac, pres_fac,
                             pres_val, pres_range, plan_class, population, land, refuel,
                             bar, missions, commodity, outfits, shipyard, descrip, bar_descrip);
             //Load system with its node into vector of Assets
@@ -512,7 +522,11 @@ public:
                 SetStringOpaque(Assets.at(i).sys_node, "y", Assets.at(i).y_pos.mb_str()); //Set Y
                 SetStringOpaque(Assets.at(i).sys_node, "space", Assets.at(i).gfx_space.mb_str()); //Set GFX_space
                 SetStringOpaque(Assets.at(i).sys_node, "exterior", Assets.at(i).gfx_ext.mb_str()); //Set GFX_ext
-               // SetStringOpaque(Assets.at(i).sys_node, "value", Assets.at(i).pres_value.mb_str()); //Set Faction
+
+                if(SetBool(Assets.at(i).sys_node, "presence", "faction", Assets.at(i).faction) > 1) //Set Faction present flag
+                { //Checks to see if return is 2 (node created) or 3 (node already exists)
+                    SetStringOpaque(Assets.at(i).sys_node, "faction", Assets.at(i).pres_faction.mb_str()); //Set Presence value
+                }
                 SetStringOpaque(Assets.at(i).sys_node, "value", Assets.at(i).pres_value.mb_str()); //Set Presence value
                 SetStringOpaque(Assets.at(i).sys_node, "range", Assets.at(i).pres_range.mb_str()); //Set Presence range
 
@@ -527,6 +541,14 @@ public:
                 SetBool(Assets.at(i).sys_node, "services", "commodity", Assets.at(i).commodity); //Set Commodity flag
                 SetBool(Assets.at(i).sys_node, "services", "outfits", Assets.at(i).outfits); //Set Outfits flag
                 SetBool(Assets.at(i).sys_node, "services", "shipyard", Assets.at(i).shipyard); //Set Shipyard flag
+
+                mxml_node_t *temp_sub_node;
+                mxml_node_t *temp_sub_node2;
+                //temp_sub_node = mxmlFindElement(Assets.at(i).sys_node, Assets.at(i).sys_node, "services", NULL, NULL, MXML_DESCEND);
+
+              //  temp_sub_node2 = mxmlFindElement(temp_sub_node, temp_sub_node, ", NULL, NULL, MXML_DESCEND);
+              //  mxml_node_t *flag;
+              //  flag = mxmlNewElement(temp_sub_node, "shipyard");
 
                 SetStringOpaque(Assets.at(i).sys_node, "description", Assets.at(i).description.mb_str()); //Set Description
                 SetStringOpaque(Assets.at(i).sys_node, "bar", Assets.at(i).bar_description.mb_str()); //Set Bar Description

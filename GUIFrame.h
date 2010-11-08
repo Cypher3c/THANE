@@ -57,7 +57,7 @@ class GUIFrame : public wxFrame
 	
 	public:
 		
-		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("THANE v0.0.2a"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 242,200 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("THANE v0.0.3a"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 242,200 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		~GUIFrame();
 	
 };

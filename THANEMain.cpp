@@ -179,14 +179,10 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
     ind = m_AssetListBox->GetSelection();
 
     wxString tmp_asset_nam;
-  //  wxString tmp_x;
-  //  wxString tmp_y;
     wxString tmp_tmp;
     wxString tmp_tmp2;
 
     tmp_asset_nam = SysA.Assets.at(ind).name;
-  //  tmp_x << SysA.Assets.at(ind).x_pos;
-  //  tmp_y << SysA.Assets.at(ind).y_pos;
 
     //Set the asset name textbox
     m_textPNAME->ChangeValue(tmp_asset_nam);
@@ -203,19 +199,15 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
     m_text_GFXExt->ChangeValue(SysA.Assets.at(ind).gfx_ext);
 
     //Set the faction textbox and checkbox
-    if(SysA.Assets.at(ind).pres_faction != wxT("n")){
+    if(SysA.Assets.at(ind).faction)
+    {
+        m_checkFac->SetValue(SysA.Assets.at(ind).faction);
         m_text_Faction->ChangeValue(SysA.Assets.at(ind).pres_faction);
-        m_checkFac->SetValue(true);
-    }
-    else{
-      //  m_text_Faction->
     }
 
     //Set the value textbox
-  //  tmp_tmp << SysA.Assets.at(ind).pres_value;
     m_text_PresVal->ChangeValue(SysA.Assets.at(ind).pres_value);
     //Set the range textbox
-   // tmp_tmp2 << SysA.Assets.at(ind).pres_range;
     m_text_PresRange->ChangeValue(SysA.Assets.at(ind).pres_range);
 
     //Set the Class and Population Boxes
@@ -224,8 +216,6 @@ void THANEAsset::sys_click( wxCommandEvent& event ) {
     m_text_Class->ChangeValue(tmp_tmp);
 
     tmp_tmp = wxT(""); //Clear it
-
-   // tmp_tmp << SysA.Assets.at(ind).population;
 
     m_text_Population->ChangeValue(SysA.Assets.at(ind).population);
 
@@ -293,6 +283,10 @@ void THANEAsset::GetChanges_String(wxTextCtrl*& text_box, wxString &val){
         val = text_box->GetValue();
     }
 }
+void THANEAsset::GetChanges_Bool(wxCheckBox*& check_box, bool &val){
+    //set name in object
+    val = check_box->GetValue();
+}
 
 void THANEAsset::SaveAssetChanges( wxCommandEvent& event ){
 
@@ -305,6 +299,34 @@ void THANEAsset::SaveAssetChanges( wxCommandEvent& event ){
     GetChanges_String(m_textPosY, SysA.Assets.at(ind).y_pos); //Y Position
     GetChanges_String(m_text_GFXSpace, SysA.Assets.at(ind).gfx_space); //Space graphics
     GetChanges_String(m_text_GFXExt, SysA.Assets.at(ind).gfx_ext); //Ext graphics
+
+    GetChanges_Bool(m_checkFac, SysA.Assets.at(ind).faction); //Faction present flag
+    if (SysA.Assets.at(ind).faction && m_text_Faction->IsModified()) //If faction box is checked, set pres_faction to the name entered in the faction box
+    {
+        GetChanges_String(m_text_Faction, SysA.Assets.at(ind).pres_faction); //Get Faction name
+    }
+    else
+    {
+        SysA.Assets.at(ind).pres_faction = wxString("", wxConvUTF8);
+    }
+    GetChanges_String(m_text_PresVal, SysA.Assets.at(ind).pres_value); //Presence value
+    GetChanges_String(m_text_PresRange, SysA.Assets.at(ind).pres_range); //Presence range
+
+    GetChanges_String(m_text_Class, SysA.Assets.at(ind).planet_class); //Planet class
+    GetChanges_String(m_text_Population, SysA.Assets.at(ind).population); //Population
+
+    GetChanges_Bool(m_checkBoxLand, SysA.Assets.at(ind).land); //Land flag
+    GetChanges_Bool(m_checkBoxRefuel, SysA.Assets.at(ind).refuel); //Refuel flag
+    GetChanges_Bool(m_checkBoxBar, SysA.Assets.at(ind).bar); //Bar flag
+    GetChanges_Bool(m_checkBoxMissions, SysA.Assets.at(ind).missions); //Missions flag
+    GetChanges_Bool(m_checkBoxCommodity, SysA.Assets.at(ind).commodity); //Commodity flag
+    GetChanges_Bool(m_checkBoxOutfits, SysA.Assets.at(ind).outfits); //Outfits flag
+    GetChanges_Bool(m_checkBoxShipyard, SysA.Assets.at(ind).shipyard); //Shipyard flag
+
+    GetChanges_String(m_textLandingDescription, SysA.Assets.at(ind).description); //Landing Description
+    GetChanges_String(m_textBarDescription, SysA.Assets.at(ind).bar_description); //Bar Description
+
+
     //Disable "Save Changes button"
     m_AssetSaveChanges->Enable(false);
 

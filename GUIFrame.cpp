@@ -518,7 +518,22 @@ AssetEd::AssetEd( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	m_textPosY->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_GFXSpace->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_GFXExt->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_Faction->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkFac->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_PresVal->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_PresRange->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_Class->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_Class->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( AssetEd::m_text_ClassOnTextEnter ), NULL, this );
+	m_text_Population->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxLand->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxRefuel->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxBar->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxMissions->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxCommodity->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxOutfits->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxShipyard->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_textLandingDescription->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_textBarDescription->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_ComListBox->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::comm_click ), NULL, this );
 	m_AssetSaveChanges->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( AssetEd::SaveAssetChanges ), NULL, this );
 }
@@ -537,7 +552,22 @@ AssetEd::~AssetEd()
 	m_textPosY->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_GFXSpace->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_GFXExt->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_Faction->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkFac->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_PresVal->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_PresRange->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_text_Class->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_text_Class->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( AssetEd::m_text_ClassOnTextEnter ), NULL, this );
+	m_text_Population->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxLand->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxRefuel->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxBar->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxMissions->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxCommodity->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxOutfits->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_checkBoxShipyard->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_textLandingDescription->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
+	m_textBarDescription->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( AssetEd::ChangeMade ), NULL, this );
 	m_ComListBox->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( AssetEd::comm_click ), NULL, this );
 	m_AssetSaveChanges->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( AssetEd::SaveAssetChanges ), NULL, this );
 	

@@ -50,6 +50,7 @@ class THANEAsset : public AssetEd
         virtual void SaveAssetChanges( wxCommandEvent& event );
         void GetChanges_Float(wxTextCtrl*& text_box, float &float_val);
         void GetChanges_String(wxTextCtrl*& text_box, wxString &float_val);
+        void GetChanges_Bool(wxCheckBox*& text_box, bool &val);
         virtual void ChangeMade( wxCommandEvent& event);
 
         int param_flags; //Parameter flags, for judging whether stuff has been changed, decimal format, compact
